@@ -8,10 +8,15 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://audio/fmod/banks"
+
 [application]
 
 config/name="Game Off 2025"
 config/version="0.0.1"
+run/main_scene="uid://d03ox0x3t4x3l"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
