@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Off 2025"
+config/version="0.0.1"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,3 +22,15 @@ FmodManager="*res://addons/fmod/FmodManager.gd"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://bm6h5yx1xgaub"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://ui/translation/translation.en.translation", "res://ui/translation/translation.de.translation")
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

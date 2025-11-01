@@ -1,3 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Export files and subfolders
+/export/*
+!export/.gdignore
+
+# FMOD Files
+/audio/fmod/*.cache/*
+/audio/fmod/studio_project/**/.*/*
