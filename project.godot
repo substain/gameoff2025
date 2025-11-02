@@ -22,12 +22,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-FmodManager="*res://addons/fmod/FmodManager.gd"
-Globals="*res://scenes/globals.gd"
+CYSGlobals="*res://scenes/create_your_song_prototype/cys_globals.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 

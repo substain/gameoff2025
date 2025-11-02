@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcrnkxooyq5i4"]
+
+[ext_resource type="Script" uid="uid://dsqfok6j4eb2a" path="res://scenes/create_your_song_prototype/cys_sound_snippet.gd" id="1_lx2cy"]
+[ext_resource type="Texture2D" uid="uid://dpcqaqewla4at" path="res://2d/example/string/string-test1.svg" id="2_rwqnj"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rwqnj"]
+points = PackedVector2Array(-55, 0, -46, 1, -34, -5, -13, -31, 34, -31, 73, -14, 114, -4, 161, -1, 159, 43, -55, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwqnj"]
+size = Vector2(110, 85)
+
+[node name="KickSnippet" type="StaticBody2D"]
+modulate = Color(0.4862745, 1, 1, 1)
+collision_layer = 5
+script = ExtResource("1_lx2cy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(295, 0)
+scale = Vector2(0.56878304, 0.56878304)
+texture = ExtResource("2_rwqnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_rwqnj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_rwqnj")
+debug_color = Color(0.4386512, 0.5669639, 0.54583544, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
