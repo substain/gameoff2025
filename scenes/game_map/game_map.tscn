@@ -1,0 +1,206 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlg102u4ynte4"]
+
+[ext_resource type="Texture2D" uid="uid://dqi4x10df6ap6" path="res://2d/placeholder/zen_preview.png" id="1_2qsyw"]
+[ext_resource type="Script" uid="uid://spp4aunfllk8" path="res://scenes/game_map/game_map.gd" id="1_tq0av"]
+[ext_resource type="Texture2D" uid="uid://n7vjuy7e6hsb" path="res://2d/placeholder/zen_preview_press.png" id="2_ud3be"]
+[ext_resource type="Texture2D" uid="uid://8ubre5w5g5va" path="res://2d/placeholder/zen_preview_hover.png" id="3_tq0av"]
+
+[sub_resource type="Gradient" id="Gradient_8jl7y"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2qsyw"]
+gradient = SubResource("Gradient_8jl7y")
+width = 256
+height = 128
+
+[node name="GameMap" type="Node2D"]
+script = ExtResource("1_tq0av")
+zen_garden_file_path = "res://scenes/zen_garden/zen_garden_level.tscn"
+zen_garden_singing_file_path = "res://scenes/zen_garden_singing/zen_garden_singing_level.tscn"
+surfing_file_path = "res://scenes/surfing/surfing_level.tscn"
+angler_fish_path = "res://scenes/angler_fish/angler_fish_level.tscn"
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(566, 324)
+scale = Vector2(5.3203125, 5.3203125)
+texture = SubResource("GradientTexture2D_2qsyw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.0
+offset_top = -242.0
+offset_right = 242.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="ZenGardenLevel" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(240, 300)
+layout_mode = 2
+
+[node name="ZenGardenLevelButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_2qsyw")
+texture_pressed = ExtResource("2_ud3be")
+texture_hover = ExtResource("3_tq0av")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -23.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Zen Garden"
+
+[node name="ZenGardenSingingLevel" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(240, 300)
+layout_mode = 2
+
+[node name="ZenGardenSingingLevelButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenSingingLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_2qsyw")
+texture_pressed = ExtResource("2_ud3be")
+texture_hover = ExtResource("3_tq0av")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenSingingLevel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -23.0
+offset_right = 75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Zen Garden Singing"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnglerFishLevel" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 300)
+layout_mode = 2
+
+[node name="AnglerFishLevelButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_2qsyw")
+texture_pressed = ExtResource("2_ud3be")
+texture_hover = ExtResource("3_tq0av")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -23.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "AnglerFish"
+
+[node name="SurfLevelButton" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 300)
+layout_mode = 2
+
+[node name="SurfLevelButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 120.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_2qsyw")
+texture_pressed = ExtResource("2_ud3be")
+texture_hover = ExtResource("3_tq0av")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -23.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Surfing"
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton" to="." method="_on_zen_garden_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenSingingLevel/ZenGardenSingingLevelButton" to="." method="_on_zen_garden_singing_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton" to="." method="_on_angler_fish_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton" to="." method="_on_surf_level_button_pressed"]

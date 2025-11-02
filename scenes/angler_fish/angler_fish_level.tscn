@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmddoy74i7yad"]
+
+[sub_resource type="Gradient" id="Gradient_h663t"]
+colors = PackedColorArray(0.63176304, 0.5091365, 0.98721844, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5n0uo"]
+gradient = SubResource("Gradient_h663t")
+
+[node name="AnglerFishLevel" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(620, 333.5)
+scale = Vector2(20.375, 11.421875)
+texture = SubResource("GradientTexture2D_5n0uo")

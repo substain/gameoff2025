@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccpveusva3lsi"]
+
+[sub_resource type="Gradient" id="Gradient_yttgd"]
+colors = PackedColorArray(0, 0.7372549, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xnxgt"]
+gradient = SubResource("Gradient_yttgd")
+
+[node name="ZenGarden" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(620, 333.5)
+scale = Vector2(20.375, 11.421875)
+texture = SubResource("GradientTexture2D_xnxgt")
