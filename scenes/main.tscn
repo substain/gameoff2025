@@ -1,0 +1,309 @@
+[gd_scene load_steps=16 format=3 uid="uid://c73617xoavmr2"]
+
+[ext_resource type="PackedScene" uid="uid://7s2njiex250w" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://d0ibf3cm2s0bc" path="res://scenes/ui.gd" id="1_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://cl30xgcumivvb" path="res://2d/example/string/string-base1.svg" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://b82uiovf1670j" path="res://scenes/placement.gd" id="2_choun"]
+[ext_resource type="Script" uid="uid://gpbu8d34l88r" path="res://scenes/movable_level.gd" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://cxddmprrikwxc" path="res://2d/example/star_handdrawn.svg" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://b5vccdepvueqr" path="res://scenes/enemy_box_area.tscn" id="6_tefeu"]
+[ext_resource type="AudioStream" uid="uid://8ianq8cii4p8" path="res://audio/music/example/MusicBox.wav" id="7_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://bxjivje8mt6jc" path="res://audio/music/example/Vox.wav" id="8_tipki"]
+[ext_resource type="AudioStream" uid="uid://6vbe60jarfr7" path="res://audio/music/example/Screech.wav" id="9_85g3d"]
+
+[sub_resource type="Gradient" id="Gradient_o5qli"]
+offsets = PackedFloat32Array(0, 0.98313254)
+colors = PackedColorArray(0.17889887, 6.208867e-05, 0.6251723, 1, 0.46506023, 0.46506023, 0.46506023, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0wfyh"]
+gradient = SubResource("Gradient_o5qli")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_choun"]
+offsets = PackedFloat32Array(0.35903615)
+colors = PackedColorArray(0.48201513, 0.6064158, 0.6723864, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ya4ey"]
+gradient = SubResource("Gradient_choun")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
+size = Vector2(5315, 189)
+
+[node name="Main" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("1_tbgi4")
+
+[node name="UIBase" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UIBase"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -93.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIBase/MarginContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="UI/UIBase/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Stop" type="Button" parent="UI/UIBase/MarginContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Stop"
+
+[node name="GameMessage" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -262.0
+offset_right = 262.0
+offset_bottom = 74.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "TEST"
+horizontal_alignment = 1
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(659, 259.5)
+scale = Vector2(21.59375, 13.421875)
+texture = SubResource("GradientTexture2D_0wfyh")
+
+[node name="Placement" type="Node2D" parent="."]
+script = ExtResource("2_choun")
+wheel_scroll_speed = 15.0
+
+[node name="Background" type="Sprite2D" parent="Placement"]
+position = Vector2(78, 289.5)
+scale = Vector2(23.625, 13.203125)
+texture = SubResource("GradientTexture2D_ya4ey")
+
+[node name="PlacementCamera" type="Camera2D" parent="Placement"]
+position = Vector2(0, 364)
+
+[node name="Pointer" type="Sprite2D" parent="Placement"]
+modulate = Color(0.482208, 0.7871157, 7.70092e-07, 1)
+position = Vector2(0, 364.99997)
+scale = Vector2(0.0978836, 0.10846561)
+texture = ExtResource("3_sugp2")
+
+[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+position = Vector2(49, 245)
+collision_layer = 3
+
+[node name="MovementCamera" type="Camera2D" parent="Player"]
+position = Vector2(526, -88)
+
+[node name="MovableLevel" type="Node2D" parent="."]
+script = ExtResource("2_jyhfs")
+move_speed = 150.0
+
+[node name="Base" type="Sprite2D" parent="MovableLevel"]
+position = Vector2(665, 360)
+texture = ExtResource("2_0wfyh")
+
+[node name="Base2" type="Sprite2D" parent="MovableLevel"]
+position = Vector2(1994, 358)
+texture = ExtResource("2_0wfyh")
+
+[node name="Base3" type="Sprite2D" parent="MovableLevel"]
+position = Vector2(3324, 357)
+texture = ExtResource("2_0wfyh")
+
+[node name="Base4" type="Sprite2D" parent="MovableLevel"]
+position = Vector2(4652, 355)
+texture = ExtResource("2_0wfyh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MovableLevel"]
+
+[node name="BaseColShape" type="CollisionShape2D" parent="MovableLevel/StaticBody2D"]
+position = Vector2(2641, 460)
+shape = SubResource("RectangleShape2D_0wfyh")
+
+[node name="MovableBg" type="Node2D" parent="MovableLevel"]
+
+[node name="StarHanddrawn" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(405.25, 257.25)
+scale = Vector2(0.19312169, 0.19312169)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn2" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(817.875, 107.87505)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn7" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2130, 274)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn8" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2837.0002, 84.00003)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn9" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2837.0002, 84.00003)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn10" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3530, 302)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn11" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(4298, 214)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn12" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(4197, 128)
+scale = Vector2(0.26587313, 0.26587313)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn3" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(957.9375, 298.9375)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn4" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1291, 66.000015)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn5" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1451, 239.99998)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn6" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1451, 239.99998)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn13" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(957.9375, 298.9375)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn14" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1642.0625, 128.06252)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn15" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1802.0625, 302.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn16" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(1802.0625, 302.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn17" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3634.0625, 107.062515)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn18" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3794.0625, 281.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn19" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3794.0625, 281.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn20" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2532.0625, 128.06252)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn21" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2692.0625, 302.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn22" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3045.0002, 167)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn23" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3328, 14.000008)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn24" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(2025.0001, 35.000046)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn25" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(3247.0625, 261.06247)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn26" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(4938, 229)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn27" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(5200.0005, 243.99998)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn30" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(565.001, 123.00002)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn28" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(4494.0625, 64.062546)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="StarHanddrawn29" type="Sprite2D" parent="MovableLevel/MovableBg"]
+position = Vector2(5123.0005, 73)
+scale = Vector2(0.10648162, 0.10648162)
+texture = ExtResource("3_sugp2")
+
+[node name="EnemyBoxes" type="Node2D" parent="MovableLevel"]
+
+[node name="EnemyBoxArea" parent="MovableLevel/EnemyBoxes" instance=ExtResource("6_tefeu")]
+position = Vector2(843, 299)
+
+[node name="BaseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_o6xl0")
+
+[node name="Sound1AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tipki")
+
+[node name="Sound2AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+
+[node name="Sound3AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="UI/UIBase/MarginContainer/HBoxContainer/Start" to="UI" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/UIBase/MarginContainer/HBoxContainer/Stop" to="UI" method="_on_stop_pressed"]
+[connection signal="player_died" from="Player" to="UI" method="_on_player_player_died"]

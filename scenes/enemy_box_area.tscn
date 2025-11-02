@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5vccdepvueqr"]
+
+[ext_resource type="Script" uid="uid://cr708kcoli4uh" path="res://scenes/enemy_box_area.gd" id="1_qpwdq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
+size = Vector2(66, 66)
+
+[sub_resource type="Gradient" id="Gradient_tbgi4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tefeu"]
+gradient = SubResource("Gradient_tbgi4")
+
+[node name="EnemyBoxArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_qpwdq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tbgi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_tefeu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
