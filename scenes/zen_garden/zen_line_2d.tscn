@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cee1vmk181t3o"]
+
+[ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="1_bbu5y"]
+
+[node name="ZenLine2D" type="Line2D"]
+texture_repeat = 2
+texture = ExtResource("1_bbu5y")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

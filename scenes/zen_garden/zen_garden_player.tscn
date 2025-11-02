@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp4jk5663m6rc"]
+
+[ext_resource type="Script" uid="uid://dbu5htgi0av5d" path="res://scenes/zen_garden/zen_garden_player.gd" id="1_2joqi"]
+[ext_resource type="Texture2D" uid="uid://cvaxghcsay80s" path="res://icon.svg" id="2_j0a7y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2joqi"]
+radius = 41.0
+
+[node name="ZenGardenPlayer" type="CharacterBody2D"]
+script = ExtResource("1_2joqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.9073486e-06, -1.9073486e-06)
+scale = Vector2(0.63281244, 0.63281244)
+texture = ExtResource("2_j0a7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2joqi")
+debug_color = Color(0.8344442, 0.35676914, 0.4204107, 0.41960785)

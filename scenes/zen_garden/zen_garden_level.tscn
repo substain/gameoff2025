@@ -1,14 +1,93 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccpveusva3lsi"]
+[gd_scene load_steps=12 format=3 uid="uid://ccpveusva3lsi"]
+
+[ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/zen_garden/zen_garden_player.tscn" id="1_o5g1r"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/zen_garden/zen_player_path_follow.gd" id="1_p7q3e"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/zen_garden/zen_line_2d.tscn" id="2_y0pjs"]
+[ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="3_clk8c"]
 
 [sub_resource type="Gradient" id="Gradient_yttgd"]
-colors = PackedColorArray(0, 0.7372549, 0, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.74138474, 0.7413847, 0.74138457, 1, 0.4390491, 0.43904912, 0.43904912, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xnxgt"]
 gradient = SubResource("Gradient_yttgd")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5g1r"]
+
+[sub_resource type="Gradient" id="Gradient_o5g1r"]
+offsets = PackedFloat32Array(0.5036145)
+colors = PackedColorArray(1, 0.38234738, 0.36465052, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p7q3e"]
+gradient = SubResource("Gradient_o5g1r")
+
+[sub_resource type="Curve2D" id="Curve2D_o5g1r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 316, 0, 0, 0, 0, 538, 313, 0, 0, 0, 0, 604, 268, 0, 0, 0, 0, 649, 269, 0, 0, 0, 0, 671, 288, 0, 0, 0, 0, 684, 314, 0, 0, 0, 0, 667, 353, 0, 0, 0, 0, 624, 369, 0, 0, 0, 0, 588, 351, 0, 0, 0, 0, 570, 313, 0, 0, 0, 0, 582, 283, 0, 0, 0, 0, 625, 263, 0, 0, 0, 0, 693, 282, 0, 0, 0, 0, 779, 317, 0, 0, 0, 0, 941, 318, 0, 0, 0, 0, 1150, 317)
+}
+point_count = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dkhn"]
 
 [node name="ZenGarden" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(620, 333.5)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(560, 319)
 scale = Vector2(20.375, 11.421875)
 texture = SubResource("GradientTexture2D_xnxgt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 324)
+
+[node name="Stone" type="StaticBody2D" parent="."]
+position = Vector2(628, 315)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stone"]
+shape = SubResource("RectangleShape2D_o5g1r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stone"]
+scale = Vector2(0.27530086, 0.27530086)
+texture = SubResource("GradientTexture2D_p7q3e")
+
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_o5g1r")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("drawn_lines")]
+position = Vector2(-1, 316)
+rotation = -0.023525072
+rotates = false
+script = ExtResource("1_p7q3e")
+drawn_lines = NodePath("../../DrawnLines")
+zen_line_scene = ExtResource("2_y0pjs")
+
+[node name="ZenGardenPlayer" parent="Path/PathFollow2D" instance=ExtResource("1_o5g1r")]
+script = null
+
+[node name="DrawnLines" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="DrawnLines"]
+visible = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_6dkhn")
+position = Vector2(0, -2)
+rotation = -0.00039833438
+points = PackedVector2Array(33, 310, 551, 314, 610, 266, 646, 265, 672.886, 286.26804, 684.8757, 312.27283, 679.8681, 331.27084, 664, 352, 649.85614, 361.25888, 629, 368, 607.85535, 363.24216, 592, 353, 577.8681, 331.2302, 574, 304, 581.88684, 284.2318, 589.8908, 274.235, 598, 267, 616.89557, 262.24573, 631.896, 261.2517, 654, 265, 692.88605, 286.276, 737.88007, 301.29395, 780.8749, 314.31107, 1022, 315, 1147, 319)
+texture = ExtResource("3_clk8c")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 12
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_top = 37.0
+offset_right = 111.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "hold [A] to draw the zen line"
