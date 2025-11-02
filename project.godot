@@ -16,13 +16,21 @@ General/banks_path="res://audio/fmod/banks"
 
 config/name="Game Off 2025"
 config/version="0.0.1"
-run/main_scene="uid://c73617xoavmr2"
+run/main_scene="uid://dlg102u4ynte4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CYSGlobals="*res://scenes/create_your_song_prototype/cys_globals.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_call_argument=1
 
 [editor_plugins]
 

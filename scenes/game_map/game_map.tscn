@@ -117,13 +117,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -23.0
-offset_right = 75.0
+offset_left = -73.0
+offset_top = -30.0
+offset_right = 77.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Zen Garden Singing"
+text = "Zen Garden Singing
+(not implemented)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
@@ -156,13 +158,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -23.0
-offset_right = 45.0
+offset_left = -68.0
+offset_top = -30.0
+offset_right = 77.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "AnglerFish"
+text = "AnglerFish
+(not implemented)"
 
 [node name="SurfLevelButton" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(240, 300)
@@ -192,13 +196,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -23.0
-offset_right = 45.0
+offset_left = -73.0
+offset_top = -30.0
+offset_right = 72.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Surfing"
+text = "Surfing
+(not implemented)"
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton" to="." method="_on_zen_garden_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenSingingLevel/ZenGardenSingingLevelButton" to="." method="_on_zen_garden_singing_level_button_pressed"]
