@@ -9,7 +9,6 @@ extends CanvasLayer
 @onready var movable_level: MovableLevel = $"../MovableLevel"
 @onready var player: Player = $"../Player"
 @onready var game_message: Label = $GameMessage
-@onready var base_audio_stream_player: AudioStreamPlayer = $"../BaseAudioStreamPlayer"
 @onready var placement: Placement = $"../Placement"
 
 func _ready() -> void:
@@ -27,7 +26,8 @@ func _on_start_pressed() -> void:
 	player.reset()
 	player.start()
 
-	base_audio_stream_player.play()
+	Globals.sound_manager.start_music()
+	Globals.on_start_game.emit()
 	placement.set_inactive()
 			
 func _on_stop_pressed() -> void:
@@ -39,10 +39,24 @@ func _on_stop_pressed() -> void:
 	player.stop()
 	player.reset()
 	
-	base_audio_stream_player.stop()
-
+	Globals.sound_manager.stop_music()
+	Globals.on_stop_game.emit()
 	placement.set_active()
 	
 func _on_player_player_died() -> void:
 	_on_stop_pressed()
 	game_message.text = "YOU DIED!"
+
+
+func _on_kick_pressed() -> void:
+	placement.set_snippet_type(SoundSnippet.SoundType.KICK)
+
+
+func _on_clap_pressed() -> void:
+	#placement.set_snippet_type(SoundSnippet.SoundType.CLAP)
+	pass
+	
+
+
+func _on_m_down_pressed() -> void:
+	placement.set_snippet_type(SoundSnippet.SoundType.M1)

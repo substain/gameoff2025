@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c73617xoavmr2"]
+[gd_scene load_steps=22 format=3 uid="uid://c73617xoavmr2"]
 
 [ext_resource type="PackedScene" uid="uid://7s2njiex250w" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://d0ibf3cm2s0bc" path="res://scenes/ui.gd" id="1_tbgi4"]
@@ -6,10 +6,16 @@
 [ext_resource type="Script" uid="uid://b82uiovf1670j" path="res://scenes/placement.gd" id="2_choun"]
 [ext_resource type="Script" uid="uid://gpbu8d34l88r" path="res://scenes/movable_level.gd" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cxddmprrikwxc" path="res://2d/example/star_handdrawn.svg" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://d0awqbpmbu3sv" path="res://scenes/added_sounds.gd" id="6_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://b5vccdepvueqr" path="res://scenes/enemy_box_area.tscn" id="6_tefeu"]
-[ext_resource type="AudioStream" uid="uid://8ianq8cii4p8" path="res://audio/music/example/MusicBox.wav" id="7_o6xl0"]
-[ext_resource type="AudioStream" uid="uid://bxjivje8mt6jc" path="res://audio/music/example/Vox.wav" id="8_tipki"]
-[ext_resource type="AudioStream" uid="uid://6vbe60jarfr7" path="res://audio/music/example/Screech.wav" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dcrnkxooyq5i4" path="res://scenes/kick_snippet.tscn" id="6_trceg"]
+[ext_resource type="Texture2D" uid="uid://b4m1k8lcu8lfe" path="res://2d/example/string/string-base.svg" id="8_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://c75itik44r3lg" path="res://audio/music/example2/drums_100bpm.mp3" id="8_choun"]
+[ext_resource type="AudioStream" uid="uid://ds2bw5g3shqu" path="res://audio/music/example2/m1.mp3" id="10_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://b3s61uvjw0npg" path="res://scenes/m1_snippet.tscn" id="11_jbj1t"]
+[ext_resource type="AudioStream" uid="uid://dt0w5gnfipvy8" path="res://audio/music/example2/clap.mp3" id="11_trceg"]
+[ext_resource type="Script" uid="uid://vpq3nj0hj24f" path="res://scenes/sound_manager.gd" id="11_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://bmjujk6klaev5" path="res://audio/music/example2/kick2.mp3" id="12_eb6dy"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0, 0.98313254)
@@ -68,6 +74,50 @@ layout_mode = 2
 disabled = true
 text = "Stop"
 
+[node name="PlacementContainer" type="MarginContainer" parent="UI/UIBase"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.5
+offset_top = -55.0
+offset_right = 108.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIBase/PlacementContainer"]
+layout_mode = 2
+
+[node name="Kick" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "KICK"
+
+[node name="Clap" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "CLAP"
+
+[node name="MDown" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "M DOWN"
+
+[node name="MUp" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "M UP"
+
+[node name="S1" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "S1"
+
+[node name="S2" type="Button" parent="UI/UIBase/PlacementContainer/HBoxContainer"]
+layout_mode = 2
+text = "S2"
+
 [node name="GameMessage" type="Label" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -87,7 +137,6 @@ texture = SubResource("GradientTexture2D_0wfyh")
 
 [node name="Placement" type="Node2D" parent="."]
 script = ExtResource("2_choun")
-wheel_scroll_speed = 15.0
 
 [node name="Background" type="Sprite2D" parent="Placement"]
 position = Vector2(78, 289.5)
@@ -97,8 +146,11 @@ texture = SubResource("GradientTexture2D_ya4ey")
 [node name="PlacementCamera" type="Camera2D" parent="Placement"]
 position = Vector2(0, 364)
 
-[node name="Pointer" type="Sprite2D" parent="Placement"]
+[node name="Pointer" type="Node2D" parent="Placement"]
+
+[node name="PointerSprite" type="Sprite2D" parent="Placement/Pointer"]
 modulate = Color(0.482208, 0.7871157, 7.70092e-07, 1)
+z_index = 1
 position = Vector2(0, 364.99997)
 scale = Vector2(0.0978836, 0.10846561)
 texture = ExtResource("3_sugp2")
@@ -114,27 +166,46 @@ position = Vector2(526, -88)
 script = ExtResource("2_jyhfs")
 move_speed = 150.0
 
-[node name="Base" type="Sprite2D" parent="MovableLevel"]
+[node name="AddedSounds" type="Node2D" parent="MovableLevel"]
+script = ExtResource("6_jkv2x")
+
+[node name="KickSnippet" parent="MovableLevel/AddedSounds" instance=ExtResource("6_trceg")]
+position = Vector2(623, 366)
+
+[node name="Line" type="Node2D" parent="MovableLevel"]
+
+[node name="Base" type="Sprite2D" parent="MovableLevel/Line"]
+modulate = Color(1, 1, 1, 0.24313726)
 position = Vector2(665, 360)
 texture = ExtResource("2_0wfyh")
 
-[node name="Base2" type="Sprite2D" parent="MovableLevel"]
+[node name="Base2" type="Sprite2D" parent="MovableLevel/Line"]
+modulate = Color(1, 1, 1, 0.24313726)
 position = Vector2(1994, 358)
 texture = ExtResource("2_0wfyh")
 
-[node name="Base3" type="Sprite2D" parent="MovableLevel"]
+[node name="Base3" type="Sprite2D" parent="MovableLevel/Line"]
+modulate = Color(1, 1, 1, 0.24313726)
 position = Vector2(3324, 357)
 texture = ExtResource("2_0wfyh")
 
-[node name="Base4" type="Sprite2D" parent="MovableLevel"]
+[node name="Base4" type="Sprite2D" parent="MovableLevel/Line"]
+modulate = Color(1, 1, 1, 0.24313726)
 position = Vector2(4652, 355)
 texture = ExtResource("2_0wfyh")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="MovableLevel"]
+[node name="StaticBody2D" type="StaticBody2D" parent="MovableLevel/Line"]
 
-[node name="BaseColShape" type="CollisionShape2D" parent="MovableLevel/StaticBody2D"]
+[node name="BaseColShape" type="CollisionShape2D" parent="MovableLevel/Line/StaticBody2D"]
 position = Vector2(2641, 460)
 shape = SubResource("RectangleShape2D_0wfyh")
+
+[node name="HelperLine" type="Sprite2D" parent="MovableLevel/Line"]
+modulate = Color(0.37254903, 0.37254903, 0.37254903, 0.47058824)
+position = Vector2(0, 366)
+rotation = 1.5707964
+scale = Vector2(0.038203724, 0.9284708)
+texture = ExtResource("8_a8y0u")
 
 [node name="MovableBg" type="Node2D" parent="MovableLevel"]
 
@@ -289,21 +360,33 @@ scale = Vector2(0.10648162, 0.10648162)
 texture = ExtResource("3_sugp2")
 
 [node name="EnemyBoxes" type="Node2D" parent="MovableLevel"]
+position = Vector2(49, 24)
 
 [node name="EnemyBoxArea" parent="MovableLevel/EnemyBoxes" instance=ExtResource("6_tefeu")]
 position = Vector2(843, 299)
 
-[node name="BaseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_o6xl0")
+[node name="M1Snippet" parent="MovableLevel" instance=ExtResource("11_jbj1t")]
+position = Vector2(202, 366)
 
-[node name="Sound1AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_tipki")
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("11_ya4ey")
 
-[node name="Sound2AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_85g3d")
+[node name="BaseAudioStreamPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("8_choun")
 
-[node name="Sound3AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+[node name="M1AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("10_eb6dy")
+
+[node name="ClapAudioStreamPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("11_trceg")
+
+[node name="KickAudioStreamPlayer" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("12_eb6dy")
+max_polyphony = 3
 
 [connection signal="pressed" from="UI/UIBase/MarginContainer/HBoxContainer/Start" to="UI" method="_on_start_pressed"]
 [connection signal="pressed" from="UI/UIBase/MarginContainer/HBoxContainer/Stop" to="UI" method="_on_stop_pressed"]
+[connection signal="pressed" from="UI/UIBase/PlacementContainer/HBoxContainer/Kick" to="UI" method="_on_kick_pressed"]
+[connection signal="pressed" from="UI/UIBase/PlacementContainer/HBoxContainer/Clap" to="UI" method="_on_clap_pressed"]
+[connection signal="pressed" from="UI/UIBase/PlacementContainer/HBoxContainer/MDown" to="UI" method="_on_m_down_pressed"]
 [connection signal="player_died" from="Player" to="UI" method="_on_player_player_died"]
