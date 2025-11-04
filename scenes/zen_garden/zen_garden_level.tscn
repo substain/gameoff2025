@@ -1,9 +1,28 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccpveusva3lsi"]
+[gd_scene load_steps=18 format=3 uid="uid://ccpveusva3lsi"]
 
+[ext_resource type="Script" uid="uid://2kh53oc55jjk" path="res://scenes/zen_garden/zen_garden_layout.gd" id="1_6dkhn"]
 [ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/zen_garden/zen_garden_player.tscn" id="1_o5g1r"]
 [ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/zen_garden/zen_player_path_follow.gd" id="1_p7q3e"]
+[ext_resource type="Script" uid="uid://b33olkbsa4emf" path="res://scenes/zen_garden/note_dummy.gd" id="2_k0w65"]
 [ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/zen_garden/zen_line_2d.tscn" id="2_y0pjs"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="3_clk8c"]
+[ext_resource type="Script" uid="uid://hofg57wqyea1" path="res://scenes/zen_garden/note_hold_dummy.gd" id="3_owdu7"]
+
+[sub_resource type="Resource" id="Resource_7akuf"]
+script = ExtResource("2_k0w65")
+start_time_offset = 1.915
+metadata/_custom_type_script = "uid://b33olkbsa4emf"
+
+[sub_resource type="Resource" id="Resource_owdu7"]
+script = ExtResource("3_owdu7")
+end_time_offset = 2.86
+start_time_offset = 1.81
+metadata/_custom_type_script = "uid://hofg57wqyea1"
+
+[sub_resource type="Resource" id="Resource_k0w65"]
+script = ExtResource("2_k0w65")
+start_time_offset = 0.665
+metadata/_custom_type_script = "uid://b33olkbsa4emf"
 
 [sub_resource type="Gradient" id="Gradient_yttgd"]
 colors = PackedColorArray(0.74138474, 0.7413847, 0.74138457, 1, 0.4390491, 0.43904912, 0.43904912, 1)
@@ -30,6 +49,10 @@ point_count = 16
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dkhn"]
 
 [node name="ZenGarden" type="Node2D"]
+
+[node name="ZenGardenLayout" type="Node" parent="."]
+script = ExtResource("1_6dkhn")
+notes = Array[ExtResource("2_k0w65")]([SubResource("Resource_7akuf"), SubResource("Resource_owdu7"), SubResource("Resource_k0w65")])
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(560, 319)
