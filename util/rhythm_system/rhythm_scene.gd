@@ -85,13 +85,7 @@ func check() -> void:
 			
 	if scene_data.subscribed_events.is_empty():
 		print_rich("[color=yellow][b]WARNING: No subscribed events provided. If this is intentional you can ignore this warning.[/b][/color]")
-			
-	print("Midi Tracknames:")
-	var idx: int = 0
-	for track: String in tracknames:
-		print("%d: %s" % [idx, track])
-		idx = idx + 1
-
+		
 	if not all_good:
 		printerr("There were errors. Please check above!")
 		return
