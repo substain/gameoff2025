@@ -5,7 +5,7 @@ extends RefCounted
 static var debug_output : String = "0"
 
 # order of key names for a midi note
-static var key_order: Array[StringName] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
+const key_order: Array[StringName] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
 
 """
 Load and parse a file by path
@@ -71,11 +71,12 @@ static func load_packed_byte_array(arr: PackedByteArray) -> MidiFileParser:
 			else:
 				debug += "Unhandled state " + str(status) +"\n"
 				break
-		if debug_output == "1":
-			print(debug)
-		else:
-			var file: FileAccess = FileAccess.open(debug_output, FileAccess.WRITE)
-			file.store_string(debug)
+		# NOTE: Disabled this, it just clutters the git repository/filesystem
+		#if debug_output == "1":
+		#	print(debug)
+		#else:
+		#	var file: FileAccess = FileAccess.open(debug_output, FileAccess.WRITE)
+		#	file.store_string(debug)
 	else:
 		while true:
 			var status: int = instance.parse()

@@ -16,7 +16,7 @@ const BORDER_WIDTH: float = 2.0
 const NOTE_HEIGHT: float = TRACK_HEIGHT - (2 * NOTE_PADDING)
 
 var INPUT_BUFFER_SEC: float = 0.1  # 50ms early/late -> 100ms total
-
+var NOTE_TAP_HOLD_THRESHOLD_SECONDS: float = 0.5
 
 const COLOR_ON_BEAT: Color = Color.ORANGE
 const COLOR_ON_BEAT_LET_GO: Color = Color.DARK_GOLDENROD
@@ -77,10 +77,11 @@ func _input(event: InputEvent) -> void:
 		
 		pixel_tweener.tween_property(self, "PIXELS_PER_SECOND", new_pixels, 0.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
-func set_rhythm_data(d: RhythmData, input_buffer_sec: float = 0.1) -> void:
+func set_rhythm_data(d: RhythmData, input_buffer_sec: float = 0.1, note_tap_hold_threshold_seconds: float = 0.5) -> void:
 	data = d
 	total_duration_sec = 0.0
 	INPUT_BUFFER_SEC = input_buffer_sec
+	NOTE_TAP_HOLD_THRESHOLD_SECONDS = note_tap_hold_threshold_seconds
 	
 	if not data:
 		custom_minimum_size = Vector2.ZERO
@@ -148,7 +149,7 @@ func _draw() -> void:
 			var draw_start_x: float = start_x + offset_x
 			var buffer_w: float = INPUT_BUFFER_SEC * PIXELS_PER_SECOND
 
-			var is_hold: bool = note.duration >= 0.5
+			var is_hold: bool = note.duration >= NOTE_TAP_HOLD_THRESHOLD_SECONDS
 
 			# Je nach Modus und Position andere Farbe wählen
 			var draw_color: Color

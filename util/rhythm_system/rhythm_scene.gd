@@ -8,38 +8,115 @@ signal note_hit(track: RhythmTrack)
 signal note_failed(track: RhythmTrack)
 signal note_event(track: RhythmTrack) # für anims uns krams?
 @warning_ignore_restore("unused_signal")
-
-@export_group("Music")
-@export var backing_track: AudioStream
-@export_file var midi_file: String
-
-@export_group("Input")
-@export var button_a_trackname: StringName
-@export var button_b_trackname: StringName
-@export var button_ab_trackname: StringName
-
-@export_subgroup("Timing")
-@export var input_buffer_seconds: float = 0.1
-# NOTE: Hiermit wird entschieden ob eine Note gehalten oder nur kurz gedrückt werden muss
-# Alles was kürzer ist ist nur ein "Tap", alles darüber ein "Hold"
-@export var note_tap_hold_threshold_seconds: float = 0.5
+@export var scene_data: RhythmSceneData
 
 @export_category("Debug")
 @export_tool_button("Check Files") var check_action: Callable = check
-@export_tool_button("Test") var test_action: Callable = test
+@export_tool_button("Print Midi Tracks") var print_midi_tracks_action: Callable = print_midi_tracks
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var visualizer: RhythmVisualizer = $Visualizer
 
 func _ready() -> void:
-	audio_stream_player.stream = backing_track
-	var data: RhythmData = process_midi_file(midi_file)
-	visualizer.set_rhythm_data(data)
+	audio_stream_player.stream = scene_data.backing_track
+	var data: RhythmData = process_midi_file(scene_data.midi_file)
+	visualizer.set_rhythm_data(data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
 
 func check() -> void:
-	pass
+	var all_good: bool = true
+	print("Checking....")
+	if scene_data == null:
+		printerr("scene_data null. Aborting")
+		return
+		
+	if scene_data.backing_track == null:
+		printerr("scene_data.backing_track null. Aborting")
+		return
+		
+	if scene_data.midi_file == null or scene_data.midi_file.is_empty():
+		printerr("scene_data.midi_file not set. Aborting")
+		return
+
+	# Check Input Tracknames, for this we would need to parse the midi
+	# and check if these tracks even exist
+	var tracknames: Array[String] = []
+
+	var data: RhythmData = process_midi_file(scene_data.midi_file)
+	for track: RhythmTrack in data.tracks:
+		#print(track.name)
+		tracknames.push_back(track.name)
+		
+	var keys_dict: Dictionary[StringName, StringName] = {
+		&"Button A Trackname": scene_data.button_a_trackname,
+		&"Button B Trackname": scene_data.button_b_trackname,
+		&"Button AB Trackname": scene_data.button_ab_trackname
+	}
+		
+	for key: StringName in keys_dict:
+		if keys_dict[key].is_empty():
+			print_rich("[color=yellow][b]WARNING: Input for key '%s' is empty. If this is intentional (for example if the level does not make use of this button) you can ignore this warning.[/b][/color]" % key)
+			#all_good = false
+			continue
+			
+		if key not in tracknames:
+			printerr("Key '%s' not found in midi tracknames! Typo? Maybe the midi changed?" % key)
+			all_good = false
+			#return
+			
+	for event: RhythmEvent in scene_data.subscribed_events:
+		if event == null:
+			printerr("Subscribed Events contains an empty resource. Please fix!")
+			all_good = false
+			continue
+		
+		if event.identifier.is_empty():
+			printerr("Event has no identifier set! This event will never be called: Trackname: %s, Offset: %.2f" % [event.trackname, event.offset])
+			all_good = false
+			continue
+		
+		if event.trackname.is_empty():
+			printerr("WARNING: Event with identifier '%s' has no trackname set! This event will never be triggered." % event.identifier)
+			all_good = false
+			continue
+			
+		if event.trackname not in tracknames:
+			printerr("Trackname '%s' for Event '%s' not found in midi tracknames! Typo? Maybe the midi changed?" % [event.trackname, event.identifier])
+			all_good = false
+			
+	if scene_data.subscribed_events.is_empty():
+		print_rich("[color=yellow][b]WARNING: No subscribed events provided. If this is intentional you can ignore this warning.[/b][/color]")
+			
+	print("Midi Tracknames:")
+	var idx: int = 0
+	for track: String in tracknames:
+		print("%d: %s" % [idx, track])
+		idx = idx + 1
+
+	if not all_good:
+		printerr("There were errors. Please check above!")
+		return
+		
+	print_rich("[color=green][b]Everything looks good!")
 	
-func test() -> void:
+func print_midi_tracks() -> void:
+	if scene_data == null or scene_data.midi_file == null or scene_data.midi_file.is_empty():
+		printerr("No midi file set. Check if scene data is set and the midi file path is correct")
+		return
+		
+	var tracknames: Array[String] = []
+		
+	# TODO: Parse midi, get track names
+	var data: RhythmData = process_midi_file(scene_data.midi_file)
+	for track: RhythmTrack in data.tracks:
+		#print(track.name)
+		tracknames.push_back(track.name)
+	
+	print("Midi Tracknames:")
+	var idx: int = 0
+	for track: String in tracknames:
+		print("%d: %s" % [idx, track])
+		idx = idx + 1
+		
 	pass
 
 func start() -> void:
