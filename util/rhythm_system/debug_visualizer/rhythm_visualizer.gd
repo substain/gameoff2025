@@ -15,7 +15,7 @@ const NOTE_PADDING: float = 5.0
 const BORDER_WIDTH: float = 2.0
 const NOTE_HEIGHT: float = TRACK_HEIGHT - (2 * NOTE_PADDING)
 
-const INPUT_BUFFER_SEC: float = 0.1  # 50ms early/late -> 100ms total
+var INPUT_BUFFER_SEC: float = 0.1  # 50ms early/late -> 100ms total
 
 
 const COLOR_ON_BEAT: Color = Color.ORANGE
@@ -77,9 +77,10 @@ func _input(event: InputEvent) -> void:
 		
 		pixel_tweener.tween_property(self, "PIXELS_PER_SECOND", new_pixels, 0.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
-func set_rhythm_data(d: RhythmData) -> void:
+func set_rhythm_data(d: RhythmData, input_buffer_sec: float = 0.1) -> void:
 	data = d
 	total_duration_sec = 0.0
+	INPUT_BUFFER_SEC = input_buffer_sec
 	
 	if not data:
 		custom_minimum_size = Vector2.ZERO
