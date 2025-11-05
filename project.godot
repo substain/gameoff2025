@@ -34,7 +34,7 @@ gdscript/warnings/unsafe_call_argument=1
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/midipls/plugin.cfg")
 
 [gui]
 
