@@ -8,7 +8,8 @@ var current_seconds: float = 0.0:
 		current_seconds = value
 		queue_redraw()
 
-const PIXELS_PER_SECOND: float = 150.0
+var PIXELS_PER_SECOND: float = 150.0
+var PIXELS_PER_SECOND_BACKING_VALUE: float = 150.0
 const TRACK_HEIGHT: float = 30.0
 const NOTE_PADDING: float = 5.0
 const BORDER_WIDTH: float = 2.0
@@ -43,7 +44,38 @@ enum NODE_TYPE {
 
 var draw_mode: DRAW_MODE = DRAW_MODE.HARD
 
-# TODO: Also handle tap vs hold note visualization
+var pixel_tweener: Tween
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_toggle_note_ui"):
+		visible = !visible
+	elif event.is_action_pressed("debug_increase_note_ui_speed"):
+		var new_pixels: float = min(PIXELS_PER_SECOND_BACKING_VALUE + 25, 1500)
+		PIXELS_PER_SECOND_BACKING_VALUE = new_pixels
+		if pixel_tweener != null:
+			pixel_tweener.kill()
+			
+		pixel_tweener = create_tween()
+		
+		pixel_tweener.tween_property(self, "PIXELS_PER_SECOND", new_pixels, 0.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	elif event.is_action_pressed("debug_decrease_note_ui_speed"):
+		var new_pixels: float = max(PIXELS_PER_SECOND_BACKING_VALUE - 25, 25)
+		PIXELS_PER_SECOND_BACKING_VALUE = new_pixels
+		if pixel_tweener != null:
+			pixel_tweener.kill()
+			
+		pixel_tweener = create_tween()
+		
+		pixel_tweener.tween_property(self, "PIXELS_PER_SECOND", new_pixels, 0.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	elif event.is_action_pressed("debug_reset_note_ui_speed"):
+		var new_pixels: float = 150
+		PIXELS_PER_SECOND_BACKING_VALUE = new_pixels
+		if pixel_tweener != null:
+			pixel_tweener.kill()
+			
+		pixel_tweener = create_tween()
+		
+		pixel_tweener.tween_property(self, "PIXELS_PER_SECOND", new_pixels, 0.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func set_rhythm_data(d: RhythmData) -> void:
 	data = d
@@ -129,12 +161,13 @@ func _draw() -> void:
 					else:
 						draw_color = COLOR_UPCOMING
 				DRAW_MODE.HARD:
-					if note_start_sec + INPUT_BUFFER_SEC < current_seconds:
+					# TODO: make not end highlight during buffer
+					if is_hold and note_end_sec - INPUT_BUFFER_SEC < current_seconds and note_end_sec + INPUT_BUFFER_SEC > current_seconds:
+						draw_color = COLOR_ON_BEAT_LET_GO
+					elif note_start_sec + INPUT_BUFFER_SEC < current_seconds:
 						draw_color = COLOR_PAST
 					elif note_start_sec - INPUT_BUFFER_SEC < current_seconds:
 						draw_color = COLOR_ON_BEAT
-					# TODO: make not end highlight during buffer
-					# elif is_hold and (note_end_sec
 					else:
 						draw_color = COLOR_UPCOMING
 					#if note_end_sec < current_seconds:
@@ -218,4 +251,7 @@ func _draw() -> void:
 			100,
 			font_size,
 			Color.WHITE
-		)
+		)	
+		
+		# Pixels per Second anzeigen
+		draw_string(font, Vector2(0, TRACK_HEIGHT - NOTE_PADDING * 2), "%d pixels/s" % PIXELS_PER_SECOND, HORIZONTAL_ALIGNMENT_LEFT)
