@@ -38,6 +38,10 @@ var _rhythm_data: RhythmData
 var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
 
 func _ready() -> void:
+	# Tool script macht sonst tool script sachen
+	if Engine.is_editor_hint():
+		return
+	
 	audio_stream_player.stream = scene_data.backing_track
 	
 	_rhythm_data = process_midi_file(scene_data.midi_file)
