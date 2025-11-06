@@ -184,7 +184,7 @@ func check() -> void:
 
 	# Check Input Tracknames, for this we would need to parse the midi
 	# and check if these tracks even exist
-	var tracknames: Array[String] = []
+	var tracknames: Array[StringName] = []
 
 	var data: RhythmData = process_midi_file(scene_data.midi_file)
 	for track: RhythmTrack in data.tracks:
@@ -203,7 +203,9 @@ func check() -> void:
 			#all_good = false
 			continue
 			
-		if key not in tracknames:
+		var event_trackname: StringName = keys_dict[key]
+			
+		if event_trackname not in tracknames:
 			printerr("Key '%s' not found in midi tracknames! Typo? Maybe the midi changed?" % key)
 			all_good = false
 			#return
