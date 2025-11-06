@@ -32,6 +32,13 @@ gdscript/warnings/unsafe_property_access=1
 gdscript/warnings/unsafe_method_access=1
 gdscript/warnings/unsafe_call_argument=1
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -94,6 +101,11 @@ note_input_b={
 [internationalization]
 
 locale/translations=PackedStringArray("res://ui/translation/translation.en.translation", "res://ui/translation/translation.de.translation")
+
+[physics]
+
+common/physics_jitter_fix=0.0
+common/physics_interpolation=true
 
 [rendering]
 
