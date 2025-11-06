@@ -2,12 +2,23 @@
 extends Control
 class_name RhythmScene
 
-@warning_ignore_start("unused_signal")
 signal parsing_finished(data: RhythmData)
-signal note_hit(track: RhythmTrack)
-signal note_failed(track: RhythmTrack)
-signal note_event(track: RhythmTrack) # für anims uns krams?
-@warning_ignore_restore("unused_signal")
+signal preparing_debug_visualization_finished()
+signal building_event_list_finished()
+#signal ready() ist ja automatisch wenn alles fertig ist
+
+# Note Hit greift bei tap sofort, bei Held erst wenn alles durch ist
+# und der Spieler rechtzeitig wieder losgelassen hat
+signal note_hit(track: RhythmTrack, note: RhythmNote)
+signal note_missed(track: RhythmTrack, note: RhythmNote)
+signal note_failed(track: RhythmTrack, note: RhythmNote)
+
+signal event_triggered(event: RhythmTriggerEvent, time: float)
+
+signal note_tap_hit(track: RhythmTrack, note: RhythmNote)
+signal note_hold_start(track: RhythmTrack, note: RhythmNote)
+signal note_hold_release(track: RhythmTrack, note: RhythmNote)
+
 @export var scene_data: RhythmSceneData
 
 @export_category("Debug")
@@ -15,13 +26,147 @@ signal note_event(track: RhythmTrack) # für anims uns krams?
 @export_tool_button("Print Midi Tracks") var print_midi_tracks_action: Callable = print_midi_tracks
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var visualizer: RhythmVisualizer = $Visualizer
+@onready var visualizer: RhythmVisualizer = $DebugVisualizer
+
+var _next_event_index: int = 0
+# var _is_running: bool = false
+
+var _trigger_events: Array[RhythmTriggerEvent] = []
+var _subscribed_events: Array[RhythmSubscribeEvent] = []
+var _rhythm_data: RhythmData
+
+var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
 
 func _ready() -> void:
 	audio_stream_player.stream = scene_data.backing_track
-	var data: RhythmData = process_midi_file(scene_data.midi_file)
-	visualizer.set_rhythm_data(data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
+	
+	_rhythm_data = process_midi_file(scene_data.midi_file)
+	parsing_finished.emit(_rhythm_data)
+	
+	visualizer.set_rhythm_data(_rhythm_data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
+	preparing_debug_visualization_finished.emit()
 
+	build_event_list(_rhythm_data, scene_data.subscribed_events)
+	building_event_list_finished.emit()
+
+func register_animation_for_track(event: RhythmSubscribeEvent) -> void:
+	_subscribed_events.append(event)
+	# TODO: nicht vollständige events rausfiltern (aktuell wird das in build_event_list gemacht, das
+	# kann aber ruhig schon hier passieren).
+	# z.B: fehlender oder nicht passender trackname, fehlender identifier
+	print("Registered event '%s' for track %s with %.2f offset" % [event.identifier, event.trackname, event.offset])
+
+func _get_track_for_input(input_action: StringName) -> RhythmTrack:
+	var track_name: StringName
+	
+	# NOTE: Theoretisch kann das hier auch ein Dictionary sein... aber so reichts ja
+	match input_action:
+		"note_input_a":
+			track_name = scene_data.button_a_trackname
+		"note_input_b":
+			track_name = scene_data.button_b_trackname
+		# TODO: Schauen wie man 2 Tasten gleichzeitig ordentlich detected...
+		#"note_input_ab":
+		#	track_name = scene_data.button_ab_trackname
+		_:
+			return null
+			
+	if track_name.is_empty():
+		return null
+		
+	for track: RhythmTrack in _rhythm_data.tracks:
+		if track.name == track_name:
+			return track
+			
+	return null
+
+# NOTE: Es kann beim neu laden vom level zu problemen kommen. Am besten sollte die ganze Szene neu geladen werden
+# sodass immer frische "RhythmNote"-Objekte erstellt werden (diese haben nämlich einen internen state
+# welcher bisher nicht zurückgesetzt wird).
+# Ist nicht unmöglich das zu beheben, aber für den Jam sollte das reichen
+# bzw ist der Aufwand nicht gaaaaaanz ohne und unnötig wenn man bescheid weiß :)
+
+# TODO: Input buffer checken... ich glaube der müsste an mehreren stellen halbier werden
+# weil +-.... muss man nochmal testen
+# man kann beim lied den pitch runter drehen dann läuft das lied langsamer... vereinfacht das testen :)
+func _get_hittable_note(track: RhythmTrack, current_time: float) -> RhythmNote:
+	var input_buffer: float = scene_data.input_buffer_seconds
+	
+	for note: RhythmNote in track.notes:
+		if note.is_hit:
+			continue
+		
+		# Deckt tap + hold ab. Ggf muss man schauen ob das bei längeren tap notes
+		# zu problemen kommen kann
+		var start_hit_window: float = note.start - input_buffer
+		var end_hit_window: float = note.start + note.duration + input_buffer
+		
+		# checke ob zeit innerhalb der gesamten Note
+		# Dies ist auch wichtig, damit eine Note "gefailed" werden kann
+		# Hier gibt es nämlich 2 Optionen:
+		# a) man drückt gar nicht
+		# b) man drückt zu spät/während die Note aktiv ist
+		# Bei rhythm heaven ist das eigentlich egal, hier wird nur gezahlt WAS
+		# man getroffen hat und nicht was nicht.... glaube ich
+		if current_time >= start_hit_window and current_time <= end_hit_window:
+			return note
+			
+		# early exit wenn die nächste Note zu weit in der Zukunft ist
+		if note.start > current_time + input_buffer:
+			break
+			
+	return null
+
+func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribeEvent]) -> void:
+	for event: RhythmSubscribeEvent in subscribed_events:
+		register_animation_for_track(event)
+	
+	_trigger_events.clear()
+	
+	if not data:
+		printerr("RhythmData is null. Cannot build event list.")
+		return
+
+	var tracks_by_name: Dictionary = {}
+	for track: RhythmTrack in _rhythm_data.tracks:
+		tracks_by_name[track.name] = track
+	
+
+	for mapping: RhythmSubscribeEvent in _subscribed_events:
+		var track_name: String = mapping.trackname
+		var track_trigger_events: Array[RhythmTriggerEvent] = []
+		
+		if not tracks_by_name.has(track_name):
+			printerr("trackname '%s' not found." % track_name)
+			continue
+			
+		var track_object: RhythmTrack = tracks_by_name[track_name]
+		
+		# RhythmTriggerEvent für jede Note in dem Track anlegen
+		for note: RhythmNote in track_object.notes:
+			var trigger_time: float = note.start + mapping.offset
+			
+			# Nur events berücksichtigen welche auch in der playtime des liedes sind
+			# bzw. > 0.0 sekunden. Nach hinten raus kann es ja ruhig noch was animieren
+			# (Wobei das nie triggern würde.... na mal schauen).
+			if trigger_time >= 0:
+				var rte: RhythmTriggerEvent = RhythmTriggerEvent.new()
+				rte.time = trigger_time
+				rte.offset = mapping.offset
+				rte.identifier = mapping.identifier
+				rte.note = note
+				rte.trackname = track_object.name
+				rte.debug_color = mapping.debug_color
+				_trigger_events.append(rte)
+				track_trigger_events.append(rte)
+				
+		track_trigger_events.sort_custom(func(a: RhythmTriggerEvent, b: RhythmTriggerEvent) -> bool: return a.time < b.time)
+		track_object.events[mapping.identifier] = track_trigger_events
+
+	_trigger_events.sort_custom(func(a: RhythmTriggerEvent, b: RhythmTriggerEvent) -> bool: return a.time < b.time)
+	#print(_trigger_events)
+	print("Built %d total trigger events." % _trigger_events.size())
+	
 func check() -> void:
 	var all_good: bool = true
 	print("Checking....")
@@ -63,7 +208,7 @@ func check() -> void:
 			all_good = false
 			#return
 			
-	for event: RhythmEvent in scene_data.subscribed_events:
+	for event: RhythmSubscribeEvent in scene_data.subscribed_events:
 		if event == null:
 			printerr("Subscribed Events contains an empty resource. Please fix!")
 			all_good = false
@@ -91,6 +236,7 @@ func check() -> void:
 		return
 		
 	print_rich("[color=green][b]Everything looks good!")
+
 	
 func print_midi_tracks() -> void:
 	if scene_data == null or scene_data.midi_file == null or scene_data.midi_file.is_empty():
@@ -123,18 +269,133 @@ func stop() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	pass
+	var current_time: float = audio_stream_player.get_playback_position()
+	var input_buffer: float = scene_data.input_buffer_seconds
+	var hold_threshold: float = scene_data.note_tap_hold_threshold_seconds
+	
+	# TODO: Globale Konstante für die Input-Namen verwenden
+	var rhythm_actions: Array[StringName] = ["note_input_a", "note_input_b"] # note_input_ab
+	
+	# Checkt alle Inputs (A, B, AB) durch
+	for input_action: StringName in rhythm_actions:
+		var is_pressed: bool = event.is_action_pressed(input_action)
+		var is_released: bool = event.is_action_released(input_action)
+		
+		if not is_pressed and not is_released:
+			continue
+			
+		var track: RhythmTrack = _get_track_for_input(input_action)
+		if not track:
+			continue
+
+		var track_name: StringName = track.name
+		
+		if is_pressed:
+			var hittable_note: RhythmNote = _get_hittable_note(track, current_time)
+
+			if hittable_note:
+				hittable_note.status = RhythmNote.STATUS.NONE
+				
+				# Check for Tap/Start window (+- buffer around note.start)
+				var press_window_start: float = hittable_note.start - input_buffer
+				var press_window_end: float = hittable_note.start + input_buffer
+				
+				if current_time >= press_window_start and current_time <= press_window_end:
+					hittable_note.is_hit = true
+					
+					if hittable_note.duration < hold_threshold:
+						print("TAP NOTE HIT!")
+						hittable_note.status = RhythmNote.STATUS.COMPLETE
+						note_tap_hit.emit(track, hittable_note)
+						note_hit.emit(track, hittable_note)
+						
+					else:
+						print("HOLD NOTE STARTED")
+						hittable_note.status = RhythmNote.STATUS.HELD
+						_held_notes[track] = hittable_note
+						note_hold_start.emit(track, hittable_note)
+					
+					return 
+			
+			print("Input Missed/Early on press: ", track_name)
+			
+		# input losgelassen, für held notes
+		elif is_released:
+			if _held_notes.has(track):
+				var held_note: RhythmNote = _held_notes[track]
+				var release_hit_window_start: float = held_note.start + held_note.duration - input_buffer
+				var release_hit_window_end: float = held_note.start + held_note.duration + input_buffer
+				
+				_held_notes.erase(track_name)
+
+				# CÜberprüfe ob innerhalb der input_buffer losgelassen wurde
+				if current_time >= release_hit_window_start and current_time <= release_hit_window_end:
+					held_note.status = RhythmNote.STATUS.COMPLETE
+					print("HOLD NOTE FINISHED")
+					note_hold_release.emit(track, held_note)
+					note_hit.emit(track, held_note)
+				else:
+					# held note zu früh oder zu spät losgelassen
+					held_note.status = RhythmNote.STATUS.FAILED
+					note_failed.emit(track, held_note)
+					print("Hold Note Failure (Release Timing) on track: ", track_name)
+	
+	# Zum testen, leertaste/enter -> start
 	if event.is_action_pressed("ui_accept"):
+		_next_event_index = 0
 		audio_stream_player.play()
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
-	var time: float = audio_stream_player.get_playback_position() # + AudioServer.get_time_since_last_mix()
-	visualizer.current_seconds = time
+	var current_time: float = audio_stream_player.get_playback_position() # + AudioServer.get_time_since_last_mix()
+	visualizer.current_seconds = current_time
+
+	while _next_event_index < _trigger_events.size() and _trigger_events[_next_event_index].time <= current_time:
+		var event: RhythmTriggerEvent = _trigger_events[_next_event_index]
+		event_triggered.emit(event, current_time)
+		print("Emitting ", event)
+		_next_event_index = _next_event_index + 1
+
+	# checken ob eine Note gar nicht gedrückt wurde
+	var input_buffer: float = scene_data.input_buffer_seconds
 	
-func is_within_note_buffer() -> void:
+	for track: RhythmTrack in _rhythm_data.tracks:
+		var track_name: StringName = track.name
+		
+		# filtere nach Noten welche noch nicht getroffen wurden
+		# und welche ihr "treffer Zeitfenster" verpasst haben
+		for note: RhythmNote in track.notes: 
+			if note.status != RhythmNote.STATUS.NONE:
+				# ist bereits getroffen, oder wird gehalten
+				# oder ist bereits verpasst worden
+				continue
+			
+			var note_miss_time: float = note.start + input_buffer
+			
+			# Anfang von tap + hold notes komplett verpasst
+			if current_time > note_miss_time:
+				note.status = RhythmNote.STATUS.MISSED 
+				
+				# Nicht ganz sicher ob der check so stimmt
+				# Checkt ob eine ggf. gehaltene Note verpasst wurde...
+				# Aber bin noch nicht sicher ob get_next_hittable_note() so richtig ist..
+				 
+				if _held_notes.has(track) and _held_notes[track] == note:
+					_held_notes.erase(track)
+					
+					
+				note_missed.emit(track, note)
+				print("Note Missed (Past window): ", track_name)
+				   
+			# wenn Note zu weit in der Zukunft, early exit
+			# ggf. noch input buffer drauf rechnen?
+			elif note.start > current_time:
+				break
+
+func _process(_delta: float) -> void:
+	# TODO: Maybe update the debug visualization in process?
 	pass
 	
 func process_midi_file(path: String) -> RhythmData:
@@ -155,7 +416,7 @@ func process_midi_file(path: String) -> RhythmData:
 	for idx: int in parser.tracks.size():
 		var track_parser: MidiFileParser.Track = parser.tracks[idx]
 
-		# Determine the track's name
+		# Trackname auslesen
 		var track_name: String = "Track %d" % (idx + 1)
 		for event: MidiFileParser.Event in track_parser.meta:
 			if (event as MidiFileParser.Meta).type == MidiFileParser.Meta.Type.TRACK_NAME:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1d6g64utdy0a"]
+[gd_scene load_steps=6 format=3 uid="uid://c1d6g64utdy0a"]
 
 [ext_resource type="Script" uid="uid://ccpp64cox1cd1" path="res://util/rhythm_system/rhythm_scene.gd" id="1_0y0lv"]
-[ext_resource type="Script" uid="uid://nybkx4j8mmh5" path="res://util/rhythm_system/debug_visualizer/rhythm_visualizer.gd" id="1_a5vcu"]
+[ext_resource type="Script" uid="uid://nybkx4j8mmh5" path="res://util/rhythm_system/debug_visualizer/debug_rhythm_visualizer.gd" id="1_a5vcu"]
 [ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/ZenGarden.ogg" id="2_4j8lo"]
 [ext_resource type="Resource" uid="uid://csvy27ylsq87t" path="res://scenes/rhythm_base/rhythm_base_scene_data.tres" id="2_ip230"]
+[ext_resource type="Script" uid="uid://dlb4nex4nnrul" path="res://scenes/rhythm_base/rhythm_base_demo.gd" id="5_8es68"]
 
 [node name="RhythmBase" type="Control"]
 layout_mode = 3
@@ -14,8 +15,40 @@ scene_data = ExtResource("2_ip230")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4j8lo")
 
-[node name="Visualizer" type="Control" parent="."]
+[node name="DebugVisualizer" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_a5vcu")
+
+[node name="A" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 273.0
+offset_right = 256.0
+offset_bottom = 313.0
+pivot_offset = Vector2(20, 20)
+color = Color(1, 0.49803922, 0.3137255, 1)
+
+[node name="B" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 273.0
+offset_right = 454.0
+offset_bottom = 313.0
+pivot_offset = Vector2(20, 20)
+color = Color(0.92156863, 0.47058824, 0.85490197, 1)
+
+[node name="C" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 273.0
+offset_right = 655.0
+offset_bottom = 313.0
+pivot_offset = Vector2(20, 20)
+color = Color(0.32156864, 0.7294118, 0.7882353, 1)
+
+[node name="Demo" type="Node" parent="."]
+script = ExtResource("5_8es68")
+
+[connection signal="event_triggered" from="." to="Demo" method="_on_rhythm_base_event_triggered"]

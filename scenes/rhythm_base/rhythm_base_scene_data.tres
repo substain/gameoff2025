@@ -1,19 +1,36 @@
-[gd_resource type="Resource" script_class="RhythmSceneData" load_steps=5 format=3 uid="uid://csvy27ylsq87t"]
+[gd_resource type="Resource" script_class="RhythmSceneData" load_steps=7 format=3 uid="uid://csvy27ylsq87t"]
 
 [ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/ZenGarden.ogg" id="1_ohpfj"]
 [ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="1_udykp"]
-[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_event.gd" id="3_q26em"]
+[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_event.gd" id="3_q26em"]
 
 [sub_resource type="Resource" id="Resource_q26em"]
 script = ExtResource("3_q26em")
-identifier = &"asdf"
+trackname = &"MIDI Throat Singing"
+identifier = &"RotateA"
+metadata/_custom_type_script = "uid://b6bmbjrsggkay"
+
+[sub_resource type="Resource" id="Resource_r8yve"]
+script = ExtResource("3_q26em")
+trackname = &"MIDI Throat Singing"
+offset = -5.0
+identifier = &"WiggleB"
+debug_color = Color(0.9209143, 0.46915263, 0.8555636, 1)
+metadata/_custom_type_script = "uid://b6bmbjrsggkay"
+
+[sub_resource type="Resource" id="Resource_x3bm8"]
+script = ExtResource("3_q26em")
+trackname = &"MIDI Throat Singing"
+offset = -3.2
+identifier = &"ScaleC"
+debug_color = Color(0.3225256, 0.73122936, 0.78969455, 1)
 metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 
 [resource]
 script = ExtResource("1_udykp")
 backing_track = ExtResource("1_ohpfj")
 midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
-input_buffer_seconds = null
-note_tap_hold_threshold_seconds = null
-subscribed_events = Array[ExtResource("3_q26em")]([SubResource("Resource_q26em")])
+button_a_trackname = &"MIDI Throat Singing"
+button_b_trackname = &"MIDI BELLS"
+subscribed_events = Array[ExtResource("3_q26em")]([SubResource("Resource_q26em"), SubResource("Resource_r8yve"), SubResource("Resource_x3bm8")])
 metadata/_custom_type_script = "uid://cc1yvxkjy47yb"
