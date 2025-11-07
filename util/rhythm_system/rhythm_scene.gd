@@ -593,6 +593,8 @@ func _build_tempo_map(parser: MidiFileParser) -> Array:
 
 	return unique_tempo_map
 
+func get_beat_duration_in_seconds(beats: float = 1.0) -> float:
+	return 1.0 / _rhythm_data.get_bps_at_time(audio_stream_player.get_playback_position()) * beats
 
 func _ticks_to_seconds(absolute_ticks: int, tempo_map: Array) -> float:
 	var current_time_ms: float = 0.0
