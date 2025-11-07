@@ -1,4 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=9 format=3 uid="uid://ddi7wqycrl4sb"]
+
+[ext_resource type="Script" uid="uid://ccpp64cox1cd1" path="res://util/rhythm_system/rhythm_scene.gd" id="1_jn2uw"]
+[ext_resource type="Script" uid="uid://nybkx4j8mmh5" path="res://util/rhythm_system/debug_visualizer/debug_rhythm_visualizer.gd" id="2_48l30"]
+[ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/ZenGarden.ogg" id="2_oj440"]
+[ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="2_t5lcg"]
+[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_event.gd" id="3_oj440"]
+
+[sub_resource type="Resource" id="Resource_68q3x"]
+script = ExtResource("2_t5lcg")
+backing_track = ExtResource("2_oj440")
+midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
+metadata/_custom_type_script = "uid://cc1yvxkjy47yb"
 
 [sub_resource type="Gradient" id="Gradient_wk7kd"]
 colors = PackedColorArray(0.9708927, 0.41336823, 1.92523e-07, 1, 1, 1, 1, 1)
@@ -7,6 +19,20 @@ colors = PackedColorArray(0.9708927, 0.41336823, 1.92523e-07, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_wk7kd")
 
 [node name="ZenGardenSinging" type="Node2D"]
+
+[node name="RhythmBase" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jn2uw")
+scene_data = SubResource("Resource_68q3x")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RhythmBase"]
+
+[node name="DebugVisualizer" type="Control" parent="RhythmBase"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_48l30")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(620, 333.5)
