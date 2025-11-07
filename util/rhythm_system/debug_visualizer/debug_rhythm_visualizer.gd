@@ -41,7 +41,6 @@ enum NODE_TYPE { TAP_A, TAP_B, TAB_AB, HOLD_A, HOLD_B, HOLD_AB }
 var draw_mode: DRAW_MODE = DRAW_MODE.HARD
 var pixel_tweener: Tween
 
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_toggle_note_ui"):
 		visible = !visible
@@ -102,7 +101,15 @@ func set_rhythm_data(
 		# Gesamtdauer berechnen (bzw dann wann die letzte Note spielt, kann also kürzer sein als das eigentliche Lied).
 		for note: RhythmNote in track.notes:
 			total_duration_sec = max(total_duration_sec, note.start + note.duration)
-
+			
+			var linked_events: Array[RhythmTriggerEvent] = []
+			for event_array: Array in track.events.values():
+				for event: RhythmTriggerEvent in event_array:
+					if event.note == note:
+						linked_events.append(event)
+			
+			note_events[note] = linked_events
+			
 		# Das gleiche nochmal mit Events. Events mit positivem offset können entsprechend nach der letzten
 		# Note triggern.
 		for event_array: Array in track.events.values():
@@ -118,6 +125,8 @@ func set_rhythm_data(
 
 	queue_redraw()
 
+# Array[RhythmTriggerEvent]
+var note_events: Dictionary[RhythmNote, Array] = {}
 
 func _draw() -> void:
 	if not data or data.tracks.is_empty() or is_zero_approx(total_duration_sec):
@@ -180,32 +189,32 @@ func _draw() -> void:
 				font_size,
 				event_debug_color_base
 			)
-
+			
 		# Noten und events zeichnen
 		for note: RhythmNote in track_data.notes:
 			var note_start_sec: float = note.start
 			var note_end_sec: float = note.start + note.duration
 
 			# culling logik
-			var linked_events: Array = []
+			#var linked_events: Array = []
 			var note_is_visible: bool = false
 
 			if not (note_end_sec < start_time_visible or note_start_sec > end_time_visible):
 				note_is_visible = true
+				
+			#for event_array: Array in track_data.events.values():
+			#	for event: RhythmTriggerEvent in event_array:
+			#		if event.note == note:
+			#			linked_events.append(event)
 
-			for event_array: Array in track_data.events.values():
-				for event: RhythmTriggerEvent in event_array:
-					if event.note == note:
-						linked_events.append(event)
+			#			# falls note nicht sichtbar, prüfe ob dazugehöriges event sichtbar ist
+			#			if not note_is_visible:
+			#				var event_time: float = event.time
+			#				var min_time: float = min(note_start_sec, event_time)
+			#				var max_time: float = max(note_start_sec, event_time)
 
-						# falls note nicht sichtbar, prüfe ob dazugehöriges event sichtbar ist
-						if not note_is_visible:
-							var event_time: float = event.time
-							var min_time: float = min(note_start_sec, event_time)
-							var max_time: float = max(note_start_sec, event_time)
-
-							if not (max_time < start_time_visible or min_time > end_time_visible):
-								note_is_visible = true
+			#				if not (max_time < start_time_visible or min_time > end_time_visible):
+			#					note_is_visible = true
 
 			if not note_is_visible:
 				continue
@@ -289,12 +298,15 @@ func _draw() -> void:
 			var note_link_y: float = note_lane_y + NOTE_PADDING + half_note_h
 
 			# events
-			for event: RhythmTriggerEvent in linked_events:
+			for event: RhythmTriggerEvent in note_events[note]:
 				var event_link_y: float = event_y_map.get(event.identifier, -1.0)
 				if event_link_y == -1.0:
 					continue
 
 				var event_x_on_screen: float = (event.time * PIXELS_PER_SECOND) + offset_x
+
+				if not (event_x_on_screen < start_time_visible or event_x_on_screen > end_time_visible):
+					continue
 
 				# verbindungslinie
 				draw_line(

@@ -6,6 +6,9 @@ extends Node
 
 func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, time: float) -> void:
 	match event.identifier:
+		"Bop":
+			var tween: Tween = create_tween()
+			tween.tween_property(a, "rotation", a.rotation + (PI*0.5), 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 		"RotateA":
 			var tween: Tween = create_tween()
 			tween.tween_property(a, "rotation", a.rotation + (PI*0.5), 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
