@@ -1,18 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=15 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
+[ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
+[ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden_singing/zen_garden_singing_level.gd" id="1_r5g3c"]
+[ext_resource type="Resource" uid="uid://csvy27ylsq87t" path="res://scenes/rhythm_base/rhythm_base_scene_data.tres" id="2_48l30"]
+[ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden_singing/singing_monk.tscn" id="2_jn2uw"]
+[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/zen_garden/timed_starter.gd" id="4_t80qu"]
+[ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/zen_garden/zen_player_path_follow.gd" id="6_r5g3c"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/zen_garden/zen_line_2d.tscn" id="7_3rur6"]
+[ext_resource type="Texture2D" uid="uid://dm78ebdyk0rnu" path="res://2d/placeholder/circle_1x1.svg" id="8_t80qu"]
 
 [sub_resource type="Gradient" id="Gradient_wk7kd"]
-colors = PackedColorArray(0.9708927, 0.41336823, 1.92523e-07, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.574, 0.65169996, 0.7, 1, 0.46229059, 0.46229059, 0.46229059, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_x1g7k"]
 gradient = SubResource("Gradient_wk7kd")
+fill_to = Vector2(0, 1)
 
-[node name="ZenGardenSinging" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
-[node name="RhythmBase" parent="." instance=ExtResource("1_hagkd")]
+[sub_resource type="Curve2D" id="Curve2D_2mkoy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 571, 344, 0, 0, 0, 0, 599, 305, 0, 0, 0, 0, 630, 284, 0, 0, 0, 0, 657, 276, 0, 0, 0, 0, 682, 277, 0, 0, 0, 0, 704, 285, 0, 0, 0, 0, 723, 295, 0, 0, 0, 0, 737, 311, 0, 0, 0, 0, 748, 332, 0, 0, 0, 0, 753, 361, 0, 0, 0, 0, 747, 389, 0, 0, 0, 0, 731, 414, 0, 0, 0, 0, 711, 427, 0, 0, 0, 0, 682, 433, 0, 0, 0, 0, 658, 436, 0, 0, 0, 0, 627, 433, 0, 0, 0, 0, 602, 422, 0, 0, 0, 0, 581, 404, 0, 0, 0, 0, 573, 384, 0, 0, 0, 0, 570, 361, 0, 0, 0, 0, 571, 344)
+}
+point_count = 21
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(620, 333.5)
+[node name="ZenGardenSinging" type="Node2D" node_paths=PackedStringArray("rhythm_scene", "ui")]
+script = ExtResource("1_r5g3c")
+rhythm_scene = NodePath("RhythmBase")
+ui = NodePath("UI")
+
+[node name="UI" parent="." instance=ExtResource("1_osv4t")]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(646, 358)
 scale = Vector2(20.375, 11.421875)
 texture = SubResource("GradientTexture2D_x1g7k")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="RhythmBase" parent="." instance=ExtResource("1_hagkd")]
+scene_data = ExtResource("2_48l30")
+
+[node name="SingingMonk" parent="." instance=ExtResource("2_jn2uw")]
+position = Vector2(661, 331)
+scale = Vector2(4, 4)
+
+[node name="DrawnLines" type="Node2D" parent="." node_paths=PackedStringArray("target_lines")]
+script = ExtResource("4_t80qu")
+target_lines = [null, null, null]
+target_times = Array[float]([0.5, 1.5, 2.5, 7.0])
+
+[node name="Line2D" type="Line2D" parent="DrawnLines"]
+visible = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_0kq45")
+position = Vector2(0, -2)
+rotation = -0.00039833438
+points = PackedVector2Array(33, 310, 551, 314, 610, 266, 646, 265, 672.886, 286.26804, 684.8757, 312.27283, 679.8681, 331.27084, 664, 352, 649.85614, 361.25888, 629, 368, 607.85535, 363.24216, 592, 353, 577.8681, 331.2302, 574, 304, 581.88684, 284.2318, 589.8908, 274.235, 598, 267, 616.89557, 262.24573, 631.896, 261.2517, 654, 265, 692.88605, 286.276, 737.88007, 301.29395, 780.8749, 314.31107, 1022, 315, 1147, 319)
+texture = ExtResource("5_osv4t")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 12
+
+[node name="Path" type="Path2D" parent="."]
+position = Vector2(-194, -154)
+scale = Vector2(1.289618, 1.39375)
+curve = SubResource("Curve2D_2mkoy")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path"]
+position = Vector2(571, 344)
+rotation = -0.023525072
+rotates = false
+script = ExtResource("6_r5g3c")
+zen_line_scene = ExtResource("7_3rur6")
+
+[node name="WhiteCircleInner" type="Sprite2D" parent="Path/PathFollow2D"]
+texture_filter = 1
+rotation = 0.023525076
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_t80qu")
+
+[node name="WhiteCircleOutter" type="Sprite2D" parent="Path/PathFollow2D"]
+modulate = Color(1, 1, 1, 0.34117648)
+texture_filter = 1
+rotation = 0.023525072
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_t80qu")
+
+[connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
+[connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
+[connection signal="stop_pressed" from="UI" to="." method="_on_ui_stop_pressed"]
+[connection signal="toggle_rhythm_ui" from="UI" to="." method="_on_ui_toggle_rhythm_ui"]

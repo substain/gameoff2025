@@ -37,6 +37,8 @@ var _rhythm_data: RhythmData
 
 var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
   
+var _music_position: float = 0.0
+
 func _ready() -> void:
 	# Tool script macht sonst tool script sachen
 	if Engine.is_editor_hint():
@@ -317,13 +319,21 @@ func print_midi_tracks() -> void:
 	pass
 
 func start() -> void:
-	pass
-	
-func pause() -> void:
-	pass
+	audio_stream_player.play(0.0)
+
+func set_paused(is_paused_new: bool) -> void:
+	if is_paused_new:
+		_music_position = audio_stream_player.get_playback_position()
+		audio_stream_player.stop()
+	else:
+		audio_stream_player.play(_music_position)
 	
 func stop() -> void:
-	pass
+	_music_position = 0.0
+	audio_stream_player.stop()	
+
+func set_ui_visible(is_ui_visible_new: bool) -> void:
+	visualizer.visible = is_ui_visible_new
 
 func _input(event: InputEvent) -> void:
 	var current_time: float = audio_stream_player.get_playback_position()
@@ -399,8 +409,7 @@ func _input(event: InputEvent) -> void:
 	
 	# Zum testen, leertaste/enter -> start
 	if event.is_action_pressed("ui_accept"):
-		_next_event_index = 0
-		audio_stream_player.play()
+		start()
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
