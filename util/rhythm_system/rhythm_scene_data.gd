@@ -17,4 +17,5 @@ extends Resource
 @export var note_tap_hold_threshold_seconds: float = 0.5
 
 @export_subgroup("Events")
-@export var subscribed_events: Array[RhythmSubscribeEvent] = []
+@export var subscribed_events: Array[RhythmSubscribeNoteEvent] = []
+@export var custom_events: Array[RhythmSubscribeCustomEvent] = []

@@ -3,6 +3,8 @@ extends Resource
 
 var trackname: StringName
 var offset: float = 0.0
+var offset_beats: float = 0.0
+var use_beats: bool = false
 var identifier: StringName
 var time: float = 0.0
 var note: RhythmNote

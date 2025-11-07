@@ -32,7 +32,7 @@ var _next_event_index: int = 0
 # var _is_running: bool = false
 
 var _trigger_events: Array[RhythmTriggerEvent] = []
-var _subscribed_events: Array[RhythmSubscribeEvent] = []
+var _subscribed_events: Array[RhythmSubscribeNoteEvent] = []
 var _rhythm_data: RhythmData
 
 var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
@@ -47,13 +47,13 @@ func _ready() -> void:
 	_rhythm_data = process_midi_file(scene_data.midi_file)
 	parsing_finished.emit(_rhythm_data)
 	
-	build_event_list(_rhythm_data, scene_data.subscribed_events)
+	build_event_list(_rhythm_data, scene_data.subscribed_events, scene_data.custom_events)
 	building_event_list_finished.emit()
 	
 	visualizer.set_rhythm_data(_rhythm_data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
 	preparing_debug_visualization_finished.emit()
 
-func register_animation_for_track(event: RhythmSubscribeEvent) -> void:
+func register_animation_for_track(event: RhythmSubscribeNoteEvent) -> void:
 	_subscribed_events.append(event)
 	# TODO: nicht vollständige events rausfiltern (aktuell wird das in build_event_list gemacht, das
 	# kann aber ruhig schon hier passieren).
@@ -121,8 +121,8 @@ func _get_hittable_note(track: RhythmTrack, current_time: float) -> RhythmNote:
 			
 	return null
 
-func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribeEvent]) -> void:
-	for event: RhythmSubscribeEvent in subscribed_events:
+func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribeNoteEvent], custom_events: Array[RhythmSubscribeCustomEvent]) -> void:
+	for event: RhythmSubscribeNoteEvent in subscribed_events:
 		register_animation_for_track(event)
 	
 	_trigger_events.clear()
@@ -136,7 +136,7 @@ func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribe
 		tracks_by_name[track.name] = track
 	
 
-	for mapping: RhythmSubscribeEvent in _subscribed_events:
+	for mapping: RhythmSubscribeNoteEvent in _subscribed_events:
 		var track_name: String = mapping.trackname
 		var track_trigger_events: Array[RhythmTriggerEvent] = []
 		
@@ -148,7 +148,19 @@ func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribe
 		
 		# RhythmTriggerEvent für jede Note in dem Track anlegen
 		for note: RhythmNote in track_object.notes:
-			var trigger_time: float = note.start + mapping.offset
+			var offset_in_seconds: float = mapping.offset
+			if mapping.use_beats:
+				var beats: float = mapping.offset_beats
+				
+				var bps_at_note: float = _rhythm_data.get_bps_at_time(note.start)
+			
+				var beat_offset_in_seconds: float = beats / bps_at_note
+				
+				# TODO: Wir könnten auch Sekunden UND Beat offset gleichzeitig nutzen
+				# hierfür +=
+				offset_in_seconds = beat_offset_in_seconds
+			
+			var trigger_time: float = note.start + offset_in_seconds
 			
 			# Nur events berücksichtigen welche auch in der playtime des liedes sind
 			# bzw. > 0.0 sekunden. Nach hinten raus kann es ja ruhig noch was animieren
@@ -156,7 +168,9 @@ func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribe
 			if trigger_time >= 0:
 				var rte: RhythmTriggerEvent = RhythmTriggerEvent.new()
 				rte.time = trigger_time
-				rte.offset = mapping.offset
+				rte.offset = offset_in_seconds
+				rte.offset_beats = mapping.offset_beats
+				rte.use_beats = mapping.use_beats
 				rte.identifier = mapping.identifier
 				rte.note = note
 				rte.trackname = track_object.name
@@ -167,7 +181,44 @@ func build_event_list(data: RhythmData, subscribed_events: Array[RhythmSubscribe
 		track_trigger_events.sort_custom(func(a: RhythmTriggerEvent, b: RhythmTriggerEvent) -> bool: return a.time < b.time)
 		track_object.events[mapping.identifier] = track_trigger_events
 
+	data.custom_events.clear()
+
+	for custom_event: RhythmSubscribeCustomEvent in custom_events:
+		var time_in_seconds: float = custom_event.time
+		#if mapping.use_beats:
+		#		var beats: float = mapping.offset_beats
+		#		
+		#		var bps_at_note: float = _rhythm_data.get_bps_at_time(note.start)
+		#	
+		#		var beat_offset_in_seconds: float = beats / bps_at_note
+		#		
+		#		# TODO: Wir könnten auch Sekunden UND Beat offset gleichzeitig nutzen
+		#		# hierfür +=
+		#		offset_in_seconds = beat_offset_in_seconds
+			
+		var trigger_time: float = time_in_seconds
+			
+		# Nur events berücksichtigen welche auch in der playtime des liedes sind
+		# bzw. > 0.0 sekunden. Nach hinten raus kann es ja ruhig noch was animieren
+		# (Wobei das nie triggern würde.... na mal schauen).
+		if trigger_time >= 0:
+			var rte: RhythmTriggerEvent = RhythmTriggerEvent.new()
+			rte.time = trigger_time
+			rte.offset = 0.0
+			rte.offset_beats = 0.0
+			rte.use_beats = false
+			rte.identifier = custom_event.identifier
+			rte.note = null
+			rte.trackname = ""
+			rte.debug_color = custom_event.debug_color
+			_trigger_events.append(rte)
+			data.custom_events.append(rte)
+			#track_trigger_events.append(rte)
+
+	data.custom_events.sort_custom(func(a: RhythmTriggerEvent, b: RhythmTriggerEvent) -> bool: return a.time < b.time)
+
 	_trigger_events.sort_custom(func(a: RhythmTriggerEvent, b: RhythmTriggerEvent) -> bool: return a.time < b.time)
+	
 	#print(_trigger_events)
 	print("Built %d total trigger events." % _trigger_events.size())
 	
@@ -214,7 +265,7 @@ func check() -> void:
 			all_good = false
 			#return
 			
-	for event: RhythmSubscribeEvent in scene_data.subscribed_events:
+	for event: RhythmSubscribeNoteEvent in scene_data.subscribed_events:
 		if event == null:
 			printerr("Subscribed Events contains an empty resource. Please fix!")
 			all_good = false
@@ -415,7 +466,7 @@ func process_midi_file(path: String) -> RhythmData:
 		printerr("MidiProcessor: Invalid or zero PPQ.")
 		return null
 
-	var tempo_map: Array = _build_tempo_map(parser)
+	var tempo_map_ticks: Array = _build_tempo_map(parser)
 
 	var rhythm_data: RhythmData = RhythmData.new()
 
@@ -431,9 +482,17 @@ func process_midi_file(path: String) -> RhythmData:
 
 		var rhythm_track: RhythmTrack = RhythmTrack.new(idx, track_name)
 
-		rhythm_track.notes = _process_track_events(track_parser.events, tempo_map, idx)
+		rhythm_track.notes = _process_track_events(track_parser.events, tempo_map_ticks, idx)
 		rhythm_data.tracks.append(rhythm_track)
 
+	var tempo_map_seconds: Array[RhythmTempoMapEntry] = []
+	for entry: Dictionary in tempo_map_ticks:
+		var entry_time_sec: float = _ticks_to_seconds(entry.ticks, tempo_map_ticks)
+		
+		tempo_map_seconds.append(RhythmTempoMapEntry.new(entry_time_sec, entry.bpm))
+		
+	rhythm_data.tempo_map = tempo_map_seconds
+		
 	return rhythm_data
 
 
@@ -495,10 +554,14 @@ func _build_tempo_map(parser: MidiFileParser) -> Array:
 		for event: MidiFileParser.Event in track.events:
 			if event.event_type == MidiFileParser.Event.EventType.META:
 				var meta_event: MidiFileParser.Meta = event as MidiFileParser.Meta
-
+				var bpm: float = 60000000.0 / meta_event.value
 				if meta_event.type == MidiFileParser.Meta.Type.SET_TEMPO:
 					tempo_map.append(
-						{"ticks": meta_event.absolute_ticks, "ms_per_tick": meta_event.ms_per_tick}
+						{
+							"ticks": meta_event.absolute_ticks,
+							"ms_per_tick": meta_event.ms_per_tick,
+							"bpm": bpm
+						}
 					)
 
 	# Sortieren und doppelte entfernen
@@ -508,7 +571,7 @@ func _build_tempo_map(parser: MidiFileParser) -> Array:
 	if tempo_map.is_empty() || tempo_map[0].ticks > 0:
 		# Nutze Standardtempo falls bei tick 0 nicht direkt eines gesetzt wird
 		var default_ms_per_tick: float = 60000.0 / (120.0 * float(parser.header.time_division))
-		unique_tempo_map.append({"ticks": 0, "ms_per_tick": default_ms_per_tick})
+		unique_tempo_map.append({"ticks": 0, "ms_per_tick": default_ms_per_tick, "bpm": 120.0})
 
 	var last_tick: int = -1
 	for entry: Dictionary in tempo_map:
