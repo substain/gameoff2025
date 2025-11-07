@@ -281,6 +281,9 @@ func stop() -> void:
 	_music_position = 0.0
 	audio_stream_player.stop()	
 
+func set_ui_visible(is_ui_visible_new: bool) -> void:
+	visualizer.visible = is_ui_visible_new
+
 func _input(event: InputEvent) -> void:
 	var current_time: float = audio_stream_player.get_playback_position()
 	var input_buffer: float = scene_data.input_buffer_seconds
