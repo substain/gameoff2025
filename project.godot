@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SettingsIO="*res://scripts/autoload/settings_io.gd"
 CYSGlobals="*res://scenes/create_your_song_prototype/cys_globals.gd"
 
 [debug]
