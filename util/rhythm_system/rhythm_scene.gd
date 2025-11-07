@@ -36,7 +36,7 @@ var _subscribed_events: Array[RhythmSubscribeEvent] = []
 var _rhythm_data: RhythmData
 
 var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
-
+  
 func _ready() -> void:
 	# Tool script macht sonst tool script sachen
 	if Engine.is_editor_hint():
@@ -47,11 +47,11 @@ func _ready() -> void:
 	_rhythm_data = process_midi_file(scene_data.midi_file)
 	parsing_finished.emit(_rhythm_data)
 	
-	visualizer.set_rhythm_data(_rhythm_data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
-	preparing_debug_visualization_finished.emit()
-
 	build_event_list(_rhythm_data, scene_data.subscribed_events)
 	building_event_list_finished.emit()
+	
+	visualizer.set_rhythm_data(_rhythm_data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
+	preparing_debug_visualization_finished.emit()
 
 func register_animation_for_track(event: RhythmSubscribeEvent) -> void:
 	_subscribed_events.append(event)
