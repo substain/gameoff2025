@@ -23,3 +23,6 @@ func _init(s: float, d: float, n: int, t: int) -> void:
 	self.duration = d
 	self.note_number = n
 	self.track_index = t
+	
+func get_combined_id() -> String:
+	return "T"+str(track_index)+"_S"+str(start)

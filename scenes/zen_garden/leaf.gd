@@ -1,6 +1,8 @@
 class_name Leaf
 extends Node2D
 
+signal on_remove
+
 const LEAF_FALL_ANIM: String = "fall"
 const LEAF_IDLE_ANIM: String = "idle"
 const SHADOW_FAR_ANIM: String = "far"
@@ -66,7 +68,7 @@ func start_falling() -> void:
 func land() -> void:
 	is_falling = false
 	leaf_anim_player.play(LEAF_IDLE_ANIM)
-
+	on_remove.emit()
 	var despawn_tween: Tween = create_tween()
 	despawn_tween.tween_property(self, "modulate:a", 0.0, 4.0)
 	await despawn_tween.finished
@@ -74,11 +76,12 @@ func land() -> void:
 	
 func get_hit() -> void:
 	is_falling = false
+	on_remove.emit()
 	shadow_object.queue_free()
 	var despawn_tween: Tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
 	despawn_tween.tween_method(rotate, 1.0, 0.0, 0.5)
 	despawn_tween.tween_property(self, "global_position", global_position + Vector2(randf() * 5.0, randf()* 5.0), 1.0)
 	despawn_tween.tween_property(self, "modulate:a", 0.0, 1.0)
 	await despawn_tween.finished
+
 	queue_free()
-	

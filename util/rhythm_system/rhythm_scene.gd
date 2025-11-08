@@ -71,9 +71,9 @@ func _get_track_for_input(input_action: StringName) -> RhythmTrack:
 	
 	# NOTE: Theoretisch kann das hier auch ein Dictionary sein... aber so reichts ja
 	match input_action:
-		"note_input_a":
+		InputHandler.ACTION_A:
 			track_name = scene_data.button_a_trackname
-		"note_input_b":
+		InputHandler.ACTION_B:
 			track_name = scene_data.button_b_trackname
 		# TODO: Schauen wie man 2 Tasten gleichzeitig ordentlich detected...
 		#"note_input_ab":

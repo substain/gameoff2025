@@ -9,15 +9,40 @@ const TELEGRAPH_EVENT_IDENTIFIER: String = "telegraph"
 @export var event_node_parent: Node2D
 @export var zen_player_path_follow: ZenPlayerPathFollow
 
-func create_leaf() -> void:
+## leaves are removed when they are destroyed / on the ground (not when they are freed)
+var current_leaves: Dictionary[String, Leaf] = {}
+
+func create_leaf(event: RhythmTriggerEvent) -> void:
 	var target_position: Vector2 = zen_player_path_follow.get_telegraphed_position(telegraph_time_offset)
 	var leaf: Leaf = LEAF_SCENE.instantiate() as Leaf
-	
-	event_node_parent.add_child(leaf)
+	var leaf_id: String = event.note.get_combined_id()
+	print("create leaf ", leaf_id)
+
 	leaf.global_position = target_position
+	event_node_parent.add_child(leaf)
 	leaf.set_fall_time(telegraph_time_offset, true)
 	leaf.start_falling()
-	
+	leaf.on_remove.connect(on_free_leaf.bind(leaf_id))
+	current_leaves[leaf_id] = leaf
+	print("leaves now: ", current_leaves.size())
+
 func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, time: float) -> void:
 	if event.identifier == TELEGRAPH_EVENT_IDENTIFIER:
-		create_leaf()
+		create_leaf(event)
+
+func on_free_leaf(leaf_id: String) -> void:
+	current_leaves.erase(leaf_id)
+	print("free leaf ", leaf_id)
+
+func get_leaf_by_event(event: RhythmTriggerEvent) -> Leaf:
+	var leaf_id: String = event.note.get_combined_id()
+	if !current_leaves.has(leaf_id):
+		push_warning("could not find leaf for requested event: ", event)
+		return null
+		
+	var res: Leaf = current_leaves[leaf_id]
+	if !is_instance_valid(res):
+		push_warning("invalid leaf instance found at key ", leaf_id, " for ", event)
+		
+	return res
+	
