@@ -1,23 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://beivor4vhcbrd"]
+[gd_scene load_steps=8 format=3 uid="uid://beivor4vhcbrd"]
 
+[ext_resource type="Script" uid="uid://dtao0oep2rr1t" path="res://scenes/zen_garden_singing/singing_monk.gd" id="1_8o8k5"]
 [ext_resource type="Texture2D" uid="uid://dqq2yh4of7jc8" path="res://2d/placeholder/singing_monk/singing_monk.png" id="1_ip0t1"]
-
-[sub_resource type="Animation" id="Animation_ip0t1"]
-resource_name = "idle"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
 
 [sub_resource type="Animation" id="Animation_8o8k5"]
 length = 0.001
@@ -32,23 +16,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_0mxov"]
-resource_name = "sing"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_yk68v"]
@@ -68,6 +35,40 @@ tracks/0/keys = {
 "values": [8]
 }
 
+[sub_resource type="Animation" id="Animation_ip0t1"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_0mxov"]
+resource_name = "sing"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o14jx"]
 _data = {
 &"RESET": SubResource("Animation_8o8k5"),
@@ -76,7 +77,10 @@ _data = {
 &"sing": SubResource("Animation_0mxov")
 }
 
-[node name="SingingMonk" type="Node2D"]
+[node name="SingingMonk" type="Node2D" node_paths=PackedStringArray("anim_player", "anim_timer")]
+script = ExtResource("1_8o8k5")
+anim_player = NodePath("AnimationPlayer")
+anim_timer = NodePath("Timer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -87,3 +91,9 @@ hframes = 9
 libraries = {
 &"": SubResource("AnimationLibrary_o14jx")
 }
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
