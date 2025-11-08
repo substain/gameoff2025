@@ -1,13 +1,30 @@
-[gd_resource type="Resource" script_class="RhythmSceneData" load_steps=5 format=3 uid="uid://csvy27ylsq87t"]
+[gd_resource type="Resource" script_class="RhythmSceneData" load_steps=8 format=3 uid="uid://csvy27ylsq87t"]
 
 [ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/ZenGarden.ogg" id="1_ohpfj"]
 [ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="1_udykp"]
-[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_event.gd" id="3_q26em"]
+[ext_resource type="Script" uid="uid://b5h8cxpfkcar5" path="res://util/rhythm_system/rhythm_subscribe_custom_event.gd" id="2_r8yve"]
+[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_note_event.gd" id="4_r8yve"]
+
+[sub_resource type="Resource" id="Resource_x3bm8"]
+script = ExtResource("2_r8yve")
+identifier = "TEST_A"
+time = 5.0
+debug_color = Color(0.86344135, 0.3913967, 0.7969019, 1)
+metadata/_custom_type_script = "uid://b5h8cxpfkcar5"
 
 [sub_resource type="Resource" id="Resource_q26em"]
-script = ExtResource("3_q26em")
+script = ExtResource("4_r8yve")
 trackname = &"MIDI Throat Singing"
 identifier = &"Bop"
+metadata/_custom_type_script = "uid://b6bmbjrsggkay"
+
+[sub_resource type="Resource" id="Resource_r8yve"]
+script = ExtResource("4_r8yve")
+trackname = &"MIDI Throat Singing"
+offset_beats = -2
+use_beats = true
+identifier = &"BEAT_TEST"
+debug_color = Color(0.30346733, 0.69360703, 0.79184264, 1)
 metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 
 [resource]
@@ -16,5 +33,6 @@ backing_track = ExtResource("1_ohpfj")
 midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
 button_a_trackname = &"MIDI Throat Singing"
 button_b_trackname = &"MIDI BELLS"
-subscribed_events = Array[ExtResource("3_q26em")]([SubResource("Resource_q26em")])
+subscribed_events = Array[ExtResource("4_r8yve")]([SubResource("Resource_q26em"), SubResource("Resource_r8yve")])
+custom_events = Array[ExtResource("2_r8yve")]([SubResource("Resource_x3bm8")])
 metadata/_custom_type_script = "uid://cc1yvxkjy47yb"

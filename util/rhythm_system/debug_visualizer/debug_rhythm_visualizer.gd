@@ -149,6 +149,8 @@ func _draw() -> void:
 	var font_size: int = get_theme_default_font_size()
 	var current_y_offset: float = TOP_MARGIN
 
+	var timeline_width: float = total_duration_sec * PIXELS_PER_SECOND
+
 	for idx: int in data.tracks.size():
 		var track_data: RhythmTrack = data.tracks[idx]
 
@@ -157,7 +159,6 @@ func _draw() -> void:
 		var events_base_y: float = current_y_offset + TRACK_HEIGHT
 
 		# Hintergrund (grau)
-		var timeline_width: float = total_duration_sec * PIXELS_PER_SECOND
 		var bg_rect: Rect2 = Rect2(offset_x, current_y_offset, timeline_width, track_full_height)
 		draw_rect(bg_rect, COLOR_TRACK_BG)
 
@@ -177,12 +178,19 @@ func _draw() -> void:
 			)
 			event_y_map[event_identifier] = event_lane_y_center
 
+			var event_string: String = ""
+			if event_array.front().use_beats:
+				event_string = "↳ %s (triggers: %d, offset: %.2f beats)" % [event_identifier, event_array.size(), event_array.front().offset_beats]
+			else:
+				event_string = "↳ %s (triggers: %d, offset: %.2f seconds)" % [event_identifier, event_array.size(), event_array.front().offset]
+
 			draw_string(
 				font,
 				Vector2(25, event_lane_y_center + (font_size * 0.4)),
 				(
-					"↳ %s (triggers: %d, offset: %.2f)"
-					% [event_identifier, event_array.size(), event_array.front().offset]
+					event_string
+					#"↳ %s (triggers: %d, offset: %.2f)"
+					#% [event_identifier, event_array.size(), event_array.front().offset]
 				),
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
@@ -335,13 +343,54 @@ func _draw() -> void:
 
 		current_y_offset += track_full_height
 
+	# data.custom_events
+	var bg_rect: Rect2 = Rect2(offset_x, current_y_offset, timeline_width, TRACK_HEIGHT)
+	draw_rect(bg_rect, COLOR_TRACK_BG)
+	
+	var custom_event_lane_y_center: float = (
+		current_y_offset
+		+ (EVENT_LANE_HEIGHT_BASE * 1.25)
+	)
+	
+	for event: RhythmTriggerEvent in data.custom_events:
+		var event_time: float = event.time
+		
+		if event_time < start_time_visible or event_time > end_time_visible:
+			continue
+			
+		var event_x_on_screen: float = (event.time * PIXELS_PER_SECOND) + offset_x
+			
+		draw_circle(
+			Vector2(event_x_on_screen, custom_event_lane_y_center), EVENT_MARKER_SIZE, event.debug_color
+		)
+		
+		draw_string(
+			font,
+			Vector2(event_x_on_screen - 125.0, custom_event_lane_y_center + font_size * 2.0),
+			event.identifier,
+			HORIZONTAL_ALIGNMENT_CENTER,
+			250,
+			font_size,
+			event.debug_color
+		)
+	
+	draw_string(
+		font,
+		Vector2(5, current_y_offset + TRACK_HEIGHT / 2.0 + (font_size / 2.0)),
+		"Custom Events (events: %d)" % data.custom_events.size(),
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		font_size,
+		Color.WHITE if not data.custom_events.is_empty() else Color.GRAY
+	)
+
 	var playhead_x: float = fixed_center_x
 	var total_vis_height_draw: float = current_y_offset
 
 	# Playhead (rote linie, "jetzt" im Lied)
 	draw_line(
 		Vector2(playhead_x, TOP_MARGIN),
-		Vector2(playhead_x, total_vis_height_draw),
+		Vector2(playhead_x, total_vis_height_draw + TRACK_HEIGHT),
 		COLOR_PLAYHEAD,
 		2.0
 	)
