@@ -37,8 +37,6 @@ func _ready() -> void:
 	failed_text_template = failed_label.text
 	reset_note_statistics()
 
-
-
 func set_progress(progress: float) -> void:
 	progress_bar.value = progress * 100
 	

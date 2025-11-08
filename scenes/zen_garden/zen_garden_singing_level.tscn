@@ -45,10 +45,11 @@ texture = SubResource("GradientTexture2D_x1g7k")
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node") instance=ExtResource("2_jn2uw")]
+[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "leaf_manager") instance=ExtResource("2_jn2uw")]
 position = Vector2(661, 331)
 scale = Vector2(4, 4)
 target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
+leaf_manager = NodePath("../RhythmEventCreator")
 
 [node name="DrawnLines" type="Node2D" parent="." node_paths=PackedStringArray("target_lines")]
 script = ExtResource("4_t80qu")
@@ -111,7 +112,6 @@ rotates = false
 [connection signal="note_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_hit"]
 [connection signal="note_missed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_missed"]
 [connection signal="note_missed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_missed"]
-[connection signal="note_tap_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="note_tap_hit" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]

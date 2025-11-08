@@ -31,15 +31,15 @@ func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, time: float) -> 
 func on_free_leaf(leaf_id: String) -> void:
 	current_leaves.erase(leaf_id)
 
-func get_leaf_by_event(event: RhythmTriggerEvent) -> Leaf:
-	var leaf_id: String = event.note.get_combined_id()
+func get_leaf_by_note(note: RhythmNote) -> Leaf:
+	var leaf_id: String = note.get_combined_id()
 	if !current_leaves.has(leaf_id):
-		push_warning("could not find leaf for requested event: ", event)
+		push_warning("could not find leaf for requested event: ", note)
 		return null
 		
 	var res: Leaf = current_leaves[leaf_id]
 	if !is_instance_valid(res):
-		push_warning("invalid leaf instance found at key ", leaf_id, " for ", event)
+		push_warning("invalid leaf instance found at key ", leaf_id, " for ", note)
 		
 	return res
 	
