@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmddoy74i7yad"]
+[gd_scene load_steps=4 format=3 uid="uid://ch80ydc73yb13"]
 
-[ext_resource type="Script" uid="uid://bp6qkufwp4uo2" path="res://scenes/util/level_placeholder.gd" id="1_5n0uo"]
+[ext_resource type="Script" uid="uid://bp6qkufwp4uo2" path="res://scenes/util/level_placeholder.gd" id="1_cj3ov"]
 
-[sub_resource type="Gradient" id="Gradient_h663t"]
-colors = PackedColorArray(0.63176304, 0.5091365, 0.98721844, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_dc72o"]
+colors = PackedColorArray(0.82345694, 0.51490396, 0.44391972, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5n0uo"]
-gradient = SubResource("Gradient_h663t")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cj3ov"]
+gradient = SubResource("Gradient_dc72o")
 
-[node name="AnglerFishLevel" type="Node2D"]
-script = ExtResource("1_5n0uo")
+[node name="GlowsticksLevel" type="Node2D"]
+script = ExtResource("1_cj3ov")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(635.49994, 355.99997)
-scale = Vector2(20.859373, 12.124999)
-texture = SubResource("GradientTexture2D_5n0uo")
+position = Vector2(632.49994, 351.99997)
+scale = Vector2(20.765623, 11.999999)
+texture = SubResource("GradientTexture2D_cj3ov")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 511.0
@@ -25,7 +25,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.796243, 0.796243, 0.796243, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 24
-text = "Angler Fish Level
+text = "Glowsticks Level
 (not implemented)
 "
 horizontal_alignment = 1

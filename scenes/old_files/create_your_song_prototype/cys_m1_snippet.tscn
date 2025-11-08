@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cce8kry4in6mi"]
+[gd_scene load_steps=5 format=3 uid="uid://b3s61uvjw0npg"]
 
-[ext_resource type="Script" uid="uid://dsqfok6j4eb2a" path="res://scenes/create_your_song_prototype/cys_sound_snippet.gd" id="1_rg2ea"]
-[ext_resource type="Texture2D" uid="uid://dpcqaqewla4at" path="res://2d/example/string/string-test1.svg" id="2_wlnhd"]
+[ext_resource type="Script" uid="uid://dsqfok6j4eb2a" path="res://scenes/old_files/create_your_song_prototype/cys_sound_snippet.gd" id="1_aiatx"]
+[ext_resource type="Texture2D" uid="uid://dpcqaqewla4at" path="res://2d/example/string/string-test1.svg" id="2_xguq3"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rwqnj"]
 points = PackedVector2Array(-55, 0, -46, 1, -31, -8, -11, -30, 7, -34, 38, -29, 135, 0, 136, 41, -55, 42)
@@ -9,16 +9,16 @@ points = PackedVector2Array(-55, 0, -46, 1, -31, -8, -11, -30, 7, -34, 38, -29, 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rwqnj"]
 size = Vector2(110, 85)
 
-[node name="M2CYSSnippet" type="StaticBody2D"]
+[node name="M1CYSSnippet" type="StaticBody2D"]
 collision_layer = 5
-script = ExtResource("1_rg2ea")
+script = ExtResource("1_aiatx")
 sound_type = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.53333336, 1, 1)
 position = Vector2(295, 0)
 scale = Vector2(0.56878304, 0.56878304)
-texture = ExtResource("2_wlnhd")
+texture = ExtResource("2_xguq3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("ConvexPolygonShape2D_rwqnj")

@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
-[ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden_singing/zen_garden_singing_level.gd" id="1_r5g3c"]
-[ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden_singing/singing_monk.tscn" id="2_jn2uw"]
-[ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden_singing/rhythm_event_creator.gd" id="3_3rur6"]
-[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/zen_garden/timed_starter.gd" id="4_t80qu"]
-[ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden_singing/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
+[ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
+[ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden/singing_monk.tscn" id="2_jn2uw"]
+[ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
+[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/old_files/timed_starter.gd" id="4_t80qu"]
+[ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
-[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/zen_garden/zen_player_path_follow.gd" id="6_r5g3c"]
-[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/zen_garden/zen_line_2d.tscn" id="7_3rur6"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/old_files/zen_player_path_follow.gd" id="6_r5g3c"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/old_files/zen_line_2d.tscn" id="7_3rur6"]
 [ext_resource type="Texture2D" uid="uid://dm78ebdyk0rnu" path="res://2d/placeholder/circle_1x1.svg" id="8_t80qu"]
-[ext_resource type="Curve2D" uid="uid://kawidm7edty3" path="res://scenes/zen_garden_singing/circle_path.tres" id="9_5uqd1"]
+[ext_resource type="Curve2D" uid="uid://kawidm7edty3" path="res://scenes/zen_garden/circle_path.tres" id="9_5uqd1"]
 
 [sub_resource type="Gradient" id="Gradient_wk7kd"]
 colors = PackedColorArray(0.574, 0.65169996, 0.7, 1, 0.46229059, 0.46229059, 0.46229059, 1)
@@ -22,22 +22,21 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
-[node name="ZenGardenSinging" type="Node2D" node_paths=PackedStringArray("rhythm_scene", "ui")]
+[node name="ZenGardenSinging" type="Node2D" node_paths=PackedStringArray("rhythm_scene")]
 script = ExtResource("1_r5g3c")
 rhythm_scene = NodePath("RhythmBase")
-ui = NodePath("UI")
 
 [node name="UI" parent="." instance=ExtResource("1_osv4t")]
-
-[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow")]
-script = ExtResource("3_3rur6")
-event_node_parent = NodePath("..")
-zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
 
 [node name="RhythmBase" parent="." instance=ExtResource("1_hagkd")]
 offset_left = 1.0
 offset_right = 1.0
 scene_data = ExtResource("5_3rur6")
+
+[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow")]
+script = ExtResource("3_3rur6")
+event_node_parent = NodePath("..")
+zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(654, 347.00003)
@@ -107,11 +106,18 @@ rotates = false
 [connection signal="stop_pressed" from="UI" to="." method="_on_ui_stop_pressed"]
 [connection signal="toggle_rhythm_ui" from="UI" to="." method="_on_ui_toggle_rhythm_ui"]
 [connection signal="event_triggered" from="RhythmBase" to="RhythmEventCreator" method="_on_rhythm_base_event_triggered"]
+[connection signal="note_failed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_failed"]
 [connection signal="note_failed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_failed"]
+[connection signal="note_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_hit"]
+[connection signal="note_missed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_missed"]
 [connection signal="note_missed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_missed"]
+[connection signal="note_tap_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="note_tap_hit" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_tap_hit"]
+[connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
+[connection signal="started_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]

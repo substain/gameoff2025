@@ -42,18 +42,18 @@ var draw_mode: DRAW_MODE = DRAW_MODE.HARD
 var pixel_tweener: Tween
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_toggle_note_ui"):
+	if event.is_action_pressed(InputHandler.DEBUG_TOGGLE_NOTE_UI):
 		visible = !visible
 		return
 
 	var new_pixels: float = PIXELS_PER_SECOND_BACKING_VALUE
 	var is_speed_change: bool = true
 
-	if event.is_action_pressed("debug_increase_note_ui_speed"):
+	if event.is_action_pressed(InputHandler.DEBUG_INCREASE_NOTE_UI_SPEED):
 		new_pixels = min(PIXELS_PER_SECOND_BACKING_VALUE + 25, 1500)
-	elif event.is_action_pressed("debug_decrease_note_ui_speed"):
+	elif event.is_action_pressed(InputHandler.DEBUG_DECREASE_NOTE_UI_SPEED):
 		new_pixels = max(PIXELS_PER_SECOND_BACKING_VALUE - 25, 25)
-	elif event.is_action_pressed("debug_reset_note_ui_speed"):
+	elif event.is_action_pressed(InputHandler.DEBUG_RESET_NOTE_UI_SPEED):
 		new_pixels = 150
 	else:
 		is_speed_change = false

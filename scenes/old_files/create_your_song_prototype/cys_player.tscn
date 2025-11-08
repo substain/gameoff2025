@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://7s2njiex250w"]
 
 [ext_resource type="Texture2D" uid="uid://cvaxghcsay80s" path="res://icon.svg" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://ca50k4btmq8wk" path="res://scenes/create_your_song_prototype/cys_player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://ca50k4btmq8wk" path="res://scenes/old_files/create_your_song_prototype/cys_player.gd" id="1_g2els"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
 radius = 28.01785

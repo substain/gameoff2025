@@ -54,14 +54,14 @@ func draw_zen_line(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	pass
 	#return
-	#if event.is_action_pressed("action1"):
+	#if event.is_action_pressed(InputHandler.ACTION_A):
 		#is_drawing = true
 		#current_interpolation = 0.0
 		#current_line = zen_line_scene.instantiate()
 		#drawn_lines.add_child(current_line)
 		#current_line_points.clear()
 #
-	#elif event.is_action_released("action1"):
+	#elif event.is_action_released(InputHandler.ACTION_A):
 		#is_drawing = false
 		#current_line = null
 

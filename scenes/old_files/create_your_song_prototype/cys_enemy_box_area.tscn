@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5vccdepvueqr"]
 
-[ext_resource type="Script" uid="uid://cr708kcoli4uh" path="res://scenes/create_your_song_prototype/cys_enemy_box_area.gd" id="1_qpwdq"]
+[ext_resource type="Script" uid="uid://cr708kcoli4uh" path="res://scenes/old_files/create_your_song_prototype/cys_enemy_box_area.gd" id="1_qpwdq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
 size = Vector2(66, 66)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://lal43a7famlj"]
 
-[ext_resource type="Script" uid="uid://bgjnieuevswap" path="res://scenes/zen_garden_singing/leaf.gd" id="1_rhwxp"]
+[ext_resource type="Script" uid="uid://bgjnieuevswap" path="res://scenes/zen_garden/leaf.gd" id="1_rhwxp"]
 [ext_resource type="Texture2D" uid="uid://ck3vyflvfvcjf" path="res://2d/placeholder/singing_monk/leaf.png" id="2_rhwxp"]
 [ext_resource type="Texture2D" uid="uid://beabxe53but1l" path="res://2d/placeholder/singing_monk/leafshadow.png" id="3_ogymw"]
 

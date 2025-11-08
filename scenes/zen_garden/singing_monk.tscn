@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://beivor4vhcbrd"]
 
-[ext_resource type="Script" uid="uid://dtao0oep2rr1t" path="res://scenes/zen_garden_singing/singing_monk.gd" id="1_8o8k5"]
+[ext_resource type="Script" uid="uid://dtao0oep2rr1t" path="res://scenes/zen_garden/singing_monk.gd" id="1_8o8k5"]
 [ext_resource type="Texture2D" uid="uid://dqq2yh4of7jc8" path="res://2d/placeholder/singing_monk/singing_monk.png" id="1_ip0t1"]
 
 [sub_resource type="Animation" id="Animation_8o8k5"]

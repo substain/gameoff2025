@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://ccpveusva3lsi"]
 
-[ext_resource type="Script" uid="uid://2kh53oc55jjk" path="res://scenes/zen_garden/zen_garden_layout.gd" id="1_6dkhn"]
-[ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/zen_garden/zen_garden_player.tscn" id="1_o5g1r"]
-[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/zen_garden/zen_player_path_follow.gd" id="1_p7q3e"]
-[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/zen_garden/zen_line_2d.tscn" id="2_y0pjs"]
+[ext_resource type="Script" uid="uid://2kh53oc55jjk" path="res://scenes/old_files/old_files/zen_garden_layout.gd" id="1_6dkhn"]
+[ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/old_files/old_files/zen_garden_player.tscn" id="1_o5g1r"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/old_files/zen_player_path_follow.gd" id="1_p7q3e"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/old_files/zen_line_2d.tscn" id="2_y0pjs"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="3_clk8c"]
 
 [sub_resource type="Gradient" id="Gradient_yttgd"]

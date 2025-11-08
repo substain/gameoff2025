@@ -6,6 +6,7 @@ const FLYING_NOTE = preload("uid://ocykk4ntbiep")
 const ANIM_IDLE: String = "idle"
 const ANIM_SING: String = "sing"
 const ANIM_FAIL: String = "fail"
+const ANIM_RESET: String = "RESET"
 
 @export var target_pos_node: ZenPlayerPathFollow
 @export_category("internal nodes")
@@ -14,14 +15,18 @@ const ANIM_FAIL: String = "fail"
 
 var is_one_shot_active: bool = false
 
+var is_moving: bool = false
+
 func _ready() -> void:
 	stop_moving()
 	
 func start_moving() -> void:
 	anim_player.play(ANIM_IDLE)
-
+	is_moving = true
+	
 func stop_moving() -> void:
 	anim_player.stop()
+	is_moving = false
 
 func shoot_note(is_hit: bool) -> void:
 	var flying_note: FlyingNote = FLYING_NOTE.instantiate() as FlyingNote
@@ -31,24 +36,32 @@ func shoot_note(is_hit: bool) -> void:
 	flying_note.start_shoot(targetpos, is_hit)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("action1"):
+	if event.is_action_pressed(InputHandler.ACTION_B):
 		anim_player.play(ANIM_SING)
 		is_one_shot_active = true
 		anim_timer.start()
 
-	if event.is_action_pressed("action2"):
+	if event.is_action_pressed(InputHandler.ACTION_A):
 		is_one_shot_active = false
 		anim_player.play(ANIM_SING)
-	if event.is_action_released("action2"):
-		anim_player.play(ANIM_IDLE)
+	if event.is_action_released(InputHandler.ACTION_A):
+		if is_moving:
+			anim_player.play(ANIM_IDLE)
+		else:
+			anim_player.play(ANIM_RESET)
+			anim_player.stop()
 
 func on_fail() -> void:
 	anim_player.play(ANIM_FAIL)
 
 func _on_timer_timeout() -> void:
 	if is_one_shot_active:
-		anim_player.play(ANIM_IDLE)
-
+		if is_moving:
+			anim_player.play(ANIM_IDLE)
+		else:
+			anim_player.play(ANIM_RESET)
+			anim_player.stop()
+			
 func _on_rhythm_base_note_failed(track: RhythmTrack, note: RhythmNote) -> void:
 	if track.name != "MIDI Drums":
 		return

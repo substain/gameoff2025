@@ -351,7 +351,7 @@ func _input(event: InputEvent) -> void:
 	var hold_threshold: float = scene_data.note_tap_hold_threshold_seconds
 	
 	# TODO: Globale Konstante für die Input-Namen verwenden
-	var rhythm_actions: Array[StringName] = ["note_input_a", "note_input_b"] # note_input_ab
+	var rhythm_actions: Array[StringName] = [InputHandler.ACTION_A, InputHandler.ACTION_B, InputHandler.ACTION_C] # note_input_ab
 	
 	# Checkt alle Inputs (A, B, AB) durch
 	for input_action: StringName in rhythm_actions:
@@ -418,7 +418,7 @@ func _input(event: InputEvent) -> void:
 					print("Hold Note Failure (Release Timing) on track: ", track_name)
 	
 	# Zum testen, leertaste/enter -> start
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(InputHandler.DEBUG_START_TRACK):
 		start()
 
 func _physics_process(_delta: float) -> void:

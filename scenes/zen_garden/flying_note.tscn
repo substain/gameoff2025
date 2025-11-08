@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ocykk4ntbiep"]
 
-[ext_resource type="Script" uid="uid://cnncoki301j0m" path="res://scenes/zen_garden_singing/flying_note.gd" id="1_8usq7"]
+[ext_resource type="Script" uid="uid://cnncoki301j0m" path="res://scenes/zen_garden/flying_note.gd" id="1_8usq7"]
 [ext_resource type="Texture2D" uid="uid://b22gqhmbkv63m" path="res://2d/placeholder/singing_monk/note.png" id="1_db73y"]
 
 [sub_resource type="Animation" id="Animation_wwx1d"]
