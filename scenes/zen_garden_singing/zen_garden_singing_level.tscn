@@ -110,3 +110,8 @@ rotates = false
 [connection signal="note_failed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_failed"]
 [connection signal="note_missed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_missed"]
 [connection signal="note_tap_hit" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_tap_hit"]
+[connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
+[connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
+[connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]

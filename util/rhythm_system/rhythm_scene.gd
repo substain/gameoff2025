@@ -19,6 +19,10 @@ signal note_tap_hit(track: RhythmTrack, note: RhythmNote)
 signal note_hold_start(track: RhythmTrack, note: RhythmNote)
 signal note_hold_release(track: RhythmTrack, note: RhythmNote)
 
+signal started_playing
+signal stopped_playing
+signal reset_progress
+
 @export var scene_data: RhythmSceneData
 
 @export_category("Debug")
@@ -320,17 +324,23 @@ func print_midi_tracks() -> void:
 
 func start() -> void:
 	audio_stream_player.play(0.0)
+	reset_progress.emit()
+	started_playing.emit()
 
 func set_paused(is_paused_new: bool) -> void:
 	if is_paused_new:
 		_music_position = audio_stream_player.get_playback_position()
 		audio_stream_player.stop()
+		stopped_playing.emit()
 	else:
 		audio_stream_player.play(_music_position)
+		started_playing.emit()
 	
 func stop() -> void:
 	_music_position = 0.0
 	audio_stream_player.stop()	
+	stopped_playing.emit()
+	reset_progress.emit()
 
 func set_ui_visible(is_ui_visible_new: bool) -> void:
 	visualizer.visible = is_ui_visible_new
