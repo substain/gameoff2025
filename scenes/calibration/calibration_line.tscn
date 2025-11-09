@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxbcndaug4hmv"]
+
+[ext_resource type="Script" uid="uid://cftpg2tv80ojd" path="res://scenes/calibration/calibration_line.gd" id="1_f727b"]
+
+[node name="Line" type="ColorRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_right = 4.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(2, 50)
+color = Color(0.76911634, 0.23095608, 0.2508015, 1)
+script = ExtResource("1_f727b")

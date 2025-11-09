@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RhythmSceneData" load_steps=6 format=3 uid="uid://uaqpwrwe0wvs"]
+
+[ext_resource type="AudioStream" uid="uid://dciwj2rlorepa" path="res://audio/music/levels/calibration/calibration.mp3" id="1_jw7nl"]
+[ext_resource type="Script" uid="uid://b5h8cxpfkcar5" path="res://util/rhythm_system/rhythm_subscribe_custom_event.gd" id="1_ox84l"]
+[ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="2_jw7nl"]
+[ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_note_event.gd" id="3_hidj7"]
+
+[sub_resource type="Resource" id="Resource_jw7nl"]
+script = ExtResource("3_hidj7")
+trackname = &"Triangle"
+offset_beats = -3
+use_beats = true
+identifier = &"SPAWN_TRIGGER"
+metadata/_custom_type_script = "uid://b6bmbjrsggkay"
+
+[resource]
+script = ExtResource("2_jw7nl")
+backing_track = ExtResource("1_jw7nl")
+midi_file = "res://audio/music/levels/calibration/calibration.mid"
+button_a_trackname = &"Triangle"
+input_buffer_seconds = 0.5
+note_tap_hold_threshold_seconds = 1.0
+subscribed_events = Array[ExtResource("3_hidj7")]([SubResource("Resource_jw7nl")])
+metadata/_custom_type_script = "uid://cc1yvxkjy47yb"

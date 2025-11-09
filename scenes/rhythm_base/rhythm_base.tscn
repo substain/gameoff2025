@@ -1,15 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1d6g64utdy0a"]
+[gd_scene load_steps=3 format=3 uid="uid://c1d6g64utdy0a"]
 
 [ext_resource type="Script" uid="uid://ccpp64cox1cd1" path="res://util/rhythm_system/rhythm_scene.gd" id="1_0y0lv"]
 [ext_resource type="Script" uid="uid://nybkx4j8mmh5" path="res://util/rhythm_system/debug_visualizer/debug_rhythm_visualizer.gd" id="1_a5vcu"]
-[ext_resource type="Resource" uid="uid://csvy27ylsq87t" path="res://scenes/rhythm_base/rhythm_base_scene_data.tres" id="2_ip230"]
 
 [node name="RhythmBase" type="Control"]
 z_index = 100
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_0y0lv")
-scene_data = ExtResource("2_ip230")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

@@ -9,15 +9,15 @@ signal building_event_list_finished()
 
 # Note Hit greift bei tap sofort, bei Held erst wenn alles durch ist
 # und der Spieler rechtzeitig wieder losgelassen hat
-signal note_hit(track: RhythmTrack, note: RhythmNote)
+signal note_hit(track: RhythmTrack, note: RhythmNote, time_diff: float)
 signal note_missed(track: RhythmTrack, note: RhythmNote)
 signal note_failed(track: RhythmTrack, note: RhythmNote)
 
 signal event_triggered(event: RhythmTriggerEvent, time: float)
 
-signal note_tap_hit(track: RhythmTrack, note: RhythmNote)
-signal note_hold_start(track: RhythmTrack, note: RhythmNote)
-signal note_hold_release(track: RhythmTrack, note: RhythmNote)
+signal note_tap_hit(track: RhythmTrack, note: RhythmNote, time_diff: float)
+signal note_hold_start(track: RhythmTrack, note: RhythmNote, time_diff: float)
+signal note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float)
 
 signal started_playing
 signal stopped_playing
@@ -380,17 +380,19 @@ func _input(event: InputEvent) -> void:
 				if current_time >= press_window_start and current_time <= press_window_end:
 					hittable_note.is_hit = true
 					
+					var time_diff: float = current_time - hittable_note.start
+					
 					if hittable_note.duration < hold_threshold:
 						print("TAP NOTE HIT!")
 						hittable_note.status = RhythmNote.STATUS.COMPLETE
-						note_tap_hit.emit(track, hittable_note)
-						note_hit.emit(track, hittable_note)
+						note_tap_hit.emit(track, hittable_note, time_diff)
+						note_hit.emit(track, hittable_note, time_diff)
 						
 					else:
 						print("HOLD NOTE STARTED")
 						hittable_note.status = RhythmNote.STATUS.HELD
 						_held_notes[track] = hittable_note
-						note_hold_start.emit(track, hittable_note)
+						note_hold_start.emit(track, hittable_note, time_diff)
 					
 					return 
 			
@@ -405,12 +407,14 @@ func _input(event: InputEvent) -> void:
 				
 				_held_notes.erase(track_name)
 
+				var time_diff: float = current_time - (held_note.start + held_note.duration)
+
 				# CÜberprüfe ob innerhalb der input_buffer losgelassen wurde
 				if current_time >= release_hit_window_start and current_time <= release_hit_window_end:
 					held_note.status = RhythmNote.STATUS.COMPLETE
 					print("HOLD NOTE FINISHED")
-					note_hold_release.emit(track, held_note)
-					note_hit.emit(track, held_note)
+					note_hold_release.emit(track, held_note, time_diff)
+					note_hit.emit(track, held_note, time_diff)
 				else:
 					# held note zu früh oder zu spät losgelassen
 					held_note.status = RhythmNote.STATUS.FAILED
