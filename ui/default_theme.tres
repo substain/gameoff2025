@@ -1,3 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://bm6h5yx1xgaub"]
 
 [resource]
+HeaderRTL/base_type = &"RichTextLabel"
+HeaderRTL/font_sizes/normal_font_size = 30
+TitleRTL/base_type = &"RichTextLabel"
+TitleRTL/font_sizes/normal_font_size = 40

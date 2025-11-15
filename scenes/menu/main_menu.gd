@@ -1,11 +1,104 @@
+class_name MainMenu
 extends Node
 
+const VERSION_PLACEHOLDER: String = "[version]"
 
-# Called when the node enters the scene tree for the first time.
+@export var set_game_title_from_project_settings: bool = true
+@export_file_path("*.tscn") var start_scene_file_path: String
+
+@export_category("internal nodes")
+@export var start_menu: Control
+@export var input_menu: InputMenu
+@export var settings_menu: SettingsMenu
+@export var credits: Credits
+
+@export var title_label: RichTextLabel
+@export var version_label: Label
+
+@export var first_start_menu_item: BaseButton
+@export var quit_button: BaseButton
+
+func _enter_tree() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = false
+	
 func _ready() -> void:
-	pass # Replace with function body.
+	set_version()
 
+	if set_game_title_from_project_settings:
+		set_title_label_from_settings()
+	
+	quit_button.visible = !is_web_build()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	show_start_menu()
+
+func show_start_menu() -> void:
+	set_visible_only(start_menu, [input_menu, settings_menu, credits])
+	
+	first_start_menu_item.grab_focus.call_deferred()
+	title_label.visible = true
+	
+func show_input_menu() -> void:
+	set_visible_only(input_menu, [start_menu, settings_menu, credits])
+	
+	first_start_menu_item.grab_focus.call_deferred()
+	title_label.visible = false
+
+func show_settings_menu() -> void:
+	set_visible_only(settings_menu, [input_menu, start_menu, credits])
+	
+	first_start_menu_item.grab_focus.call_deferred()
+	title_label.visible = false
+
+func show_credits() -> void:
+	set_visible_only(credits, [input_menu, settings_menu, start_menu])
+	
+	first_start_menu_item.grab_focus.call_deferred()
+	title_label.visible = false
+	
+func quit_game() -> void:
+	await get_tree().create_timer(0.25).timeout
+	get_tree().quit()
+			
+func set_version() -> void:
+	version_label.text = version_label.text.replace(VERSION_PLACEHOLDER, str(ProjectSettings.get_setting("application/config/version")))
+	
+func set_title_label_from_settings() -> void:
+	title_label.text = ProjectSettings.get_setting("application/config/name", "???")
+
+func _on_start_game_button_pressed() -> void:
+	get_tree().change_scene_to_file(start_scene_file_path)
+
+func _on_input_menu_button_pressed() -> void:
+	show_input_menu()
+
+func _on_settings_menu_button_pressed() -> void:
+	show_settings_menu()
+	
+func _on_credits_button_pressed() -> void:
+	show_credits()
+
+func _on_quit_button_pressed() -> void:
+	quit_game()
+	
+func _on_input_menu_back_button_pressed() -> void:
+	show_start_menu()
+
+func _on_settings_menu_back_button_pressed() -> void:
+	show_start_menu()
+
+func _on_credits_back_button_pressed() -> void:
+	show_start_menu()
+		
+
+static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[CanvasItem]) -> void:
+	for inv_node in invisible_nodes:
+		if inv_node == visible_node:
+			continue
+			
+		inv_node.visible = false
+	
+	visible_node.visible = true
+	
+static func is_web_build() -> bool:
+	return OS.has_feature("web")

@@ -16,7 +16,7 @@ General/banks_path="res://audio/fmod/banks"
 
 config/name="Game Off 2025"
 config/version="0.0.1"
-run/main_scene="uid://dlg102u4ynte4"
+run/main_scene="uid://cavcjvllyn1b0"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
