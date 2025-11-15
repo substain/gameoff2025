@@ -30,6 +30,8 @@ var input_remaps: Dictionary = {}
 
 var skip_intro_active: bool = false
 
+var input_calibration_offset: float = 0.0
+
 func _ready() -> void:
 	inputs_file = ConfigFile.new();	
 	load_from_file()

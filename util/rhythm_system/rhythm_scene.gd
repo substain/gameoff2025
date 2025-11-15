@@ -346,7 +346,13 @@ func set_ui_visible(is_ui_visible_new: bool) -> void:
 	visualizer.visible = is_ui_visible_new
 
 func _input(event: InputEvent) -> void:
-	var current_time: float = audio_stream_player.get_playback_position()
+	# anstatt überall jetzt den offset runter zu rechnen, verrechnen wir einfach 1x
+	# als "aktuelle Zeit" 
+	# TODO: Checken ob ggf. invertiert werden muss....
+	# Wenn der Spieler bei der Kalibrierung immer zu spät war (sagen wir eine halbe Sekunde)
+	# würde in den Settings (+0.5) stehen, wir möchten also die rechnerisch so behandeln,
+	# als wären wir 0,5 sekunden VOR der Note, damt der Spieler die Note trifft
+	var current_time: float = audio_stream_player.get_playback_position() - SettingsIO.input_calibration_offset
 	var input_buffer: float = scene_data.input_buffer_seconds
 	var hold_threshold: float = scene_data.note_tap_hold_threshold_seconds
 	
