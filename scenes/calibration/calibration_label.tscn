@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://buhg4st1be2qt"]
+
+[node name="CalibrationLabel" type="Label"]
+offset_right = 107.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "+ 0.0"
+horizontal_alignment = 1
+vertical_alignment = 3

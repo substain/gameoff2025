@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://7vygc2wpvuw4"]
+
+[ext_resource type="Script" uid="uid://bmnjcl352fw0f" path="res://scenes/calibration/calibration.gd" id="1_50wda"]
+[ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="2_b83y1"]
+[ext_resource type="Resource" uid="uid://uaqpwrwe0wvs" path="res://scenes/calibration/calibration_rhythm_scene_data.tres" id="3_hbrkc"]
+
+[node name="Calibration" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_50wda")
+
+[node name="RhythmBase" parent="." instance=ExtResource("2_b83y1")]
+layout_mode = 0
+scene_data = ExtResource("3_hbrkc")
+
+[node name="CenterLine" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(2, 0)
+color = Color(0.72815454, 0.4034103, 0.380194, 1)
+
+[node name="BeatBarStart" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="MovingContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LinesContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="event_triggered" from="RhythmBase" to="." method="_on_rhythm_base_event_triggered"]
+[connection signal="note_tap_hit" from="RhythmBase" to="." method="_on_rhythm_base_note_tap_hit"]
