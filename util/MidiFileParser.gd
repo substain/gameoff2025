@@ -20,56 +20,56 @@ static func load_packed_byte_array(arr: PackedByteArray) -> MidiFileParser:
 	var instance: MidiFileParser = MidiFileParser.new()
 	instance.bytes = arr
 	if debug_output != "0":
-		var debug: String = ""
+		var _debug: String = ""
 		while true:
 			var status: int = instance.parse()
 			if status == MIDI_PARSER_EOB:
-				debug += "eob\n"
+				_debug += "eob\n"
 				break
 			elif status == MIDI_PARSER_ERROR:
-				debug += "error\n"
+				_debug += "error\n"
 				break
 			elif status == MIDI_PARSER_INIT:
-				debug += "init\n"
+				_debug += "init\n"
 				continue
 			elif status == MIDI_PARSER_HEADER:
 				var _header: Header = instance.header
-				debug += "header\n"
-				debug += "    size: "+str(_header.size)+"\n"
-				debug += "    format: "+str(_header.format)+"\n"
-				debug += "    tracks count: "+str(_header.tracks)+"\n"
-				debug += "    time division: "+str(_header.time_division)+"\n"
+				_debug += "header\n"
+				_debug += "    size: "+str(_header.size)+"\n"
+				_debug += "    format: "+str(_header.format)+"\n"
+				_debug += "    tracks count: "+str(_header.tracks)+"\n"
+				_debug += "    time division: "+str(_header.time_division)+"\n"
 				continue
 			elif status == MIDI_PARSER_TRACK:
 				var track: Track = instance.current_track
-				debug += "track\n"
-				debug += "    length: "+str(track.size)+"\n"
+				_debug += "track\n"
+				_debug += "    length: "+str(track.size)+"\n"
 				continue
 			elif status == MIDI_PARSER_TRACK_MIDI:
 				var track: Track = instance.current_track
 				var midi: Midi = instance.current_midi
-				debug += "track-midi (event "+str(track.events.size() - 1)+")\n"
-				debug += "    time: "+str(track.delta_ticks)+"\n"
-				debug += "    status: "+str(midi.status)+"\n"
-				debug += "    channel: "+str(midi.channel)+"\n"
-				debug += "    param1: "+str(midi.param1)+"\n"
-				debug += "    param2: "+str(midi.param2)+"\n"
+				_debug += "track-midi (event "+str(track.events.size() - 1)+")\n"
+				_debug += "    time: "+str(track.delta_ticks)+"\n"
+				_debug += "    status: "+str(midi.status)+"\n"
+				_debug += "    channel: "+str(midi.channel)+"\n"
+				_debug += "    param1: "+str(midi.param1)+"\n"
+				_debug += "    param2: "+str(midi.param2)+"\n"
 				continue
 			elif status == MIDI_PARSER_TRACK_META:
 				var track: Track = instance.current_track
 				var meta: Meta = instance.current_meta
-				debug += "track-meta (event "+str(track.events.size() - 1)+")\n"
-				debug += "    time: "+str(track.delta_ticks)+"\n"
-				debug += "    type: "+str(meta.type)+"\n"
-				debug += "    length: "+str(meta.length)+"\n"
+				_debug += "track-meta (event "+str(track.events.size() - 1)+")\n"
+				_debug += "    time: "+str(track.delta_ticks)+"\n"
+				_debug += "    type: "+str(meta.type)+"\n"
+				_debug += "    length: "+str(meta.length)+"\n"
 				continue
 			elif status == MIDI_PARSER_TRACK_SYSEX:
 				var track: Track = instance.current_track
-				debug += "track-sysex (event "+str(track.events.size() - 1)+")\n"
-				debug += "    time: "+str(track.delta_ticks)+"\n"
+				_debug += "track-sysex (event "+str(track.events.size() - 1)+")\n"
+				_debug += "    time: "+str(track.delta_ticks)+"\n"
 				continue
 			else:
-				debug += "Unhandled state " + str(status) +"\n"
+				_debug += "Unhandled state " + str(status) +"\n"
 				break
 		# NOTE: Disabled this, it just clutters the git repository/filesystem
 		#if debug_output == "1":

@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 
-	var progress_ratio_before: float = progress_ratio	
+	#var progress_ratio_before: float = progress_ratio	
 	#if progress_ratio >= 1.0:
 		#stop()
 		#return
@@ -51,7 +51,7 @@ func draw_zen_line(delta: float) -> void:
 	print("is drawing zen line")
 		
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 	#return
 	#if event.is_action_pressed(InputHandler.ACTION_A):

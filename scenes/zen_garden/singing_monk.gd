@@ -1,7 +1,7 @@
 class_name SingingMonk
 extends Node2D
 
-const FLYING_NOTE = preload("uid://ocykk4ntbiep")
+const FLYING_NOTE: PackedScene = preload("uid://ocykk4ntbiep")
 
 const ANIM_IDLE: String = "idle"
 const ANIM_SING: String = "sing"
@@ -69,13 +69,13 @@ func _on_timer_timeout() -> void:
 			anim_player.play(ANIM_RESET)
 			anim_player.stop()
 			
-func _on_rhythm_base_note_failed(track: RhythmTrack, note: RhythmNote, diff: float) -> void:
+func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
 	if track.name != "MIDI Drums":
 		return
 	is_one_shot_active = true
 	shoot_note(false)
 	
-func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, diff: float) -> void:
+func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, _diff: float) -> void:
 	if track.name != "MIDI Drums":
 		return
 	is_one_shot_active = true

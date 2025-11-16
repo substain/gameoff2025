@@ -159,8 +159,8 @@ func _draw() -> void:
 		var events_base_y: float = current_y_offset + TRACK_HEIGHT
 
 		# Hintergrund (grau)
-		var bg_rect: Rect2 = Rect2(offset_x, current_y_offset, timeline_width, track_full_height)
-		draw_rect(bg_rect, COLOR_TRACK_BG)
+		var bg_rect_2: Rect2 = Rect2(offset_x, current_y_offset, timeline_width, track_full_height)
+		draw_rect(bg_rect_2, COLOR_TRACK_BG)
 
 		# janky ass gebastel um events und tracks zu verarbeiten...
 		var event_keys: Array[StringName] = track_data.events.keys()

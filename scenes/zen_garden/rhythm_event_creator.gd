@@ -24,7 +24,7 @@ func create_leaf(event: RhythmTriggerEvent) -> void:
 	leaf.on_remove.connect(on_free_leaf.bind(leaf_id))
 	current_leaves[leaf_id] = leaf
 
-func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, time: float) -> void:
+func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, _time: float) -> void:
 	if event.identifier == TELEGRAPH_EVENT_IDENTIFIER:
 		create_leaf(event)
 

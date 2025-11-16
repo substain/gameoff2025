@@ -64,7 +64,7 @@ func start_falling() -> void:
 	leaf_object.visible = true
 	is_falling = true
 	await get_tree().create_timer(fall_time).timeout
-	var relative_pos: float = (global_position.y - leaf_object.global_position.y) / height_offset
+	#var _relative_pos: float = (global_position.y - leaf_object.global_position.y) / height_offset
 
 func land() -> void:
 	if is_finished:

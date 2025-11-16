@@ -516,9 +516,9 @@ func process_midi_file(path: String) -> RhythmData:
 
 	var tempo_map_seconds: Array[RhythmTempoMapEntry] = []
 	for entry: Dictionary in tempo_map_ticks:
-		var entry_time_sec: float = _ticks_to_seconds(entry.ticks, tempo_map_ticks)
+		var entry_time_sec: float = _ticks_to_seconds(entry.ticks as int, tempo_map_ticks)
 		
-		tempo_map_seconds.append(RhythmTempoMapEntry.new(entry_time_sec, entry.bpm))
+		tempo_map_seconds.append(RhythmTempoMapEntry.new(entry_time_sec, entry.bpm as float))
 		
 	rhythm_data.tempo_map = tempo_map_seconds
 		
