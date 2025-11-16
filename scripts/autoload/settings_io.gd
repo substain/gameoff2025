@@ -66,6 +66,7 @@ func reset(do_save: bool = true) -> void:
 	set_music_volume_muted(false, false)
 	set_sfx_volume_muted(false, false)
 	set_ambience_volume_muted(false, false)
+	set_calibration(0.0, false)
 
 	set_locale(LocaleItem.EN, false)
 	set_fullscreen_active(false, false)
@@ -91,7 +92,8 @@ func save_to_file() -> void:
 		"ambience_volume_muted": ambience_volume_muted,
 		"locale": locale,
 		"fullscreen_active": fullscreen_active,
-		"skip_intro_active": skip_intro_active
+		"skip_intro_active": skip_intro_active,
+		"input_calibration_offset": input_calibration_offset
 	}
 	
 	var json_string: String = JSON.stringify(save_dict)
@@ -133,6 +135,8 @@ func load_from_file() -> void:
 			fullscreen_active = save_dict["fullscreen_active"]
 		if save_dict.has("skip_intro_active"):
 			skip_intro_active = save_dict["skip_intro_active"]
+		if save_dict.has("input_calibration_offset"):
+			input_calibration_offset = save_dict["input_calibration_offset"]
 				
 func save_inputs_to_file() -> void:
 	if !inputs_saveable:
@@ -220,6 +224,12 @@ func set_skip_intro_active(skip_intro_active_new: bool, do_save: bool = true) ->
 	skip_intro_active = skip_intro_active_new
 	if do_save:
 		save_to_file()
+	
+func set_calibration(calibration_new: float, do_save: bool = true) -> void:
+	input_calibration_offset = calibration_new
+	if do_save:
+		save_to_file()
+	
 	
 static func set_fullscreen(is_fullscreen: bool) -> void:
 	if is_fullscreen:

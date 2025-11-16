@@ -93,7 +93,7 @@ func _on_rhythm_base_note_hit(track: RhythmTrack, note: RhythmNote, diff: float)
 func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, diff: float) -> void:
 	set_current_hits(current_hits + 1)
 
-func _on_rhythm_base_note_failed(track: RhythmTrack, note: RhythmNote, diff: float) -> void:
+func _on_rhythm_base_note_failed(track: RhythmTrack, note: RhythmNote) -> void:
 	set_current_fails(current_fails + 1)
 
 func _on_rhythm_base_note_missed(track: RhythmTrack, note: RhythmNote) -> void:

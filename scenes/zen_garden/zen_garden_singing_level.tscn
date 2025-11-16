@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
-[ext_resource type="Script" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
+[ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden/singing_monk.tscn" id="2_jn2uw"]
-[ext_resource type="Script" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
+[ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
 [ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/old_files/timed_starter.gd" id="4_t80qu"]
 [ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
@@ -57,7 +57,6 @@ target_lines = [null, null, null]
 target_times = Array[float]([0.5, 1.5, 2.5, 7.0])
 
 [node name="Line2D" type="Line2D" parent="DrawnLines"]
-visible = false
 texture_repeat = 2
 material = SubResource("ShaderMaterial_0kq45")
 position = Vector2(0, -2)
@@ -70,17 +69,20 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 12
 
+[node name="TelegraphedHoldLine" type="Line2D" parent="."]
+
 [node name="Path" type="Path2D" parent="."]
 position = Vector2(-194, -154)
 scale = Vector2(1.289618, 1.39375)
 curve = ExtResource("9_5uqd1")
 
-[node name="ZenPlayerPathFollow" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("telegraphed_path_follow")]
+[node name="ZenPlayerPathFollow" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("drawn_lines", "telegraphed_path_follow")]
 z_index = 1
 position = Vector2(571, 344)
 rotation = -0.023525072
 rotates = false
 script = ExtResource("6_r5g3c")
+drawn_lines = NodePath("../../TelegraphedHoldLine")
 zen_line_scene = ExtResource("7_3rur6")
 telegraphed_path_follow = NodePath("../TelegraphedPathFollow")
 

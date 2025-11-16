@@ -84,7 +84,7 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, time_dif
 		if cd.deviation <= CONSISTENCY_THRESHOLD:
 			print("calibrated!")
 			calibration_finished.emit(cd.mean)
-			SettingsIO.input_calibration_offset = cd.mean
+			SettingsIO.set_calibration(cd.mean)
 			# TODO: Exit/stop calibration
 		
 		if offsets.size() >= MAXIMUM_HITS:
@@ -92,7 +92,7 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, time_dif
 			# at any time
 			print("not really calibrated! but we take what we can get")
 			calibration_finished.emit(cd.mean)
-			SettingsIO.input_calibration_offset = cd.mean
+			SettingsIO.set_calibration(cd.mean)
 			# TODO: Exit/stop calibration
 		
 			
