@@ -70,7 +70,7 @@ func update_button(button: Button, new_key_event: InputEvent) -> void:
 			keycode = DisplayServer.keyboard_get_keycode_from_physical(iek.physical_keycode)
 		button.text = OS.get_keycode_string(keycode) #
 	else:
-		@warning_ignore("unsafe_call_argument")
+		@warning_ignore("unsafe_method_access")
 		button.text = new_key_event.as_text_key_label()
 
 static func get_first_input_for(input_name: String) -> InputEvent:

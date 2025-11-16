@@ -1,10 +1,10 @@
 class_name ZenPlayerPathFollow
 extends PathFollow2D
 
-const SPEED: float = 200
-
+@export var speed: float = 200
 @export var drawn_lines: Node2D
 @export var interpolation_time: float = 0.15
+
 @export var zen_line_scene: PackedScene
 @export var telegraphed_path_follow: PathFollow2D
 
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		#return
 	#
 	if is_running:
-		progress += delta * SPEED
+		progress += delta * speed
 		#if progress_ratio_before > progress_ratio:
 			#stop()
 			#return
@@ -72,7 +72,7 @@ func stop() -> void:
 	is_running = false
 
 func get_telegraphed_position(time_offset: float) -> Vector2:
-	telegraphed_path_follow.progress = progress + (time_offset * SPEED)
+	telegraphed_path_follow.progress = progress + (time_offset * speed)
 	return telegraphed_path_follow.global_position
 
 

@@ -8,5 +8,9 @@ accept_audio_stream_player = NodePath("AcceptAudioStreamPlayer")
 hover_audio_stream_player = NodePath("HoverAudioStreamPlayer")
 
 [node name="AcceptAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+bus = &"SFX"
 
 [node name="HoverAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+bus = &"SFX"

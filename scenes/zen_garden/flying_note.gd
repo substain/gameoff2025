@@ -6,7 +6,7 @@ const ANIM_FLY: String = "fly"
 const ANIM_HIT: String = "destroy"
 
 @export var animation_player: AnimationPlayer
-@export var speed: float = 800
+@export var speed: float = 1400
 
 var is_flying: bool = false
 var direction: Vector2

@@ -97,11 +97,12 @@ static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[Ca
 	
 static func is_web_build() -> bool:
 	return OS.has_feature("web")
-	
-func play_hover_sfx() -> void:
-	#TODO
-	pass
-	
+
 func play_accept_sfx() -> void:
-	#TODO
-	pass
+	AudioController.play_sfx(AudioController.SfxType.ACCEPT)
+		
+func play_hover_sfx() -> void:
+	AudioController.play_sfx(AudioController.SfxType.HOVER)
+
+func _on_calibration_button_pressed() -> void:
+	push_error("TODO: start calibration")

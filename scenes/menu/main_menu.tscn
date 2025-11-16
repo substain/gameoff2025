@@ -57,6 +57,10 @@ layout_mode = 2
 layout_mode = 2
 text = "ui.menu.start"
 
+[node name="CalibrationButton" type="Button" parent="StartMenuMC/VBoxContainer"]
+layout_mode = 2
+text = "ui.menu.calibration"
+
 [node name="InputMenuButton" type="Button" parent="StartMenuMC/VBoxContainer"]
 layout_mode = 2
 text = "ui.menu.input_menu"
@@ -99,6 +103,7 @@ layout_mode = 2
 text = "v[version]"
 
 [connection signal="pressed" from="StartMenuMC/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="StartMenuMC/VBoxContainer/CalibrationButton" to="." method="_on_calibration_button_pressed"]
 [connection signal="pressed" from="StartMenuMC/VBoxContainer/InputMenuButton" to="." method="_on_input_menu_button_pressed"]
 [connection signal="pressed" from="StartMenuMC/VBoxContainer/SettingsMenuButton" to="." method="_on_settings_menu_button_pressed"]
 [connection signal="pressed" from="StartMenuMC/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
