@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs01eprm04ef8"]
+
+[ext_resource type="Script" uid="uid://cy4akn28j7j0n" path="res://scenes/util/audio_controller.gd" id="1_mgs1l"]
+
+[node name="AudioController" type="Node" node_paths=PackedStringArray("accept_audio_stream_player", "hover_audio_stream_player")]
+script = ExtResource("1_mgs1l")
+accept_audio_stream_player = NodePath("AcceptAudioStreamPlayer")
+hover_audio_stream_player = NodePath("HoverAudioStreamPlayer")
+
+[node name="AcceptAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HoverAudioStreamPlayer" type="AudioStreamPlayer" parent="."]

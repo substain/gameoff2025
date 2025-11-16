@@ -1,11 +1,15 @@
+## Autoload: SettingsIO
 extends Node
 
-signal language_changed
+enum LocaleItem {
+	EN, 
+	DE	
+}
+
+signal locale_changed
 
 const SETTINGS_PATH: String = "user://settings.save"
 const FULLSCREEN_IS_BORDERLESS: bool = true
-
-
 
 const SAVE_INPUT_PATH: String = "user://inputs.save"
 const INPUTS_SECTION: String = "Input"
@@ -22,7 +26,7 @@ var sfx_volume_muted: bool = false
 var ambience_volume_linear: float = 1
 var ambience_volume_muted: bool = false
 
-var language: StringName = &"en"
+var locale: LocaleItem = LocaleItem.EN
 
 var fullscreen_active: bool = false
 
@@ -46,7 +50,7 @@ func apply_values() -> void:
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.SFX, sfx_volume_muted)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.AMBIENCE, ambience_volume_muted)
 	
-	TranslationServer.set_locale(language)
+	TranslationServer.set_locale(to_short_locale(locale))
 	set_fullscreen(fullscreen_active)
 
 func reset(do_save: bool = true) -> void:
@@ -61,7 +65,7 @@ func reset(do_save: bool = true) -> void:
 	set_sfx_volume_muted(false, false)
 	set_ambience_volume_muted(false, false)
 
-	set_language("en", false)
+	set_locale(LocaleItem.EN, false)
 	set_fullscreen_active(false, false)
 	
 	if do_save:
@@ -83,7 +87,7 @@ func save_to_file() -> void:
 		"music_volume_muted": music_volume_muted,
 		"sfx_volume_muted": sfx_volume_muted,
 		"ambience_volume_muted": ambience_volume_muted,
-		"language": language,
+		"locale": locale,
 		"fullscreen_active": fullscreen_active,
 		"skip_intro_active": skip_intro_active
 	}
@@ -121,8 +125,8 @@ func load_from_file() -> void:
 			sfx_volume_muted = save_dict["sfx_volume_muted"]
 		if save_dict.has("ambience_volume_muted"):
 			ambience_volume_muted = save_dict["ambience_volume_muted"]
-		if save_dict.has("language"):
-			language = save_dict["language"]
+		if save_dict.has("locale"):
+			locale = save_dict["locale"]
 		if save_dict.has("fullscreen_active"):
 			fullscreen_active = save_dict["fullscreen_active"]
 		if save_dict.has("skip_intro_active"):
@@ -199,9 +203,9 @@ func set_ambience_volume_muted(ambience_volume_muted_new: bool, do_save: bool = 
 	if do_save:
 		save_to_file()
 
-func set_language(lang_new: StringName, do_save: bool = true) -> void:
-	language = lang_new
-	language_changed.emit()
+func set_locale(locale_new: LocaleItem, do_save: bool = true) -> void:
+	locale = locale_new
+	locale_changed.emit()
 	if do_save:
 		save_to_file()
 
@@ -222,3 +226,6 @@ static func set_fullscreen(is_fullscreen: bool) -> void:
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+
+static func to_short_locale(locale_item: LocaleItem) -> String:
+	return str(SettingsIO.LocaleItem.keys()[locale_item]).to_lower()

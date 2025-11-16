@@ -34,26 +34,22 @@ func _ready() -> void:
 
 func show_start_menu() -> void:
 	set_visible_only(start_menu, [input_menu, settings_menu, credits])
-	
 	first_start_menu_item.grab_focus.call_deferred()
 	title_label.visible = true
 	
 func show_input_menu() -> void:
 	set_visible_only(input_menu, [start_menu, settings_menu, credits])
-	
-	first_start_menu_item.grab_focus.call_deferred()
+	input_menu.grab_focus_deferred()
 	title_label.visible = false
 
 func show_settings_menu() -> void:
 	set_visible_only(settings_menu, [input_menu, start_menu, credits])
-	
-	first_start_menu_item.grab_focus.call_deferred()
+	settings_menu.grab_focus_deferred()	
 	title_label.visible = false
 
 func show_credits() -> void:
 	set_visible_only(credits, [input_menu, settings_menu, start_menu])
-	
-	first_start_menu_item.grab_focus.call_deferred()
+	credits.grab_focus_deferred()
 	title_label.visible = false
 	
 func quit_game() -> void:
@@ -89,10 +85,9 @@ func _on_settings_menu_back_button_pressed() -> void:
 
 func _on_credits_back_button_pressed() -> void:
 	show_start_menu()
-		
-
+			
 static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[CanvasItem]) -> void:
-	for inv_node in invisible_nodes:
+	for inv_node: CanvasItem in invisible_nodes:
 		if inv_node == visible_node:
 			continue
 			
@@ -102,3 +97,11 @@ static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[Ca
 	
 static func is_web_build() -> bool:
 	return OS.has_feature("web")
+	
+func play_hover_sfx() -> void:
+	#TODO
+	pass
+	
+func play_accept_sfx() -> void:
+	#TODO
+	pass

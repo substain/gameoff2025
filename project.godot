@@ -25,6 +25,7 @@ config/icon="res://icon.svg"
 CYSGlobals="*res://scenes/old_files/create_your_song_prototype/cys_globals.gd"
 SettingsIO="*res://scripts/autoload/settings_io.gd"
 GameState="*res://scripts/autoload/game_state.gd"
+AudioController="*res://scenes/util/audio_controller.tscn"
 
 [debug]
 

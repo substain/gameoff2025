@@ -3,16 +3,34 @@
 [ext_resource type="Script" uid="uid://dic1s8nq2wna7" path="res://scenes/menu/settings_menu.gd" id="1_qk8rs"]
 [ext_resource type="Theme" uid="uid://bm6h5yx1xgaub" path="res://ui/default_theme.tres" id="2_0sh77"]
 
-[node name="SettingsMenu" type="MarginContainer"]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("first_focus_item", "locale_option_button", "fullscreen_button", "overall_slider", "music_slider", "sfx_slider", "ambience_slider", "overall_value_label", "music_value_label", "sfx_value_label", "ambience_value_label", "overall_mute_checkbox", "music_mute_checkbox", "sfx_mute_checkbox", "ambience_mute_checkbox")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qk8rs")
+first_focus_item = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC/LocaleOptionButton")
+locale_option_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC/LocaleOptionButton")
+fullscreen_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/FullscreenHBC/FullscreenCheckBox")
+overall_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioHSlider")
+music_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider")
+sfx_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider")
+ambience_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider")
+overall_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioValueLabel")
+music_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioValueLabel")
+sfx_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioValueLabel")
+ambience_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioValueLabel")
+overall_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioMuteCheckBox")
+music_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioMuteCheckBox")
+sfx_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioMuteCheckBox")
+ambience_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioMuteCheckBox")
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 66.0
 size_flags_vertical = 0
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
@@ -30,12 +48,169 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -171.5
+offset_right = 300.0
+offset_bottom = 171.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackButton" type="Button" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LocaleHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LocaleLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC"]
+layout_mode = 2
+text = "ui.settings.locale"
+
+[node name="LocaleOptionButton" type="OptionButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC"]
+layout_mode = 2
+
+[node name="FullscreenHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FullscreenLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/FullscreenHBC"]
+layout_mode = 2
+text = "ui.settings.fullscreen"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/FullscreenHBC"]
+layout_mode = 2
+
+[node name="OverallAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OverallAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC"]
+layout_mode = 2
+text = "ui.settings.overall_audio"
+
+[node name="OverallAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="OverallAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC"]
+layout_mode = 2
+text = "[value]%"
+
+[node name="OverallAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC"]
+layout_mode = 2
+text = "ui.settings.audio_mute"
+
+[node name="MusicAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MusicAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC"]
+layout_mode = 2
+text = "ui.settings.music_audio"
+
+[node name="MusicAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="MusicAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC"]
+layout_mode = 2
+text = "[value]%"
+
+[node name="MusicAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC"]
+layout_mode = 2
+text = "ui.settings.audio_mute"
+
+[node name="SfxAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SfxAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC"]
+layout_mode = 2
+text = "ui.settings.sfx_audio"
+
+[node name="SfxAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="SfxAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC"]
+layout_mode = 2
+text = "[value]%"
+
+[node name="SfxAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC"]
+layout_mode = 2
+text = "ui.settings.audio_mute"
+
+[node name="AmbienceAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AmbienceAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
+layout_mode = 2
+text = "ui.settings.ambience_audio"
+
+[node name="AmbienceAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="AmbienceAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
+layout_mode = 2
+text = "[value]%"
+
+[node name="AmbienceAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
+layout_mode = 2
+text = "ui.settings.audio_mute"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ui.menu.reset"
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "ui.menu.back"
 
-[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC/LocaleOptionButton" to="." method="_on_locale_option_button_item_selected"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/FullscreenHBC/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioHSlider" to="." method="_on_overall_audio_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioHSlider" to="." method="_on_overall_audio_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioMuteCheckBox" to="." method="_on_overall_audio_mute_check_box_toggled"]
+[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider" to="." method="_on_music_audio_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider" to="." method="_on_music_audio_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioMuteCheckBox" to="." method="_on_music_audio_mute_check_box_toggled"]
+[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider" to="." method="_on_sfx_audio_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider" to="." method="_on_sfx_audio_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioMuteCheckBox" to="." method="_on_sfx_audio_mute_check_box_toggled"]
+[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider" to="." method="_on_ambience_audio_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider" to="." method="_on_ambience_audio_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioMuteCheckBox" to="." method="_on_ambience_audio_mute_check_box_toggled"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

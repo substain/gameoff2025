@@ -3,16 +3,20 @@
 [ext_resource type="Script" uid="uid://w6uor5eq6eip" path="res://scenes/menu/input_menu.gd" id="1_mea1p"]
 [ext_resource type="Theme" uid="uid://bm6h5yx1xgaub" path="res://ui/default_theme.tres" id="2_8yfkx"]
 
-[node name="InputMenu" type="MarginContainer"]
+[node name="InputMenu" type="Control" node_paths=PackedStringArray("first_focus_item")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mea1p")
+first_focus_item = NodePath("VBoxContainer/HBoxContainer/ResetButton")
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 66.0
 size_flags_vertical = 0
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
@@ -30,12 +34,41 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -167.5
+offset_right = 250.0
+offset_bottom = 167.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BackButton" type="Button" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ui.menu.reset"
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "ui.menu.back"
 
-[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

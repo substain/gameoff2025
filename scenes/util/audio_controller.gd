@@ -1,0 +1,22 @@
+## Autoload: AudioController
+extends Node
+
+enum SfxType {
+	ACCEPT, 
+	HOVER
+}
+
+@export_category("internal nodes")
+@export var accept_audio_stream_player: AudioStreamPlayer
+@export var hover_audio_stream_player: AudioStreamPlayer
+
+func _ready() -> void:
+	pass
+
+func play_sfx(sfx_type: SfxType) -> void:
+	match sfx_type:
+		SfxType.ACCEPT:
+			accept_audio_stream_player.play()
+			
+		SfxType.HOVER:
+			hover_audio_stream_player.play()
