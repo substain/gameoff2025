@@ -411,7 +411,7 @@ func _input(event: InputEvent) -> void:
 				var release_hit_window_start: float = held_note.start + held_note.duration - input_buffer
 				var release_hit_window_end: float = held_note.start + held_note.duration + input_buffer
 				
-				_held_notes.erase(track_name)
+				_held_notes.erase(track)
 
 				var time_diff: float = current_time - (held_note.start + held_note.duration)
 
