@@ -402,6 +402,7 @@ func _input(event: InputEvent) -> void:
 					
 					return 
 			
+			note_failed.emit(track, null)
 			print("Input Missed/Early on press: ", track_name)
 			
 		# input losgelassen, für held notes
