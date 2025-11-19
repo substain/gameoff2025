@@ -1,23 +1,26 @@
-[gd_scene load_steps=16 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=20 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
-[ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
+[ext_resource type="Script" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden/singing_monk.tscn" id="2_jn2uw"]
 [ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
 [ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/old_files/timed_starter.gd" id="4_t80qu"]
 [ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
+[ext_resource type="Texture2D" uid="uid://ggpk0y3fxptv" path="res://2d/zen/Zen Garden Background Blanc.png" id="6_bwifo"]
 [ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/old_files/zen_player_path_follow.gd" id="6_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/old_files/zen_line_2d.tscn" id="7_3rur6"]
+[ext_resource type="Shader" uid="uid://diio5h8lx0mkf" path="res://scenes/zen_garden/zen_garden_singing_level.gdshader" id="7_eyw3c"]
+[ext_resource type="Texture2D" uid="uid://n7pd83x7ec6j" path="res://2d/zen/fader.png" id="8_0wtlu"]
+[ext_resource type="Texture2D" uid="uid://cdvcqbveakme5" path="res://2d/zen/Zen Garden Background.png" id="8_6hbp2"]
 [ext_resource type="Texture2D" uid="uid://dm78ebdyk0rnu" path="res://2d/placeholder/circle_1x1.svg" id="8_t80qu"]
+[ext_resource type="Texture2D" uid="uid://dbey2hvvtynvs" path="res://2d/zen/monk.png" id="13_lbh2w"]
 
-[sub_resource type="Gradient" id="Gradient_wk7kd"]
-colors = PackedColorArray(0.574, 0.65169996, 0.7, 1, 0.46229059, 0.46229059, 0.46229059, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x1g7k"]
-gradient = SubResource("Gradient_wk7kd")
-fill_to = Vector2(0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wtlu"]
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
@@ -44,9 +47,15 @@ event_node_parent = NodePath("..")
 zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(656, 363.00003)
-scale = Vector2(20.375, 11.421875)
-texture = SubResource("GradientTexture2D_x1g7k")
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_bwifo")
+
+[node name="Background2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0wtlu")
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_6hbp2")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -77,8 +86,8 @@ round_precision = 12
 [node name="TelegraphedHoldLine" type="Line2D" parent="."]
 
 [node name="Path" type="Path2D" parent="."]
-position = Vector2(-194, -154)
-scale = Vector2(1.289618, 1.39375)
+position = Vector2(-225.99998, 175.99998)
+scale = Vector2(1.29, 1)
 curve = SubResource("Curve2D_cuvp4")
 
 [node name="ZenPlayerPathFollow" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("drawn_lines", "telegraphed_path_follow")]
@@ -109,6 +118,11 @@ texture = ExtResource("8_t80qu")
 position = Vector2(661.43616, 351.56952)
 rotation = -0.023525072
 rotates = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(622, 306)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("13_lbh2w")
 
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]

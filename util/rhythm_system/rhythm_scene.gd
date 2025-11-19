@@ -402,6 +402,10 @@ func _input(event: InputEvent) -> void:
 					
 					return 
 			
+			# TODO: Vielleicht einen cooldown haben damit der user nicht spammen kann
+			# Aktuell könnte er spammen und irgendwann trotzdem die nächste richtige Note treffen
+			# Man könnte den Cooldown an die jeweiligen Animationen koppeln
+			note_failed.emit(track, null)
 			print("Input Missed/Early on press: ", track_name)
 			
 		# input losgelassen, für held notes
@@ -411,7 +415,7 @@ func _input(event: InputEvent) -> void:
 				var release_hit_window_start: float = held_note.start + held_note.duration - input_buffer
 				var release_hit_window_end: float = held_note.start + held_note.duration + input_buffer
 				
-				_held_notes.erase(track_name)
+				_held_notes.erase(track)
 
 				var time_diff: float = current_time - (held_note.start + held_note.duration)
 
