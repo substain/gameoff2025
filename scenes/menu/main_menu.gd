@@ -64,27 +64,35 @@ func set_title_label_from_settings() -> void:
 
 func _on_start_game_button_pressed() -> void:
 	get_tree().change_scene_to_file(start_scene_file_path)
+	play_accept_sfx()
 
 func _on_input_menu_button_pressed() -> void:
 	show_input_menu()
+	play_accept_sfx()
 
 func _on_settings_menu_button_pressed() -> void:
+	play_accept_sfx()
 	show_settings_menu()
 	
 func _on_credits_button_pressed() -> void:
+	play_accept_sfx()
 	show_credits()
 
 func _on_quit_button_pressed() -> void:
+	play_accept_sfx()
 	quit_game()
 	
 func _on_input_menu_back_button_pressed() -> void:
+	play_accept_sfx()
 	show_start_menu()
 
 func _on_settings_menu_back_button_pressed() -> void:
 	show_start_menu()
+	play_accept_sfx()
 
 func _on_credits_back_button_pressed() -> void:
 	show_start_menu()
+	play_accept_sfx()
 			
 static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[CanvasItem]) -> void:
 	for inv_node: CanvasItem in invisible_nodes:
@@ -105,4 +113,5 @@ func play_hover_sfx() -> void:
 	AudioController.play_sfx(AudioController.SfxType.HOVER)
 
 func _on_calibration_button_pressed() -> void:
+	play_accept_sfx()
 	push_error("TODO: start calibration")
