@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmwenlnrbr0ev" path="res://scenes/menu/settings_menu.tscn" id="4_t0a87"]
 [ext_resource type="PackedScene" uid="uid://cxbd17bwwqeko" path="res://scenes/menu/credits.tscn" id="5_qo0fc"]
 
-[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("start_menu", "input_menu", "settings_menu", "credits", "title_label", "version_label", "first_start_menu_item", "quit_button", "hidden_on_main_menu_items", "hidden_on_pause_menu_items")]
+[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("start_menu", "input_menu", "settings_menu", "credits", "title_label", "version_label", "first_start_menu_item", "quit_button", "items_to_hide")]
 script = ExtResource("1_y1o0p")
 start_scene_file_path = "res://scenes/game_map/game_map.tscn"
 start_menu = NodePath("StartMenuMC")
@@ -17,10 +17,10 @@ title_label = NodePath("HeaderMC/TitleLabel")
 version_label = NodePath("VersionMC/VersionLabel")
 first_start_menu_item = NodePath("StartMenuMC/VBoxContainer/StartGameButton")
 quit_button = NodePath("StartMenuMC/VBoxContainer/QuitButton")
-hidden_on_main_menu_items = [NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]
-hidden_on_pause_menu_items = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC")]
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
+z_index = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -40,6 +40,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StartMenuMC" type="MarginContainer" parent="."]
+z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -89,14 +90,18 @@ text = "ui.menu.quit"
 
 [node name="InputMenu" parent="." instance=ExtResource("3_3y2rt")]
 visible = false
+z_index = 1
 
 [node name="SettingsMenu" parent="." instance=ExtResource("4_t0a87")]
 visible = false
+z_index = 1
 
 [node name="Credits" parent="." instance=ExtResource("5_qo0fc")]
 visible = false
+z_index = 1
 
 [node name="VersionMC" type="MarginContainer" parent="."]
+z_index = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5ucfx8fc6ffe"]
+[gd_scene load_steps=3 format=3 uid="uid://b5ucfx8fc6ffe"]
 
 [ext_resource type="Script" uid="uid://swlh1ijj3r4g" path="res://scenes/ui/game_ui.gd" id="1_gwk6t"]
+[ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="2_xjfbv"]
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label")]
 script = ExtResource("1_gwk6t")
+pause_menu = NodePath("PauseMenu")
 start_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/StartButton")
 pause_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/PauseButton")
 show_rhythm_ui_button = NodePath("RhythmMC/VBoxContainer/HBoxContainer/ShowRhythmUIButton")
@@ -155,6 +157,20 @@ text = "[b]Arrow Left[/b] / [b]A[/b]: 	Sing (hold)
 [b]Arrow Right[/b] / [b]D[/b]: 	Sing (Tab)
 [b]Space[/b]: 					Restart"
 fit_content = true
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("2_xjfbv")]
+visible = false
+is_pause_menu = true
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC")]
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
 
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/Stop" to="." method="_on_stop_pressed"]

@@ -1,5 +1,7 @@
 keys;en;de
 ui.menu.start;Start;Start
+ui.menu.continue;Continue;Fortsetzen
+ui.menu.back_to_main_menu;Main Menu;Hauptmenü
 ui.menu.calibration;Calibration;Kalibrierung
 ui.menu.input_menu;Controls;Steuerung
 ui.menu.settings_menu;Settings;Einstellungen

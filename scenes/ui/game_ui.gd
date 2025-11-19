@@ -7,6 +7,8 @@ signal set_paused(is_paused: bool)
 signal toggle_rhythm_ui(is_toggled_on: bool)
 
 @export_category("internal nodes")
+@export var pause_menu: Menu
+
 @export var start_button: Button
 @export var pause_button: Button
 @export var show_rhythm_ui_button: Button
@@ -16,6 +18,7 @@ signal toggle_rhythm_ui(is_toggled_on: bool)
 @export var missed_label: RichTextLabel
 @export var failed_label: RichTextLabel
 @export var warning_label: RichTextLabel
+
 
 var is_stopped: bool = false
 var is_track_in_progress: bool = false
@@ -36,6 +39,11 @@ func _ready() -> void:
 	missed_text_template = missed_label.text
 	failed_text_template = failed_label.text
 	reset_note_statistics()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		pause_menu.visible = !pause_menu.visible
+		pause_menu.set_paused(pause_menu.visible)
 
 func set_progress(progress: float) -> void:
 	progress_bar.value = progress * 100

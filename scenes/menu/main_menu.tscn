@@ -4,4 +4,5 @@
 
 [node name="MainMenu" type="Node"]
 
-[node name="Menu" parent="." instance=ExtResource("1_nl8w3")]
+[node name="Menu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("1_nl8w3")]
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]

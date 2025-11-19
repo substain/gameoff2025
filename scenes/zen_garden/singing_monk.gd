@@ -69,7 +69,7 @@ func _on_timer_timeout() -> void:
 			anim_player.play(ANIM_RESET)
 			anim_player.stop()
 			
-func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
+func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 	if track.name != "MIDI Drums":
 		return
 	is_one_shot_active = true

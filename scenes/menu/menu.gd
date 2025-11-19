@@ -20,20 +20,14 @@ const VERSION_PLACEHOLDER: String = "[version]"
 @export var first_start_menu_item: BaseButton
 @export var quit_button: BaseButton
 
-@export var hidden_on_main_menu_items: Array[Control] = []
-@export var hidden_on_pause_menu_items: Array[Control] = []
+@export var items_to_hide: Array[Control] = []
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if !is_pause_menu:
-		get_tree().paused = false
+		set_paused(false)
 	
 func _ready() -> void:
-	var items_to_hide: Array[Control] = hidden_on_main_menu_items
-	
-	if is_pause_menu:
-		items_to_hide = hidden_on_pause_menu_items
-
 		
 	for ctrl: Control in items_to_hide:
 		ctrl.visible = false
@@ -108,7 +102,21 @@ func _on_settings_menu_back_button_pressed() -> void:
 func _on_credits_back_button_pressed() -> void:
 	show_start_menu()
 	play_accept_sfx()
-			
+
+func _on_calibration_button_pressed() -> void:
+	play_accept_sfx()
+	push_error("TODO: start calibration")
+
+func _on_back_to_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
+
+func _on_continue_button_pressed() -> void:
+	set_paused(false)
+	self.visible = false
+
+func set_paused(is_paused_new: bool) -> void:
+	get_tree().paused = is_paused_new
+
 static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[CanvasItem]) -> void:
 	for inv_node: CanvasItem in invisible_nodes:
 		if inv_node == visible_node:
@@ -126,14 +134,3 @@ func play_accept_sfx() -> void:
 		
 func play_hover_sfx() -> void:
 	AudioController.play_sfx(AudioController.SfxType.HOVER)
-
-func _on_calibration_button_pressed() -> void:
-	play_accept_sfx()
-	push_error("TODO: start calibration")
-
-func _on_back_to_main_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
-
-func _on_continue_button_pressed() -> void:
-	get_tree().paused = false
-	self.visible = false

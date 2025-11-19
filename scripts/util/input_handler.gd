@@ -11,4 +11,6 @@ const ACTION_A: String = "action_a"
 const ACTION_B: String = "action_b"
 const ACTION_C: String = "action_c"
 
+const PAUSE: String = "pause"
+
 const ALL_ACTIONS: Array[String] = [ACTION_A, ACTION_B, ACTION_C]
