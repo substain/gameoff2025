@@ -1,10 +1,12 @@
-class_name MainMenu
+class_name Menu
 extends Node
 
 const VERSION_PLACEHOLDER: String = "[version]"
 
 @export var set_game_title_from_project_settings: bool = true
 @export_file_path("*.tscn") var start_scene_file_path: String
+
+@export var is_pause_menu: bool = false
 
 @export_category("internal nodes")
 @export var start_menu: Control
@@ -18,11 +20,24 @@ const VERSION_PLACEHOLDER: String = "[version]"
 @export var first_start_menu_item: BaseButton
 @export var quit_button: BaseButton
 
+@export var hidden_on_main_menu_items: Array[Control] = []
+@export var hidden_on_pause_menu_items: Array[Control] = []
+
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().paused = false
+	if !is_pause_menu:
+		get_tree().paused = false
 	
 func _ready() -> void:
+	var items_to_hide: Array[Control] = hidden_on_main_menu_items
+	
+	if is_pause_menu:
+		items_to_hide = hidden_on_pause_menu_items
+
+		
+	for ctrl: Control in items_to_hide:
+		ctrl.visible = false
+	
 	set_version()
 
 	if set_game_title_from_project_settings:
@@ -106,3 +121,10 @@ func play_hover_sfx() -> void:
 
 func _on_calibration_button_pressed() -> void:
 	push_error("TODO: start calibration")
+
+func _on_back_to_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
+
+func _on_continue_button_pressed() -> void:
+	get_tree().paused = false
+	self.visible = false
