@@ -211,11 +211,11 @@ text = "Surfing
 (not implemented)"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
-offset_left = 39.0
-offset_top = 239.0
-offset_right = 278.0
-offset_bottom = 302.0
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 915.0
+offset_top = 212.0
+offset_right = 1154.0
+offset_bottom = 275.0
 theme_override_font_sizes/font_size = 35
 text = "Randomizer"
 
@@ -223,3 +223,4 @@ text = "Randomizer"
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton" to="." method="_on_glowsticks_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton" to="." method="_on_angler_fish_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton" to="." method="_on_surf_level_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

@@ -54,3 +54,9 @@ func _on_angler_fish_level_button_pressed() -> void:
 
 func _on_glowsticks_button_pressed() -> void:
 	switch_level(LevelType.GLOWSTICKS)
+
+
+func _on_button_pressed() -> void:
+	var select_a_level: int=randi_range(0, LevelType.values().size())
+	print(select_a_level)
+	switch_level(select_a_level)
