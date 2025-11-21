@@ -7,14 +7,18 @@ extends Node2D
 @export_file_path var glowsticks_level_path: String = ""
 @export var timer: Timer
 @export var button: Button
+@export var levelselection: Array[TextureRect]
+
 
 @export var level_buttons: Array[BaseButton] = []
 
+var select_a_level: int
+
 enum LevelType {
 	ZEN_GARDEN,
-	SURFING,
+	GLOWSTICKS,
 	ANGLER_FISH,
-	GLOWSTICKS
+	SURFING
 }
 
 func _process(_delta: float) -> void:
@@ -66,9 +70,10 @@ func _on_button_pressed() -> void:
 	button.disabled = true
 	button.text = "Countdown:" + str(timer.time_left)
 	button.set("theme_override_font_sizes/font_size", 25)
-
-
+	select_a_level=randi_range(0, LevelType.values().size()-1)
+	
+	levelselection[select_a_level].visible = true
+	
 func _on_timer_timeout() -> void:
-	var select_a_level: int=randi_range(0, LevelType.values().size()-1)
 	print(select_a_level)
 	switch_level(select_a_level)
