@@ -14,12 +14,14 @@ gradient = SubResource("Gradient_8jl7y")
 width = 256
 height = 128
 
-[node name="GameMap" type="Node2D" node_paths=PackedStringArray("level_buttons")]
+[node name="GameMap" type="Node2D" node_paths=PackedStringArray("timer", "button", "level_buttons")]
 script = ExtResource("1_tq0av")
 zen_garden_level_path = "res://scenes/zen_garden/zen_garden_singing_level.tscn"
 surfing_level_path = "res://scenes/surfing/surfing_level.tscn"
 angler_fish_level_path = "res://scenes/angler_fish/angler_fish_level.tscn"
 glowsticks_level_path = "res://scenes/glowsticks/glowsticks_level.tscn"
+timer = NodePath("Timer")
+button = NodePath("CanvasLayer/Button")
 level_buttons = [NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton")]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -219,8 +221,13 @@ offset_bottom = 275.0
 theme_override_font_sizes/font_size = 35
 text = "Randomizer"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton" to="." method="_on_zen_garden_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton" to="." method="_on_glowsticks_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton" to="." method="_on_angler_fish_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton" to="." method="_on_surf_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

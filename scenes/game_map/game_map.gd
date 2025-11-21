@@ -5,6 +5,8 @@ extends Node2D
 @export_file_path var surfing_level_path: String = ""
 @export_file_path var angler_fish_level_path: String = ""
 @export_file_path var glowsticks_level_path: String = ""
+@export var timer: Timer
+@export var button: Button
 
 @export var level_buttons: Array[BaseButton] = []
 
@@ -16,7 +18,10 @@ enum LevelType {
 }
 
 func _process(_delta: float) -> void:
-	pass
+	if button.disabled:	
+		var rounded_time:int = roundi(timer.time_left)
+		button.text = "Countdown:" + str(rounded_time)
+	
 
 
 func switch_level(level_type: LevelType) -> void:
@@ -57,6 +62,13 @@ func _on_glowsticks_button_pressed() -> void:
 
 
 func _on_button_pressed() -> void:
-	var select_a_level: int=randi_range(0, LevelType.values().size())
+	timer.start()
+	button.disabled = true
+	button.text = "Countdown:" + str(timer.time_left)
+	button.set("theme_override_font_sizes/font_size", 25)
+
+
+func _on_timer_timeout() -> void:
+	var select_a_level: int=randi_range(0, LevelType.values().size()-1)
 	print(select_a_level)
 	switch_level(select_a_level)
