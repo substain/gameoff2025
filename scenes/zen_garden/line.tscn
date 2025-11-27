@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://qaqtgnhhhqqy"]
+
+[ext_resource type="Script" uid="uid://cw2drix6uu4nr" path="res://scenes/zen_garden/line_show.gd" id="1_6lcgy"]
+[ext_resource type="Shader" uid="uid://diio5h8lx0mkf" path="res://scenes/zen_garden/zen_garden_singing_level.gdshader" id="2_vboqs"]
+[ext_resource type="Texture2D" uid="uid://n7pd83x7ec6j" path="res://2d/zen/fader.png" id="3_hpfe3"]
+[ext_resource type="Texture2D" uid="uid://cmc6hpe6y2012" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1w.png" id="4_314yd"]
+[ext_resource type="Texture2D" uid="uid://c64x2w26t42ig" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1.png" id="5_p2qjp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jsrj"]
+resource_local_to_scene = true
+shader = ExtResource("2_vboqs")
+shader_parameter/mask = ExtResource("3_hpfe3")
+shader_parameter/progress = 0.0
+
+[node name="Line1" type="Node2D" node_paths=PackedStringArray("preview_sprite", "line_sprite", "preview_timer", "line_timer")]
+script = ExtResource("1_6lcgy")
+preview_sprite = NodePath("PreviewSprite2D")
+line_sprite = NodePath("LineSprite2D")
+preview_timer = NodePath("PreviewTimer")
+line_timer = NodePath("LineTimer")
+
+[node name="PreviewSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.90588236, 0.85490197, 1, 1)
+material = SubResource("ShaderMaterial_8jsrj")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_314yd")
+
+[node name="LineSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_p2qjp")
+
+[node name="PreviewTimer" type="Timer" parent="."]
+
+[node name="LineTimer" type="Timer" parent="."]

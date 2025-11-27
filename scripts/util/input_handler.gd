@@ -12,7 +12,8 @@ enum InputName {
 	action_b,
 	action_c,
 	
-	pause
+	pause,
+	cancel
 }
 
 const DEBUG_START_TRACK: String = "debug_start_track"
@@ -56,5 +57,35 @@ static func get_all_action_inputs_as_string() -> Array[String]:
 static func get_as_string_array(inputs: Array[InputName]) -> Array[String]:
 	var input_strings: Array[String]
 	for input: InputName in inputs:
-		input_strings.push_back(InputName.keys()[input])
+		input_strings.push_back(input_name_to_str(input))
 	return input_strings
+
+static func input_name_to_str(input_name: InputName) -> String:
+	return InputName.keys()[input_name]
+
+static func input_event_to_str(input_event: InputEvent) -> String:
+	if input_event is InputEventMouseButton:
+		(input_event as InputEventMouseButton).double_click = false
+		return (input_event as InputEventMouseButton).as_text()
+	elif input_event is InputEventKey:
+		var iek: InputEventKey = (input_event as InputEventKey)
+		var keycode: int = iek.keycode
+		if keycode == 0:
+			keycode = DisplayServer.keyboard_get_keycode_from_physical(iek.physical_keycode)
+		return OS.get_keycode_string(keycode) #
+	else:
+		@warning_ignore("unsafe_method_access")
+		return input_event.as_text_key_label()
+		
+static func get_first_input_str_for_input_name(input_name: InputHandler.InputName) -> String:
+	return input_event_to_str(get_first_input_for_input_name(input_name))
+
+static func get_first_input_for_input_name(input_name: InputHandler.InputName) -> InputEvent:
+	return get_first_input_for(input_name_to_str(input_name))
+	
+static func get_first_input_for(input_name_str: String) -> InputEvent:
+	var input_events: Array[InputEvent] = InputMap.action_get_events(input_name_str);
+	if input_events.size() == 0:
+		return null
+	
+	return input_events[0];

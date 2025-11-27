@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://lal43a7famlj"]
 
-[ext_resource type="Script" uid="uid://bgjnieuevswap" path="res://scenes/zen_garden/leaf.gd" id="1_rhwxp"]
-[ext_resource type="Texture2D" uid="uid://ck3vyflvfvcjf" path="res://2d/placeholder/singing_monk/leaf.png" id="2_rhwxp"]
-[ext_resource type="Texture2D" uid="uid://beabxe53but1l" path="res://2d/placeholder/singing_monk/leafshadow.png" id="3_ogymw"]
+[ext_resource type="Script" uid="uid://bgjnieuevswap" path="res://scenes/zen_garden/falling_object.gd" id="1_1g017"]
+[ext_resource type="Texture2D" uid="uid://beabxe53but1l" path="res://2d/placeholder/singing_monk/leafshadow.png" id="2_q8mus"]
+[ext_resource type="Texture2D" uid="uid://ck3vyflvfvcjf" path="res://2d/placeholder/singing_monk/leaf.png" id="3_dgc3l"]
 
 [sub_resource type="Animation" id="Animation_3xu45"]
 length = 0.001
@@ -129,7 +129,7 @@ _data = {
 }
 
 [node name="Leaf" type="Node2D" node_paths=PackedStringArray("leaf_object", "leaf_sprite", "shadow_object", "leaf_anim_player", "shadow_anim_player")]
-script = ExtResource("1_rhwxp")
+script = ExtResource("1_1g017")
 leaf_object = NodePath("LeafObject")
 leaf_sprite = NodePath("ShadowObject/Sprite2D")
 shadow_object = NodePath("ShadowObject")
@@ -141,7 +141,7 @@ shadow_anim_player = NodePath("ShadowObject/AnimationPlayer")
 [node name="Sprite2D" type="Sprite2D" parent="ShadowObject"]
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("3_ogymw")
+texture = ExtResource("2_q8mus")
 hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ShadowObject"]
@@ -155,7 +155,7 @@ z_index = 2
 [node name="Sprite2D" type="Sprite2D" parent="LeafObject"]
 texture_filter = 1
 scale = Vector2(2, 2)
-texture = ExtResource("2_rhwxp")
+texture = ExtResource("3_dgc3l")
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LeafObject"]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://bfqj6p4bnwa0u"]
 
-[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/old_files/zen_player_path_follow.gd" id="1_ykeqb"]
-[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/old_files/zen_line_2d.tscn" id="2_8otyb"]
-[ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/old_files/old_files/zen_garden_player.tscn" id="3_en3dn"]
-[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/old_files/timed_starter.gd" id="4_en3dn"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/zen_garden/zen_player_path_follow.gd" id="1_ykeqb"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/zen_garden/zen_line_2d.tscn" id="2_8otyb"]
+[ext_resource type="PackedScene" uid="uid://dp4jk5663m6rc" path="res://scenes/old_files/zen_garden/zen_garden_player.tscn" id="3_en3dn"]
+[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/zen_garden/timed_starter.gd" id="4_en3dn"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_fmb5s"]
-[ext_resource type="Shader" uid="uid://bcb2vvapcpdgt" path="res://scenes/old_files/old_files/line_fade_shader.gdshader" id="6_fmb5s"]
+[ext_resource type="Shader" uid="uid://bcb2vvapcpdgt" path="res://scenes/old_files/zen_garden/line_fade_shader.gdshader" id="6_fmb5s"]
 
 [sub_resource type="Gradient" id="Gradient_yttgd"]
 colors = PackedColorArray(0.74138474, 0.7413847, 0.74138457, 1, 0.4390491, 0.43904912, 0.43904912, 1)

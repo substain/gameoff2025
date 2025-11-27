@@ -1,4 +1,5 @@
 ## Autoload: SettingsIO
+class_name SettingsIOClass # to allow for typed access
 extends Node
 
 enum LocaleItem {
@@ -37,6 +38,9 @@ var skip_intro_active: bool = false
 var input_calibration_offset: float = 0.0
 
 func _ready() -> void:
+	if is_web_build():
+		apply_web_build_settings()
+	
 	inputs_file = ConfigFile.new();	
 	load_from_file()
 	load_inputs_from_file()
@@ -54,6 +58,9 @@ func apply_values() -> void:
 	
 	TranslationServer.set_locale(to_short_locale(locale))
 	set_fullscreen(fullscreen_active)
+
+func apply_web_build_settings() -> void:
+	pass
 
 func reset(do_save: bool = true) -> void:
 	set_skip_intro_active(false, false)
@@ -241,3 +248,6 @@ static func set_fullscreen(is_fullscreen: bool) -> void:
 
 static func to_short_locale(locale_item: LocaleItem) -> String:
 	return str(SettingsIO.LocaleItem.keys()[locale_item]).to_lower()
+	
+static func is_web_build() -> bool:
+	return OS.has_feature("web")

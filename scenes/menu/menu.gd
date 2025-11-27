@@ -1,5 +1,5 @@
 class_name Menu
-extends Node
+extends CanvasLayer
 
 const VERSION_PLACEHOLDER: String = "[version]"
 
@@ -28,7 +28,8 @@ func _enter_tree() -> void:
 		set_paused(false)
 	
 func _ready() -> void:
-		
+	quit_button.visible = !SettingsIOClass.is_web_build()
+
 	for ctrl: Control in items_to_hide:
 		ctrl.visible = false
 	
@@ -37,7 +38,6 @@ func _ready() -> void:
 	if set_game_title_from_project_settings:
 		set_title_label_from_settings()
 	
-	quit_button.visible = !is_web_build()
 
 	show_start_menu()
 
@@ -125,12 +125,10 @@ static func set_visible_only(visible_node: CanvasItem, invisible_nodes: Array[Ca
 		inv_node.visible = false
 	
 	visible_node.visible = true
-	
-static func is_web_build() -> bool:
-	return OS.has_feature("web")
+
 
 func play_accept_sfx() -> void:
-	AudioController.play_sfx(AudioController.SfxType.ACCEPT)
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.ACCEPT)
 		
 func play_hover_sfx() -> void:
-	AudioController.play_sfx(AudioController.SfxType.HOVER)
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.HOVER)

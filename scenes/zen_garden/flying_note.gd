@@ -12,7 +12,7 @@ var is_flying: bool = false
 var direction: Vector2
 var is_hit: bool
 var target_point: Vector2
-var target_leaf: Leaf
+var target_falling_object: FallingObject
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -27,19 +27,19 @@ func _process(delta: float) -> void:
 		on_hit()		
 		
 
-func start_shoot(target_point_new: Vector2, is_hit_new: bool, target_leaf_new: Leaf = null) -> void:
+func start_shoot(target_point_new: Vector2, is_hit_new: bool, target_falling_object_new: FallingObject = null) -> void:
 	is_flying = true
 	is_hit = is_hit_new
 	target_point = target_point_new
-	target_leaf = target_leaf_new
+	target_falling_object = target_falling_object_new
 	direction = (target_point_new - global_position).normalized()
 	animation_player.play(ANIM_SPAWN)
 	await get_tree().create_timer(8.0).timeout
 	queue_free()
 	
 func on_hit() -> void:
-	if is_hit && target_leaf != null:
-		target_leaf.get_hit(direction)
+	if is_hit && target_falling_object != null:
+		target_falling_object.get_hit(direction)
 	animation_player.play(ANIM_HIT)
 	is_flying = false
 

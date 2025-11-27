@@ -1,4 +1,5 @@
-## Autoload: AudioController
+## Autoload: AudioController (scene)
+class_name AudioControllerClass # to allow for typed access
 extends Node
 
 enum SfxType {

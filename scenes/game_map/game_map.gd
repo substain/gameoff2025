@@ -1,5 +1,5 @@
 class_name GameMap
-extends Node2D
+extends Node
 
 @export_file_path var zen_garden_level_path: String = ""
 @export_file_path var surfing_level_path: String = ""

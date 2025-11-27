@@ -43,7 +43,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		pause_menu.visible = !pause_menu.visible
-		pause_menu.set_paused(pause_menu.visible)
+		pause_menu.set_paused(pause_menu.visible as bool)
 
 func set_progress(progress: float) -> void:
 	progress_bar.value = progress * 100

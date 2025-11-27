@@ -1,18 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlg102u4ynte4"]
+[gd_scene load_steps=14 format=3 uid="uid://dlg102u4ynte4"]
 
 [ext_resource type="Texture2D" uid="uid://dqi4x10df6ap6" path="res://2d/placeholder/zen_preview.png" id="1_2qsyw"]
 [ext_resource type="Script" uid="uid://spp4aunfllk8" path="res://scenes/game_map/game_map.gd" id="1_tq0av"]
 [ext_resource type="Texture2D" uid="uid://n7vjuy7e6hsb" path="res://2d/placeholder/zen_preview_press.png" id="2_ud3be"]
 [ext_resource type="Texture2D" uid="uid://8ubre5w5g5va" path="res://2d/placeholder/zen_preview_hover.png" id="3_tq0av"]
-
-[sub_resource type="Gradient" id="Gradient_8jl7y"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2qsyw"]
-gradient = SubResource("Gradient_8jl7y")
-width = 256
-height = 128
+[ext_resource type="Texture2D" uid="uid://dt4h71kfn8d3c" path="res://Assets/Map/map-draft.png" id="5_u30o8"]
 
 [sub_resource type="Gradient" id="Gradient_tq0av"]
 offsets = PackedFloat32Array(0.20080322)
@@ -42,7 +34,13 @@ colors = PackedColorArray(0.2362287, 0.5528146, 0.96773714, 0.5254902)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sh8d3"]
 gradient = SubResource("Gradient_if026")
 
-[node name="GameMap" type="Node2D" node_paths=PackedStringArray("timer", "button", "levelselection", "level_buttons")]
+[node name="GameMap" type="Control" node_paths=PackedStringArray("timer", "button", "levelselection", "level_buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_tq0av")
 zen_garden_level_path = "res://scenes/zen_garden/zen_garden_singing_level.tscn"
 surfing_level_path = "res://scenes/surfing/surfing_level.tscn"
@@ -52,11 +50,6 @@ timer = NodePath("Timer")
 button = NodePath("CanvasLayer/Button")
 levelselection = [NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton/ZenLevelSelection"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton/Sprite2D"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton/Sprite2D"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton/Sprite2D")]
 level_buttons = [NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton")]
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(646.5, 386.25)
-scale = Vector2(5.9492188, 6.2929688)
-texture = SubResource("GradientTexture2D_2qsyw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -293,6 +286,16 @@ text = "Randomizer"
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_u30o8")
+expand_mode = 3
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton" to="." method="_on_zen_garden_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton" to="." method="_on_glowsticks_button_pressed"]

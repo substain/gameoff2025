@@ -45,10 +45,10 @@ func grab_focus_deferred(control: Control = first_focus_item) -> void:
 	control.grab_focus.call_deferred()
 	
 func play_accept_sfx() -> void:
-	AudioController.play_sfx(AudioController.SfxType.ACCEPT)
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.ACCEPT)
 		
 func play_hover_sfx() -> void:
-	AudioController.play_sfx(AudioController.SfxType.HOVER)
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.HOVER)
 	
 func get_game_credits_text_rich() -> String:
 	if !FileAccess.file_exists(CREDITS_FILE_PATH):

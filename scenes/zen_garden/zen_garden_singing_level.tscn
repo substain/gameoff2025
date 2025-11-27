@@ -1,34 +1,103 @@
-[gd_scene load_steps=20 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=47 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
 [ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden/singing_monk.tscn" id="2_jn2uw"]
 [ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
-[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/old_files/timed_starter.gd" id="4_t80qu"]
+[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/zen_garden/timed_starter.gd" id="4_t80qu"]
 [ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
 [ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
 [ext_resource type="Texture2D" uid="uid://ggpk0y3fxptv" path="res://2d/zen/Zen Garden Background Blanc.png" id="6_bwifo"]
-[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/old_files/zen_player_path_follow.gd" id="6_r5g3c"]
-[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/old_files/zen_line_2d.tscn" id="7_3rur6"]
+[ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/zen_garden/zen_player_path_follow.gd" id="6_r5g3c"]
+[ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/zen_garden/zen_line_2d.tscn" id="7_3rur6"]
+[ext_resource type="Texture2D" uid="uid://cytq05j3vb0yv" path="res://Assets/Zen Garden/Background/bg-1.png" id="7_8f3qg"]
+[ext_resource type="Texture2D" uid="uid://cg8mtlks3cqjs" path="res://Assets/Zen Garden/Background/bg-2-cloud-loop.png" id="7_8jsrj"]
 [ext_resource type="Shader" uid="uid://diio5h8lx0mkf" path="res://scenes/zen_garden/zen_garden_singing_level.gdshader" id="7_eyw3c"]
+[ext_resource type="Texture2D" uid="uid://cdab5bs1limn1" path="res://Assets/Zen Garden/Background/bg-3.png" id="7_ke7tj"]
 [ext_resource type="Texture2D" uid="uid://n7pd83x7ec6j" path="res://2d/zen/fader.png" id="8_0wtlu"]
-[ext_resource type="Texture2D" uid="uid://cdvcqbveakme5" path="res://2d/zen/Zen Garden Background.png" id="8_6hbp2"]
+[ext_resource type="Script" uid="uid://bp5j0o2kg3hvh" path="res://scenes/zen_garden/line_controller.gd" id="8_8f3qg"]
+[ext_resource type="Texture2D" uid="uid://c2jhn8cjwt3h" path="res://Assets/Zen Garden/Background/bg-5.png" id="8_8jsrj"]
 [ext_resource type="Texture2D" uid="uid://dm78ebdyk0rnu" path="res://2d/placeholder/circle_1x1.svg" id="8_t80qu"]
-[ext_resource type="Texture2D" uid="uid://dbey2hvvtynvs" path="res://2d/zen/monk.png" id="13_lbh2w"]
+[ext_resource type="PackedScene" uid="uid://qaqtgnhhhqqy" path="res://scenes/zen_garden/line.tscn" id="9_8jsrj"]
+[ext_resource type="Texture2D" uid="uid://dqsy83pxlxqwl" path="res://Assets/Zen Garden/Background/Lines/bg-4-l2.png" id="18_bc303"]
+[ext_resource type="Texture2D" uid="uid://brrnviljc472e" path="res://Assets/Zen Garden/Background/Lines/bg-4-l2w.png" id="18_kxa2q"]
+[ext_resource type="Texture2D" uid="uid://bm8sd3ijqa1k0" path="res://Assets/Zen Garden/Background/Lines/bg-4-l3w.png" id="20_ju4mw"]
+[ext_resource type="Texture2D" uid="uid://bkt37gsjun4nm" path="res://Assets/Zen Garden/Background/Lines/bg-4-l3.png" id="21_qbmkk"]
+[ext_resource type="Texture2D" uid="uid://bmdevydqwn6b4" path="res://Assets/Zen Garden/Background/Lines/bg-4-l4w.png" id="22_wfyxi"]
+[ext_resource type="Texture2D" uid="uid://dv5560sdt3rjl" path="res://Assets/Zen Garden/Background/Lines/bg-4-l4.png" id="23_2hno4"]
+[ext_resource type="Texture2D" uid="uid://b2tofqxs438jr" path="res://Assets/Zen Garden/Background/Lines/bg-4-l5w.png" id="24_4ri8s"]
+[ext_resource type="Texture2D" uid="uid://oh3ais5ehpvf" path="res://Assets/Zen Garden/Background/Lines/bg-4-l5.png" id="25_b1n2n"]
+[ext_resource type="Texture2D" uid="uid://bsnr437ml0fi7" path="res://Assets/Zen Garden/Background/Lines/bg-4-l6w.png" id="26_l4h26"]
+[ext_resource type="Texture2D" uid="uid://dr7f81kt2v3g1" path="res://Assets/Zen Garden/Background/Lines/bg-4-l6.png" id="27_6a8qv"]
+[ext_resource type="Texture2D" uid="uid://dvs2ijvwdukgi" path="res://Assets/Zen Garden/Background/Lines/bg-4-l7w.png" id="28_ntrlb"]
+[ext_resource type="Texture2D" uid="uid://cbqgcveh45o0u" path="res://Assets/Zen Garden/Background/Lines/bg-4-l7.png" id="29_ke7tj"]
+[ext_resource type="Texture2D" uid="uid://d4ak3u3iss2qi" path="res://Assets/Zen Garden/Background/Lines/bg-4-l8w.png" id="30_8jsrj"]
+[ext_resource type="Texture2D" uid="uid://4py64s6bo3uo" path="res://Assets/Zen Garden/Background/Lines/bg-4-l8.png" id="31_8f3qg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wtlu"]
+[sub_resource type="Curve2D" id="Curve2D_8f3qg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
+}
+point_count = 29
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jsrj"]
+resource_local_to_scene = true
 shader = ExtResource("7_eyw3c")
 shader_parameter/mask = ExtResource("8_0wtlu")
 shader_parameter/progress = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8f3qg"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rodxa"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmntt"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7svu"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d33sh"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ncdbi"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_or4sn"]
+resource_local_to_scene = true
+shader = ExtResource("7_eyw3c")
+shader_parameter/mask = ExtResource("8_0wtlu")
+shader_parameter/progress = 0.0
+
+[sub_resource type="Curve2D" id="Curve2D_8jsrj"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
-[sub_resource type="Curve2D" id="Curve2D_cuvp4"]
+[sub_resource type="Curve2D" id="Curve2D_6hbp2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 661.43616, 351.56952, 0, 0, 0, 0, 609.4828, 371.6592, 0, 0, 0, 0, 576.91504, 382.42154, 0, 0, 0, 0, 551.32605, 386.72647, 0, 0, 0, 0, 498.59723, 368.07178, 0, 0, 0, 0, 458.2752, 365.9193, 0, 0, 0, 0, 413.30066, 387.44397, 0, 0, 0, 0, 398.56763, 410.40363, 0, 0, 0, 0, 405.54645, 420.44846, 0, 0, 0, 0, 423.38116, 425.4709, 0, 0, 0, 0, 455.94897, 420.44846, 0, 0, 0, 0, 480.7625, 414.70856, 0, 0, 0, 0, 514.1057, 407.53366, 0, 0, 0, 0, 528.06335, 407.53366, 0, 0, 0, 0, 546.6735, 408.96863, 0, 0, 0, 0, 564.50824, 423.31842, 0, 0, 0, 0, 564.50824, 437.66818, 0, 0, 0, 0, 555.9786, 445.56058, 0, 0, 0, 0, 537.3684, 451.30048, 0, 0, 0, 0, 514.1057, 449.8655, 0, 0, 0, 0, 496.271, 439.10318, 0, 0, 0, 0, 493.1693, 432.64578, 0, 0, 0, 0, 483.8642, 402.51123, 0, 0, 0, 0, 479.98712, 373.81168, 0, 0, 0, 0, 482.31335, 358.02692, 0, 0, 0, 0, 483.8642, 345.82962, 0, 0, 0, 0, 481.53796, 338.65472, 0, 0, 0, 0, 462.15234, 324.30496, 0, 0, 0, 0, 421.05493, 292.73544, 0, 0, 0, 0, 424.15662, 272.64575, 0, 0, 0, 0, 452.8473, 264.7534, 0, 0, 0, 0, 524.9617, 275.51572, 0, 0, 0, 0, 609.4828, 320.00003, 0, 0, 0, 0, 648.25397, 327.1749, 0, 0, 0, 0, 679.2709, 326.45743, 0, 0, 0, 0, 692.45306, 331.47983, 0, 0, 0, 0, 706.4107, 343.67715, 0, 0, 0, 0, 708.737, 363.04935, 0, 0, 0, 0, 703.309, 383.13904, 0, 0, 0, 0, 684.69885, 393.90137, 0, 0, 0, 0, 660.66077, 393.90137, 0, 0, 0, 0, 638.17346, 398.2063, 0, 0, 0, 0, 625.76666, 401.79376, 0, 0, 0, 0, 624.9913, 421.16595, 0, 0, 0, 0, 636.6226, 431.2108, 0, 0, 0, 0, 666.0887, 434.79825, 0, 0, 0, 0, 692.45306, 430.49332, 0, 0, 0, 0, 702.53357, 415.42603, 0, 0, 0, 0, 694.00397, 401.79376, 0, 0, 0, 0, 679.2709, 396.05383, 0, 0, 0, 0, 661.43616, 393.90137, 0, 0, 0, 0, 633.52094, 388.87894, 0, 0, 0, 0, 614.91077, 373.81168, 0, 0, 0, 0, 619.5633, 349.41705, 0, 0, 0, 0, 634.2963, 332.91483, 0, 0, 0, 0, 657.5591, 328.6099, 0, 0, 0, 0, 680.8217, 327.8924, 0, 0, 0, 0, 701.7582, 321.435, 0, 0, 0, 0, 719.5929, 294.1704, 0, 0, 0, 0, 733.55054, 284.84305, 0, 0, 0, 0, 803.3386, 270.4933, 0, 0, 0, 0, 827.3768, 257.5785, 0, 0, 0, 0, 825.0505, 238.2063, 0, 0, 0, 0, 813.4191, 227.44395, 0, 0, 0, 0, 794.03357, 224.574, 0, 0, 0, 0, 768.4446, 228.87894, 0, 0, 0, 0, 756.0378, 236.7713, 0, 0, 0, 0, 756.81323, 259.01346, 0, 0, 0, 0, 772.3217, 272.64575, 0, 0, 0, 0, 791.7073, 282.69058, 0, 0, 0, 0, 811.0929, 299.19284, 0, 0, 0, 0, 818.8471, 323.58746, 0, 0, 0, 0, 810.31744, 347.9821, 0, 0, 0, 0, 799.46155, 362.33185, 0, 0, 0, 0, 765.3429, 383.13904, 0, 0, 0, 0, 753.71155, 406.0987, 0, 0, 0, 0, 760.69037, 436.23322, 0, 0, 0, 0, 785.5039, 448.4305, 0, 0, 0, 0, 804.88947, 451.30048, 0, 0, 0, 0, 825.0505, 449.8655, 0, 0, 0, 0, 853.74115, 434.79825, 0, 0, 0, 0, 866.92334, 415.42603, 0, 0, 0, 0, 868.4742, 386.72647, 0, 0, 0, 0, 848.3132, 365.2018, 0, 0, 0, 0, 827.3768, 352.28702, 0, 0, 0, 0, 710.28784, 310.67267, 0, 0, 0, 0, 662.2116, 302.78027, 0, 0, 0, 0, 628.8684, 302.78027, 0, 0, 0, 0, 600.17773, 317.84753, 0, 0, 0, 0, 590.0972, 353.722, 0, 0, 0, 0, 594.74976, 388.16147, 0, 0, 0, 0, 597.07605, 406.81616, 0, 0, 0, 0, 576.91504, 416.86102, 0, 0, 0, 0, 557.5294, 411.8386, 0, 0, 0, 0, 545.1227, 399.6413, 0, 0, 0, 0, 534.2667, 384.574, 0, 0, 0, 0, 543.57184, 368.78928, 0, 0, 0, 0, 561.40656, 362.33185, 0, 0, 0, 0, 589.3218, 369.50674, 0, 0, 0, 0, 614.1353, 396.05383, 0, 0, 0, 0, 656.7836, 411.8386, 0, 0, 0, 0, 711.06323, 404.6637, 0, 0, 0, 0, 723.47003, 377.39914, 0, 0, 0, 0, 745.9573, 360.89688, 0, 0, 0, 0, 762.2412, 345.11212, 0, 0, 0, 0, 824.2751, 292.73544, 0, 0, 0, 0, 873.1268, 290.58298, 0, 0, 0, 0, 900.26654, 309.23767, 0, 0, 0, 0, 914.99963, 350.85202, 0, 0, 0, 0, 894.0632, 376.68164, 0, 0, 0, 0, 850.63947, 393.90137, 0, 0, 0, 0, 805.6649, 392.4664, 0, 0, 0, 0, 792.4827, 417.5785, 0, 0, 0, 0, 820.39795, 431.2108, 0, 0, 0, 0, 870.025, 426.18835, 0, 0, 0, 0, 908.7962, 396.05383, 0, 0, 0, 0, 898.7157, 351.56952, 0, 0, 0, 0, 873.1268, 322.1525, 0, 0, 0, 0, 837.4573, 305.65024, 0, 0, 0, 0, 781.6268, 358.02692, 0, 0, 0, 0, 749.059, 385.2915, 0, 0, 0, 0, 730.44885, 386.009, 0, 0, 0, 0, 722.6946, 373.0942, 0, 0, 0, 0, 724.2454, 339.37222, 0, 0, 0, 0, 711.8387, 320.7175, 0, 0, 0, 0, 680.8217, 293.45294, 0, 0, 0, 0, 651.35565, 286.99554, 0, 0, 0, 0, 615.6862, 287.713, 0, 0, 0, 0, 590.8726, 300.6278, 0, 0, 0, 0, 576.1396, 320.00003, 0, 0, 0, 0, 573.81335, 346.5471, 0, 0, 0, 0, 569.9362, 370.94174, 0, 0, 0, 0, 556.754, 371.6592, 0, 0, 0, 0, 542.02094, 355.87445, 0, 0, 0, 0, 557.5294, 344.39462, 0, 0, 0, 0, 572.26245, 358.02692, 0, 0, 0, 0, 576.91504, 393.18387, 0, 0, 0, 0, 594.74976, 415.42603, 0, 0, 0, 0, 614.91077, 428.34085, 0, 0, 0, 0, 644.37683, 434.08075, 0, 0, 0, 0, 679.2709, 429.05832, 0, 0, 0, 0, 713.3895, 418.296, 0, 0, 0, 0, 731.9997, 398.2063, 0, 0, 0, 0, 745.1819, 377.39914, 0, 0, 0, 0, 792.4827, 401.07626, 0, 0, 0, 0, 803.3386, 426.90585, 0, 0, 0, 0, 793.2581, 440.53815, 0, 0, 0, 0, 755.2624, 444.84308, 0, 0, 0, 0, 611.0336, 446.99554)
+"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
 }
-point_count = 149
+point_count = 29
 
 [node name="ZenGardenSinging" type="Node2D" node_paths=PackedStringArray("rhythm_scene")]
 script = ExtResource("1_r5g3c")
@@ -41,31 +110,157 @@ offset_left = 1.0
 offset_right = 1.0
 scene_data = ExtResource("5_3rur6")
 
-[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow")]
+[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk")]
 script = ExtResource("3_3rur6")
 event_node_parent = NodePath("..")
 zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
+singing_monk = NodePath("../SingingMonk")
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_bwifo")
 
-[node name="Background2" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_0wtlu")
+[node name="BGSky" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_6hbp2")
+texture = ExtResource("7_8f3qg")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="BGClouds" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_8jsrj")
 
-[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "leaf_manager") instance=ExtResource("2_jn2uw")]
-position = Vector2(661, 331)
-scale = Vector2(4, 4)
-target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
-leaf_manager = NodePath("../RhythmEventCreator")
+[node name="BGGroundTree" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_ke7tj")
+
+[node name="LineController" type="Node2D" parent="." node_paths=PackedStringArray("lines")]
+position = Vector2(640, 360)
+script = ExtResource("8_8f3qg")
+lines = [NodePath("Line1")]
+
+[node name="Line1" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+curve = SubResource("Curve2D_8f3qg")
+
+[node name="PreviewSprite2D" parent="LineController/Line1" index="0"]
+material = SubResource("ShaderMaterial_8jsrj")
+
+[node name="Line2" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line2" index="0"]
+material = SubResource("ShaderMaterial_8f3qg")
+texture = ExtResource("18_kxa2q")
+
+[node name="LineSprite2D" parent="LineController/Line2" index="1"]
+texture = ExtResource("18_bc303")
+
+[node name="Line3" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line3" index="0"]
+material = SubResource("ShaderMaterial_rodxa")
+texture = ExtResource("20_ju4mw")
+
+[node name="LineSprite2D" parent="LineController/Line3" index="1"]
+texture = ExtResource("21_qbmkk")
+
+[node name="Line4" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line4" index="0"]
+material = SubResource("ShaderMaterial_pmntt")
+texture = ExtResource("22_wfyxi")
+
+[node name="LineSprite2D" parent="LineController/Line4" index="1"]
+texture = ExtResource("23_2hno4")
+
+[node name="Line5" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line5" index="0"]
+material = SubResource("ShaderMaterial_e7svu")
+texture = ExtResource("24_4ri8s")
+
+[node name="LineSprite2D" parent="LineController/Line5" index="1"]
+texture = ExtResource("25_b1n2n")
+
+[node name="Line6" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line6" index="0"]
+material = SubResource("ShaderMaterial_d33sh")
+texture = ExtResource("26_l4h26")
+
+[node name="LineSprite2D" parent="LineController/Line6" index="1"]
+texture = ExtResource("27_6a8qv")
+
+[node name="Line7" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line7" index="0"]
+material = SubResource("ShaderMaterial_ncdbi")
+texture = ExtResource("28_ntrlb")
+
+[node name="LineSprite2D" parent="LineController/Line7" index="1"]
+texture = ExtResource("29_ke7tj")
+
+[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path") instance=ExtResource("9_8jsrj")]
+target_path = NodePath("../Path2D")
+
+[node name="PreviewSprite2D" parent="LineController/Line8" index="0"]
+material = SubResource("ShaderMaterial_or4sn")
+texture = ExtResource("30_8jsrj")
+
+[node name="LineSprite2D" parent="LineController/Line8" index="1"]
+texture = ExtResource("31_8f3qg")
+
+[node name="Path2D" type="Path2D" parent="LineController"]
+curve = SubResource("Curve2D_8jsrj")
+
+[node name="TelegraphPathFollow2D" type="PathFollow2D" parent="LineController/Path2D"]
+
+[node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
+modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
+texture_filter = 1
+rotation = 0.023525076
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_t80qu")
+
+[node name="CircleOutter" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
+modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
+texture_filter = 1
+rotation = 0.023525072
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_t80qu")
+
+[node name="ActualPathFollow2D2" type="PathFollow2D" parent="LineController/Path2D"]
+
+[node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
+modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
+texture_filter = 1
+rotation = 0.023525076
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_t80qu")
+
+[node name="CircleOutter" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
+modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
+texture_filter = 1
+rotation = 0.023525072
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_t80qu")
+
+[node name="BGStones" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_8jsrj")
 
 [node name="DrawnLines" type="Node2D" parent="." node_paths=PackedStringArray("target_lines")]
+visible = false
 script = ExtResource("4_t80qu")
 target_lines = [null, null, null]
 target_times = Array[float]([0.5, 1.5, 2.5, 7.0])
@@ -88,11 +283,11 @@ round_precision = 12
 [node name="Path" type="Path2D" parent="."]
 position = Vector2(-225.99998, 175.99998)
 scale = Vector2(1.29, 1)
-curve = SubResource("Curve2D_cuvp4")
+curve = SubResource("Curve2D_6hbp2")
 
 [node name="ZenPlayerPathFollow" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("drawn_lines", "telegraphed_path_follow")]
 z_index = 1
-position = Vector2(661.43616, 351.56952)
+position = Vector2(548.062, 307)
 rotation = -0.023525072
 rotates = false
 script = ExtResource("6_r5g3c")
@@ -101,28 +296,29 @@ drawn_lines = NodePath("../../TelegraphedHoldLine")
 zen_line_scene = ExtResource("7_3rur6")
 telegraphed_path_follow = NodePath("../TelegraphedPathFollow")
 
-[node name="WhiteCircleInner" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
+[node name="CircleInner" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
+modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
 texture_filter = 1
 rotation = 0.023525076
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_t80qu")
 
-[node name="WhiteCircleOutter" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
-modulate = Color(1, 1, 1, 0.34117648)
+[node name="CircleOutter" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
+modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
 texture_filter = 1
 rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
 
 [node name="TelegraphedPathFollow" type="PathFollow2D" parent="Path"]
-position = Vector2(661.43616, 351.56952)
+position = Vector2(548.062, 307)
 rotation = -0.023525072
 rotates = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(622, 306)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_lbh2w")
+[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager") instance=ExtResource("2_jn2uw")]
+position = Vector2(638, 360)
+target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
+fall_object_manager = NodePath("../RhythmEventCreator")
 
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
@@ -138,8 +334,17 @@ texture = ExtResource("13_lbh2w")
 [connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
 [connection signal="started_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_started_playing"]
-[connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
+[connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_stopped_playing"]
-[connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
+
+[editable path="LineController/Line1"]
+[editable path="LineController/Line2"]
+[editable path="LineController/Line3"]
+[editable path="LineController/Line4"]
+[editable path="LineController/Line5"]
+[editable path="LineController/Line6"]
+[editable path="LineController/Line7"]
+[editable path="LineController/Line8"]

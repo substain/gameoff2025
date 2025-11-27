@@ -1,194 +1,547 @@
-[gd_scene load_steps=8 format=3 uid="uid://beivor4vhcbrd"]
+[gd_scene load_steps=31 format=3 uid="uid://beivor4vhcbrd"]
 
 [ext_resource type="Script" uid="uid://dtao0oep2rr1t" path="res://scenes/zen_garden/singing_monk.gd" id="1_8o8k5"]
-[ext_resource type="Texture2D" uid="uid://dqq2yh4of7jc8" path="res://2d/placeholder/singing_monk/singing_monk.png" id="1_ip0t1"]
+[ext_resource type="Texture2D" uid="uid://7sji24h3n3dj" path="res://Assets/Zen Garden/Monk/monk-basic.png" id="2_2uqpf"]
+[ext_resource type="Texture2D" uid="uid://cwd345f03amm3" path="res://Assets/Zen Garden/Monk/monk-breath.png" id="2_e1kua"]
+[ext_resource type="Texture2D" uid="uid://c80bpjog8ugph" path="res://Assets/Zen Garden/Monk/monk-caugh.png" id="3_1ru22"]
+[ext_resource type="Texture2D" uid="uid://b84nbh87qqm33" path="res://Assets/Zen Garden/Monk/monk-caugh-exhausted.png" id="4_12lku"]
+[ext_resource type="Texture2D" uid="uid://b0t51f244yk6b" path="res://Assets/Zen Garden/Monk/monk-basic-exhausted.png" id="6_xkvkn"]
+[ext_resource type="Texture2D" uid="uid://bs3y4cisas3k3" path="res://Assets/Zen Garden/Monk/monk-basic-exhausted-max.png" id="7_6fbtx"]
+[ext_resource type="Texture2D" uid="uid://decwt5pe3ss5h" path="res://Assets/Zen Garden/Monk/monk-basic-happy.png" id="8_dlrt8"]
+[ext_resource type="Texture2D" uid="uid://dqiawdni72rse" path="res://Assets/Zen Garden/Monk/monk-open.png" id="9_hvbbb"]
+[ext_resource type="Texture2D" uid="uid://so303nj13bn3" path="res://Assets/Zen Garden/Monk/monk-open-exhausted.png" id="10_xn8wy"]
+[ext_resource type="Texture2D" uid="uid://b0kvwr7qshfpb" path="res://Assets/Zen Garden/Monk/monk-open-exhausted-max.png" id="11_8ppiy"]
+[ext_resource type="Texture2D" uid="uid://lckxap15nbju" path="res://Assets/Zen Garden/Monk/monk-open-happy.png" id="12_aj8pd"]
+[ext_resource type="Texture2D" uid="uid://cfm3yqsofw2dd" path="res://Assets/Zen Garden/Monk/monk-open-sing.png" id="13_2uja1"]
+[ext_resource type="Texture2D" uid="uid://citt1ap5bs7vy" path="res://Assets/Zen Garden/Monk/monk-basic-sing.png" id="14_mgrbe"]
 
-[sub_resource type="Animation" id="Animation_8o8k5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0bs3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e1kua")
+}],
+"loop": true,
+"name": &"breath",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1ru22")
+}],
+"loop": true,
+"name": &"caugh",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_12lku")
+}],
+"loop": true,
+"name": &"caugh_exhausted",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2uqpf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xkvkn")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6fbtx")
+}],
+"loop": true,
+"name": &"exhausted_max",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_dlrt8")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hvbbb")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_xn8wy")
+}],
+"loop": true,
+"name": &"open_exhausted",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_8ppiy")
+}],
+"loop": true,
+"name": &"open_exhausted_max",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_aj8pd")
+}],
+"loop": true,
+"name": &"open_happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2uja1")
+}],
+"loop": true,
+"name": &"open_sing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_mgrbe")
+}],
+"loop": true,
+"name": &"sing",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_1ru22"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [&"open"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.5, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_yk68v"]
-resource_name = "fail"
-length = 0.5
+[sub_resource type="Animation" id="Animation_xn8wy"]
+resource_name = "breath"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [&"breath"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.047157448, 0.099609815, 0.16666667, 0.2, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.8333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.04712389, -0.18849556, 0.14660765, -0.090757124, 0.0]
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.55)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id="Animation_dlrt8"]
+resource_name = "caugh"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"caugh"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.5, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_ip0t1"]
+[sub_resource type="Animation" id="Animation_hvbbb"]
+resource_name = "caugh_exhausted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"caugh_exhausted"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_aj8pd"]
+resource_name = "exhausted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"exhausted"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_2uja1"]
+resource_name = "exhausted_max"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"exhausted_max"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_mgrbe"]
+resource_name = "exhausted_max_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open_exhausted_max"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_8ppiy"]
+resource_name = "exhausted_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open_exhausted"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_txva2"]
+resource_name = "happy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_rme4i"]
+resource_name = "happy_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open_happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_xkvkn"]
 resource_name = "idle"
-length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [&"default"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.5, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_0mxov"]
-resource_name = "sing"
-length = 0.6
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_6fbtx"]
+resource_name = "idle_open"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4, 5, 6, 7]
+"values": [&"open"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(0.5, 0.5)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.1),
+
+[sub_resource type="Animation" id="Animation_e1kua"]
+resource_name = "sing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"sing"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.20000002),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.55), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_12lku"]
+resource_name = "sing_open"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open_sing"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.55), Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o14jx"]
 _data = {
-&"RESET": SubResource("Animation_8o8k5"),
-&"fail": SubResource("Animation_yk68v"),
-&"idle": SubResource("Animation_ip0t1"),
-&"sing": SubResource("Animation_0mxov")
+&"RESET": SubResource("Animation_1ru22"),
+&"breath": SubResource("Animation_xn8wy"),
+&"caugh": SubResource("Animation_dlrt8"),
+&"caugh_exhausted": SubResource("Animation_hvbbb"),
+&"exhausted": SubResource("Animation_aj8pd"),
+&"exhausted_max": SubResource("Animation_2uja1"),
+&"exhausted_max_open": SubResource("Animation_mgrbe"),
+&"exhausted_open": SubResource("Animation_8ppiy"),
+&"happy": SubResource("Animation_txva2"),
+&"happy_open": SubResource("Animation_rme4i"),
+&"idle": SubResource("Animation_xkvkn"),
+&"idle_open": SubResource("Animation_6fbtx"),
+&"sing": SubResource("Animation_e1kua"),
+&"sing_open": SubResource("Animation_12lku")
 }
 
-[node name="SingingMonk" type="Node2D" node_paths=PackedStringArray("anim_player", "anim_timer")]
+[node name="SingingMonk" type="Node2D" node_paths=PackedStringArray("anim_player", "anim_timer", "switch_pose_timer")]
 script = ExtResource("1_8o8k5")
 anim_player = NodePath("AnimationPlayer")
-anim_timer = NodePath("Timer")
+anim_timer = NodePath("AnimTimer")
+switch_pose_timer = NodePath("SwitchPoseTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_ip0t1")
-hframes = 9
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_k0bs3")
+animation = &"open"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_o14jx")
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AnimTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="SwitchPoseTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AnimTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SwitchPoseTimer" to="." method="_on_switch_pose_timer_timeout"]
