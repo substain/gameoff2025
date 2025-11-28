@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dic1s8nq2wna7" path="res://scenes/menu/settings_menu.gd" id="1_qk8rs"]
 [ext_resource type="Theme" uid="uid://bm6h5yx1xgaub" path="res://ui/default_theme.tres" id="2_0sh77"]
 
-[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("first_focus_item", "locale_option_button", "fullscreen_button", "overall_slider", "music_slider", "sfx_slider", "ambience_slider", "overall_value_label", "music_value_label", "sfx_value_label", "ambience_value_label", "overall_mute_checkbox", "music_mute_checkbox", "sfx_mute_checkbox", "ambience_mute_checkbox")]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("first_focus_item", "locale_option_button", "fullscreen_button", "overall_slider", "music_slider", "sfx_slider", "guide_music_slider", "overall_value_label", "music_value_label", "sfx_value_label", "guide_music_value_label", "overall_mute_checkbox", "music_mute_checkbox", "sfx_mute_checkbox", "guide_music_mute_checkbox", "warning_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,21 +11,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qk8rs")
+warning_color = Color(0.86872625, 0.6224598, 0.21572787, 1)
 first_focus_item = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC/LocaleOptionButton")
 locale_option_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/LocaleHBC/LocaleOptionButton")
 fullscreen_button = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/FullscreenHBC/FullscreenCheckBox")
 overall_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioHSlider")
 music_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider")
 sfx_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider")
-ambience_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider")
+guide_music_slider = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioHSlider")
 overall_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioValueLabel")
 music_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioValueLabel")
 sfx_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioValueLabel")
-ambience_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioValueLabel")
+guide_music_value_label = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioValueLabel")
 overall_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/OverallAudioHBC/OverallAudioMuteCheckBox")
 music_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioMuteCheckBox")
 sfx_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioMuteCheckBox")
-ambience_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioMuteCheckBox")
+guide_music_mute_checkbox = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioMuteCheckBox")
+warning_label = NodePath("VBoxContainer/WarningLabel")
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -139,6 +141,28 @@ text = "[value]%"
 layout_mode = 2
 text = "ui.settings.audio_mute"
 
+[node name="GuideMusicAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GuideMusicAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC"]
+layout_mode = 2
+text = "ui.settings.guide_music_audio"
+
+[node name="GuideMusicAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="GuideMusicAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC"]
+layout_mode = 2
+text = "[value]%"
+
+[node name="GuideMusicAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC"]
+layout_mode = 2
+text = "ui.settings.audio_mute"
+
 [node name="SfxAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -161,27 +185,12 @@ text = "[value]%"
 layout_mode = 2
 text = "ui.settings.audio_mute"
 
-[node name="AmbienceAudioHBC" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="WarningLabel" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
-
-[node name="AmbienceAudioLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
-layout_mode = 2
-text = "ui.settings.ambience_audio"
-
-[node name="AmbienceAudioHSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.001
-
-[node name="AmbienceAudioValueLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
-layout_mode = 2
-text = "[value]%"
-
-[node name="AmbienceAudioMuteCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC"]
-layout_mode = 2
-text = "ui.settings.audio_mute"
+bbcode_enabled = true
+text = "asdf"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
@@ -206,11 +215,11 @@ text = "ui.menu.back"
 [connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider" to="." method="_on_music_audio_h_slider_drag_ended"]
 [connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioHSlider" to="." method="_on_music_audio_h_slider_value_changed"]
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/MusicAudioHBC/MusicAudioMuteCheckBox" to="." method="_on_music_audio_mute_check_box_toggled"]
+[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioHSlider" to="." method="_on_guide_music_audio_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioHSlider" to="." method="_on_guide_music_audio_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/GuideMusicAudioHBC/GuideMusicAudioMuteCheckBox" to="." method="_on_guide_music_audio_mute_check_box_toggled"]
 [connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider" to="." method="_on_sfx_audio_h_slider_drag_ended"]
 [connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioHSlider" to="." method="_on_sfx_audio_h_slider_value_changed"]
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/SfxAudioHBC/SfxAudioMuteCheckBox" to="." method="_on_sfx_audio_mute_check_box_toggled"]
-[connection signal="drag_ended" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider" to="." method="_on_ambience_audio_h_slider_drag_ended"]
-[connection signal="value_changed" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioHSlider" to="." method="_on_ambience_audio_h_slider_value_changed"]
-[connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/AmbienceAudioHBC/AmbienceAudioMuteCheckBox" to="." method="_on_ambience_audio_mute_check_box_toggled"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

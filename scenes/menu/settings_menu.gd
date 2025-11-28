@@ -4,7 +4,7 @@ extends Control
 const MUTED_TR_KEY: String = "ui.settings.audio_value_muted"
 
 signal back_button_pressed
-
+@export var warning_color: Color
 @export var first_focus_item: Button
 
 @export var locale_option_button: OptionButton
@@ -13,24 +13,30 @@ signal back_button_pressed
 @export var overall_slider: HSlider
 @export var music_slider: HSlider
 @export var sfx_slider: HSlider
-@export var ambience_slider: HSlider
+@export var guide_music_slider: HSlider
 
 @export var overall_value_label: Label
 @export var music_value_label: Label
 @export var sfx_value_label: Label
-@export var ambience_value_label: Label
+@export var guide_music_value_label: Label
 
 @export var overall_mute_checkbox: CheckBox
 @export var music_mute_checkbox: CheckBox
 @export var sfx_mute_checkbox: CheckBox
-@export var ambience_mute_checkbox: CheckBox
+@export var guide_music_mute_checkbox: CheckBox
+
+@export var warning_label: RichTextLabel
 
 var fullscreen_active: bool
+
+var music_muted: bool = false
 
 
 func _ready() -> void:
 	if first_focus_item == null:
 		push_warning("first_focus_item not set!")
+	
+	SettingsIO.locale_changed.connect(update_warning_text)
 	init_locale_options()
 	load_values_from_settings()
 
@@ -47,12 +53,12 @@ func load_values_from_settings() -> void:
 	overall_slider.set_value_no_signal(SettingsIO.overall_volume_linear)
 	music_slider.set_value_no_signal(SettingsIO.music_volume_linear)
 	sfx_slider.set_value_no_signal(SettingsIO.sfx_volume_linear)
-	ambience_slider.set_value_no_signal(SettingsIO.ambience_volume_linear)
+	guide_music_slider.set_value_no_signal(SettingsIO.guide_music_volume_linear)
 	
 	set_percent_slider_value(overall_value_label, SettingsIO.overall_volume_linear)
 	set_percent_slider_value(music_value_label, SettingsIO.music_volume_linear)
 	set_percent_slider_value(sfx_value_label, SettingsIO.sfx_volume_linear)
-	set_percent_slider_value(ambience_value_label, SettingsIO.ambience_volume_linear)
+	set_percent_slider_value(guide_music_value_label, SettingsIO.guide_music_volume_linear)
 	
 	if SettingsIO.overall_volume_muted:
 		set_percent_slider_value_muted(overall_value_label)
@@ -60,13 +66,14 @@ func load_values_from_settings() -> void:
 		set_percent_slider_value_muted(music_value_label)
 	if SettingsIO.sfx_volume_muted:
 		set_percent_slider_value_muted(sfx_value_label)
-	if SettingsIO.ambience_volume_muted:
-		set_percent_slider_value_muted(ambience_value_label)
+	if SettingsIO.guide_music_volume_muted:
+		set_percent_slider_value_muted(guide_music_value_label)
 		
 	overall_mute_checkbox.set_pressed_no_signal(SettingsIO.overall_volume_muted)
 	music_mute_checkbox.set_pressed_no_signal(SettingsIO.music_volume_muted)
 	sfx_mute_checkbox.set_pressed_no_signal(SettingsIO.sfx_volume_muted)
-	ambience_mute_checkbox.set_pressed_no_signal(SettingsIO.ambience_volume_muted)
+	guide_music_mute_checkbox.set_pressed_no_signal(SettingsIO.guide_music_volume_muted)
+	update_warning_text()
 
 func set_percent_slider_value(label: Label, value_linear: float) -> void:
 	label.text = str(roundi(value_linear * 100)) + "%"
@@ -126,22 +133,24 @@ func _on_overall_audio_h_slider_drag_ended(value_changed: bool) -> void:
 	play_accept_sfx()
 	if value_changed:
 		SettingsIO.set_overall_volume(overall_slider.value)
-		
+		update_warning_text()
+
 func _on_music_audio_h_slider_drag_ended(value_changed: bool) -> void:
 	play_accept_sfx()
 	if value_changed:
 		SettingsIO.set_music_volume(music_slider.value)
-		
+		update_warning_text()
+
 func _on_sfx_audio_h_slider_drag_ended(value_changed: bool) -> void:
 	play_accept_sfx()
 	if value_changed:
 		SettingsIO.set_sfx_volume(sfx_slider.value)
 		
-func _on_ambience_audio_h_slider_drag_ended(value_changed: bool) -> void:
+func _on_guide_music_audio_h_slider_drag_ended(value_changed: bool) -> void:
 	play_accept_sfx()
 	if value_changed:
-		SettingsIO.set_ambience_volume(ambience_slider.value)
-		
+		SettingsIO.set_guide_music_volume(guide_music_slider.value)
+	
 func _on_overall_audio_h_slider_value_changed(value: float) -> void:
 	play_hover_sfx()
 	SettingsIO.set_overall_volume(value, false)
@@ -160,11 +169,11 @@ func _on_sfx_audio_h_slider_value_changed(value: float) -> void:
 	set_percent_slider_value(sfx_value_label, value)
 	AudioUtil.set_bus_volume(AudioUtil.AudioType.SFX, value)
 	
-func _on_ambience_audio_h_slider_value_changed(value: float) -> void:
+func _on_guide_music_audio_h_slider_value_changed(value: float) -> void:
 	play_hover_sfx()
-	SettingsIO.set_ambience_volume(value, false)
-	set_percent_slider_value(ambience_value_label, value)
-	AudioUtil.set_bus_volume(AudioUtil.AudioType.AMBIENCE, value)
+	SettingsIO.set_guide_music_volume(value, false)
+	set_percent_slider_value(guide_music_value_label, value)
+	AudioUtil.set_bus_volume(AudioUtil.AudioType.GUIDE_MUSIC, value)
 
 func _on_overall_audio_mute_check_box_toggled(toggled_on: bool) -> void:
 	play_accept_sfx()
@@ -174,40 +183,48 @@ func _on_overall_audio_mute_check_box_toggled(toggled_on: bool) -> void:
 	else:
 		set_percent_slider_value(overall_value_label, SettingsIO.overall_volume_linear)		
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.MASTER, toggled_on)
+	update_warning_text()
 
 func _on_music_audio_mute_check_box_toggled(toggled_on: bool) -> void:
 	play_accept_sfx()
-	SettingsIO.set_overall_volume_muted(toggled_on, true)
+	SettingsIO.set_music_volume_muted(toggled_on, true)
 	if toggled_on:
 		set_percent_slider_value_muted(music_value_label)
 	else:
 		set_percent_slider_value(music_value_label, SettingsIO.music_volume_linear)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.MUSIC, toggled_on)
-	
+	update_warning_text()
+
 func _on_sfx_audio_mute_check_box_toggled(toggled_on: bool) -> void:
 	play_accept_sfx()
-	SettingsIO.set_overall_volume_muted(toggled_on, true)
+	SettingsIO.set_sfx_volume_muted(toggled_on, true)
 	if toggled_on:
 		set_percent_slider_value_muted(sfx_value_label)
 	else:
 		set_percent_slider_value(sfx_value_label, SettingsIO.sfx_volume_linear)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.SFX, toggled_on)
 		
-func _on_ambience_audio_mute_check_box_toggled(toggled_on: bool) -> void:
+func _on_guide_music_audio_mute_check_box_toggled(toggled_on: bool) -> void:
 	play_accept_sfx()
-	SettingsIO.set_overall_volume_muted(toggled_on, true)
+	SettingsIO.set_guide_music_volume_muted(toggled_on, true)
 	if toggled_on:
-		set_percent_slider_value_muted(ambience_value_label)
+		set_percent_slider_value_muted(guide_music_value_label)
 	else:
-		set_percent_slider_value(ambience_value_label, SettingsIO.ambience_volume_linear)
-	AudioUtil.set_bus_muted(AudioUtil.AudioType.AMBIENCE, toggled_on)
+		set_percent_slider_value(guide_music_value_label, SettingsIO.guide_music_volume_linear)
+	AudioUtil.set_bus_muted(AudioUtil.AudioType.GUIDE_MUSIC, toggled_on)
 	
 func _on_reset_button_pressed() -> void:
 	play_accept_sfx()
 	SettingsIO.reset()
 	SettingsIO.apply_values()
 	load_values_from_settings()
-	
+
 func _on_back_button_pressed() -> void:
 	play_accept_sfx()
 	back_button_pressed.emit()
+	
+func update_warning_text() -> void:
+	warning_label.text = "[color="+warning_color.to_html()+"]" + tr("ui.settings.audio_warning") + "[/color]"
+	var is_overall_audio_muted: bool = is_zero_approx(SettingsIO.overall_volume_linear) || SettingsIO.overall_volume_muted
+	var is_music_muted: bool = is_zero_approx(SettingsIO.music_volume_linear) || SettingsIO.music_volume_muted
+	warning_label.visible = is_overall_audio_muted || is_music_muted

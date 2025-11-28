@@ -10,6 +10,7 @@ anchors_preset = 0
 script = ExtResource("1_0y0lv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [node name="DebugVisualizer" type="Control" parent="."]
 anchors_preset = 0

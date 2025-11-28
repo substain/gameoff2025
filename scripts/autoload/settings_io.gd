@@ -24,8 +24,8 @@ var music_volume_linear: float = 1
 var music_volume_muted: bool = false
 var sfx_volume_linear: float = 1
 var sfx_volume_muted: bool = false
-var ambience_volume_linear: float = 1
-var ambience_volume_muted: bool = false
+var guide_music_volume_linear: float = 1
+var guide_music_volume_muted: bool = false
 
 var locale: LocaleItem = LocaleItem.EN
 
@@ -50,11 +50,11 @@ func apply_values() -> void:
 	AudioUtil.set_bus_volume(AudioUtil.AudioType.MASTER, overall_volume_linear)
 	AudioUtil.set_bus_volume(AudioUtil.AudioType.MUSIC, music_volume_linear)
 	AudioUtil.set_bus_volume(AudioUtil.AudioType.SFX, sfx_volume_linear)
-	AudioUtil.set_bus_volume(AudioUtil.AudioType.AMBIENCE, ambience_volume_linear)
+	AudioUtil.set_bus_volume(AudioUtil.AudioType.GUIDE_MUSIC, guide_music_volume_linear)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.MASTER, overall_volume_muted)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.MUSIC, music_volume_muted)
 	AudioUtil.set_bus_muted(AudioUtil.AudioType.SFX, sfx_volume_muted)
-	AudioUtil.set_bus_muted(AudioUtil.AudioType.AMBIENCE, ambience_volume_muted)
+	AudioUtil.set_bus_muted(AudioUtil.AudioType.GUIDE_MUSIC, guide_music_volume_muted)
 	
 	TranslationServer.set_locale(to_short_locale(locale))
 	set_fullscreen(fullscreen_active)
@@ -68,11 +68,11 @@ func reset(do_save: bool = true) -> void:
 	set_overall_volume(0.75, false)
 	set_music_volume(1, false)
 	set_sfx_volume(1, false)
-	set_ambience_volume(1, false)
+	set_guide_music_volume(1, false)
 	set_overall_volume_muted(false, false)
 	set_music_volume_muted(false, false)
 	set_sfx_volume_muted(false, false)
-	set_ambience_volume_muted(false, false)
+	set_guide_music_volume_muted(false, false)
 	set_calibration(0.0, false)
 
 	set_locale(LocaleItem.EN, false)
@@ -92,11 +92,11 @@ func save_to_file() -> void:
 		"overall_volume": overall_volume_linear,
 		"music_volume": music_volume_linear,
 		"sfx_volume": sfx_volume_linear,
-		"ambience_volume": ambience_volume_linear,
+		"guide_music_volume_linear": guide_music_volume_linear,
 		"overall_volume_muted": overall_volume_muted,
 		"music_volume_muted": music_volume_muted,
 		"sfx_volume_muted": sfx_volume_muted,
-		"ambience_volume_muted": ambience_volume_muted,
+		"guide_music_volume_muted": guide_music_volume_muted,
 		"locale": locale,
 		"fullscreen_active": fullscreen_active,
 		"skip_intro_active": skip_intro_active,
@@ -126,16 +126,16 @@ func load_from_file() -> void:
 			music_volume_linear = save_dict["music_volume_linear"]
 		if save_dict.has("sfx_volume_linear"):
 			sfx_volume_linear = save_dict["sfx_volume_linear"]
-		if save_dict.has("ambience_volume_linear"):
-			ambience_volume_linear = save_dict["ambience_volume_linear"]
+		if save_dict.has("guide_music_volume_linear"):
+			guide_music_volume_linear = save_dict["guide_music_volume_linear"]
 		if save_dict.has("overall_volume_muted"):
 			overall_volume_muted = save_dict["overall_volume_muted"]
 		if save_dict.has("music_volume_muted"):
 			music_volume_muted = save_dict["music_volume_muted"]
 		if save_dict.has("sfx_volume_muted"):
 			sfx_volume_muted = save_dict["sfx_volume_muted"]
-		if save_dict.has("ambience_volume_muted"):
-			ambience_volume_muted = save_dict["ambience_volume_muted"]
+		if save_dict.has("guide_music_volume_muted"):
+			guide_music_volume_muted = save_dict["guide_music_volume_muted"]
 		if save_dict.has("locale"):
 			locale = save_dict["locale"]
 		if save_dict.has("fullscreen_active"):
@@ -191,8 +191,8 @@ func set_sfx_volume(vol_new: float, do_save: bool = true) -> void:
 		save_to_file()
 		
 
-func set_ambience_volume(vol_new: float, do_save: bool = true) -> void:
-	ambience_volume_linear = vol_new
+func set_guide_music_volume(vol_new: float, do_save: bool = true) -> void:
+	guide_music_volume_linear = vol_new
 	if do_save:
 		save_to_file()
 
@@ -211,8 +211,8 @@ func set_sfx_volume_muted(sfx_volume_muted_new: bool, do_save: bool = true) -> v
 	if do_save:
 		save_to_file()
 
-func set_ambience_volume_muted(ambience_volume_muted_new: bool, do_save: bool = true) -> void:
-	ambience_volume_muted = ambience_volume_muted_new
+func set_guide_music_volume_muted(guide_music_volume_muted_new: bool, do_save: bool = true) -> void:
+	guide_music_volume_muted = guide_music_volume_muted_new
 	if do_save:
 		save_to_file()
 

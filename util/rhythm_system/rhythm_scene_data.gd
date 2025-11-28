@@ -3,6 +3,7 @@ extends Resource
 
 @export_group("Music")
 @export var backing_track: AudioStream
+@export var additional_backing_tracks: Dictionary[AudioStream, AudioUtil.AudioType]
 @export_file var midi_file: String
 
 @export_group("Input")

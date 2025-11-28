@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RhythmSceneData" load_steps=8 format=3 uid="uid://dbbfhffnh0ppb"]
 
-[ext_resource type="AudioStream" uid="uid://cwbrb15skthyv" path="res://audio/music/levels/zengarden/ZenGarden2.ogg" id="1_a50sf"]
+[ext_resource type="AudioStream" uid="uid://cwbrb15skthyv" path="res://audio/music/levels/zengarden/old/ZenGarden2.ogg" id="1_radft"]
 [ext_resource type="Script" uid="uid://b5h8cxpfkcar5" path="res://util/rhythm_system/rhythm_subscribe_custom_event.gd" id="2_kqsqy"]
 [ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="2_qnv11"]
 [ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_note_event.gd" id="3_kqsqy"]
@@ -30,7 +30,7 @@ metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 
 [resource]
 script = ExtResource("2_qnv11")
-backing_track = ExtResource("1_a50sf")
+backing_track = ExtResource("1_radft")
 midi_file = "res://audio/music/levels/zengarden/ZenGardenNew.mid"
 button_a_trackname = &"MIDI Throat Singing"
 button_b_trackname = &"MIDI Drums"

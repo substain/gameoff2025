@@ -15,10 +15,11 @@ ui.settings.fullscreen;Fullscreen;Vollbild
 ui.settings.overall_audio;Overall;Gesamt
 ui.settings.music_audio;Music;Musik
 ui.settings.sfx_audio;SFX;SFX
-ui.settings.ambience_audio;Ambience;Umgebung
+ui.settings.guide_music_audio;Guide Music;Hilfsmusik
 ui.settings.audio_mute;Mute;Stumm
 ui.settings.audio_value_muted;Mute;Stumm
 ui.credits.attributions;3rd party credits;3rd party credits
+ui.settings.audio_warning;This is a rhythm game.\nIt is recommended to turn up music volume.;Dieses Spiel ist ein Rhythmusspiel.\nEs wird empfohlen, die Musik-Lautstärke zu erhöhen.
 ui.input.remap_key;Press a button for '[0]';Drücke einen Knopf für '[0]'
 ui.input.exit_remap;Press '[0]' to cancel;Drücke '[0]' zum Abbrechen
 input.action_a;Action A;Aktion A

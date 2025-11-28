@@ -5,36 +5,38 @@ enum AudioType
 {
 	MASTER,
 	MUSIC,
+	GUIDE_MUSIC,
 	SFX,
-	AMBIENCE
 }
 
 static func set_bus_volume(audio_type: AudioType, volume_linear: float) -> void:
 	var vol_to_use: float = volume_linear
 	if vol_to_use <= 0:
-		vol_to_use = 0.00001
-	var bus_index: int = AudioServer.get_bus_index(AudioUtil.get_audio_type_string(audio_type))	
+		vol_to_use = 0.00001 #ensure we don't go down to zero
+	var bus_index: int = get_bus_index(audio_type)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(vol_to_use))
-	#set_ui_value_by_audio_type(audio_type, volume_linear)
 	
 static func set_bus_muted(audio_type: AudioType, is_muted_new: bool) -> void:
-	var bus_index: int = AudioServer.get_bus_index(AudioUtil.get_audio_type_string(audio_type))
+	var bus_index: int = get_bus_index(audio_type)
 	AudioServer.set_bus_mute(bus_index, is_muted_new)
 	
 static func is_bus_muted(audio_type: AudioType) -> bool:
-	var bus_index: int = AudioServer.get_bus_index(AudioUtil.get_audio_type_string(audio_type))
+	var bus_index: int = get_bus_index(audio_type)
 	return AudioServer.is_bus_mute(bus_index)
 	
-static func get_audio_type_string(audio_type: AudioType) -> String:
+static func get_bus_index(audio_type: AudioType) -> int:
+	return AudioServer.get_bus_index(AudioUtil.get_audio_type_string(audio_type))
+	
+static func get_audio_type_string(audio_type: AudioType) -> StringName:
 	match audio_type:
 		AudioType.MASTER:
-			return "Master"
+			return &"Master"
 		AudioType.MUSIC:
-			return "Music"
+			return &"Music"
 		AudioType.SFX:
-			return "SFX"
-		AudioType.AMBIENCE:
-			return "Ambience"
+			return &"SFX"
+		AudioType.GUIDE_MUSIC:
+			return &"Guide Music"
 			
 	push_warning("Audio type " + str(audio_type) + " not implemented...")
 	return "Unknown Audio Type"

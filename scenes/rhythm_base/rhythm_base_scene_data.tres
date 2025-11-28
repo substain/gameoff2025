@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RhythmSceneData" load_steps=8 format=3 uid="uid://csvy27ylsq87t"]
 
-[ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/ZenGarden.ogg" id="1_ohpfj"]
+[ext_resource type="AudioStream" uid="uid://4njrgddvjqxc" path="res://audio/music/levels/zengarden/old/ZenGarden.ogg" id="1_ohpfj"]
 [ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="1_udykp"]
 [ext_resource type="Script" uid="uid://b5h8cxpfkcar5" path="res://util/rhythm_system/rhythm_subscribe_custom_event.gd" id="2_r8yve"]
 [ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_note_event.gd" id="4_r8yve"]
