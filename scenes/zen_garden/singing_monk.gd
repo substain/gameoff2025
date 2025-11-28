@@ -3,8 +3,8 @@ extends Node2D
 
 const FLYING_NOTE: PackedScene = preload("uid://ocykk4ntbiep")
 
-const DRUMS_TRACK: String = "MIDI Drums"
-const THROAT_TRACK: String = "MIDI Throat Singing"
+const FALLING_OBJECT_TARGET_TRACK: String = "guide track"
+const HOLD_TRACK: String = "MIDI Throat Singing"
 
 const MIN_POSE_TIME: float = 4.0
 const MAX_POSE_TIME: float = 9.0
@@ -108,7 +108,7 @@ static func get_idle_anim(mood_to_check: float) -> Anim:
 	return Anim.exhausted
 				
 func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
-	if track.name != THROAT_TRACK && track.name != DRUMS_TRACK:
+	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
 	is_one_shot_active = true
 	shoot_note(false)
@@ -116,18 +116,19 @@ func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 	play_anim(Anim.caugh)
 
 func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
-	if track.name != THROAT_TRACK && track.name != DRUMS_TRACK:
+	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
 	mood = max(mood - 0.2, -1.0)
 
 func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, _diff: float) -> void:
-	if track.name != THROAT_TRACK && track.name != DRUMS_TRACK:
+	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
-	is_one_shot_active = true
-	var target_falling_object: FallingObject = fall_object_manager.get_falling_object_by_note(note)
 	mood = min(mood + 0.25, 1.0)
 
-	shoot_note(true, target_falling_object)
+	if track.name == FALLING_OBJECT_TARGET_TRACK:
+		var target_falling_object: FallingObject = fall_object_manager.get_falling_object_by_note(note)
+		is_one_shot_active = true
+		shoot_note(true, target_falling_object)
 
 func _on_rhythm_base_started_playing() -> void:
 	start_moving()

@@ -50,6 +50,8 @@ texture = ExtResource("5_p2qjp")
 
 [node name="TelegraphTimer" type="Timer" parent="."]
 wait_time = 4.0
+one_shot = true
 
 [node name="ActualPressedTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true

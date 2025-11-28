@@ -30,10 +30,10 @@ func _ready() -> void:
 	telegraph_sprite.visible = false
 	actual_pressed_sprite.visible = false
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !is_activated:
 		return
-	
+
 	if !telegraph_timer.is_stopped():
 		telegraph_point_idx = _handle_draw_update(telegraph_point_idx, telegraph_timer, telegraph_line2d, telegraph_path_follow)
 		
@@ -75,13 +75,15 @@ func start_activating() -> void:
 func _start_activation_for(timer: Timer, sprite: Sprite2D, line_2d: Line2D) -> int:
 	timer.start()
 	sprite.visible = true
-	line_2d.add_point(line_2d.to_local(curve_to_use.get_baked_points()[0]), 0)
-	line_2d.add_point(line_2d.to_local(curve_to_use.get_baked_points()[0]), 1)
+	var point_0: Vector2 = curve_to_use.get_baked_points()[0]
+	var point_0_local: Vector2 = line_2d.to_local(point_0)
+	line_2d.add_point(point_0, 0)
+	line_2d.add_point(point_0, 1)
 	return 1
 
 func stop_activating() -> void:
 	actual_pressed_timer.stop()
 	
-func _is_above_next_point_idx(point_idx: int, progress: float) -> bool:
+func _is_above_next_point_idx(_point_idx: int, _progress: float) -> bool:
 	#TODO
 	return false

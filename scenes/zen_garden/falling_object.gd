@@ -71,10 +71,10 @@ func land() -> void:
 
 	is_falling = false
 	#leaf_anim_player.play(LEAF_IDLE_ANIM)
-	on_remove.emit()
 	var despawn_tween: Tween = create_tween()
 	despawn_tween.tween_property(self, "modulate:a", 0.0, 4.0)
 	await despawn_tween.finished
+	on_remove.emit()
 	queue_free()
 	
 func get_hit(from_dir: Vector2) -> void:

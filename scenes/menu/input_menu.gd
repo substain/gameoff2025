@@ -184,4 +184,3 @@ static func update_input_map_from_ins(input_name_str: String, new_input_event: I
 	InputMap.action_erase_events(input_name_str)
 	for i: int in input_events.size():
 		InputMap.action_add_event(input_name_str, input_events[i])
-	

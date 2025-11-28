@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://qaqtgnhhhqqy" path="res://scenes/zen_garden/line.tscn" id="9_8jsrj"]
 [ext_resource type="Script" uid="uid://dic827gieoob4" path="res://scenes/zen_garden/correct_note_audio_player.gd" id="9_d33sh"]
 [ext_resource type="AudioStream" uid="uid://dsq4ftyqoexwv" path="res://audio/music/levels/zengarden/zengarden_playertrack2311.ogg" id="9_ncdbi"]
+[ext_resource type="Curve2D" uid="uid://qosxxgdeqlpl" path="res://scenes/zen_garden/curves/l1_curve_2d.tres" id="18_b1n2n"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ncdbi"]
 playback_mode = 1
@@ -33,12 +34,6 @@ streams_count = 3
 stream_0/stream = ExtResource("5_pmntt")
 stream_1/stream = ExtResource("6_e7svu")
 stream_2/stream = ExtResource("7_d33sh")
-
-[sub_resource type="Curve2D" id="Curve2D_4ri8s"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ri8s"]
 resource_local_to_scene = true
@@ -118,6 +113,12 @@ shader = ExtResource("7_eyw3c")
 shader_parameter/mask = ExtResource("8_0wtlu")
 shader_parameter/progress = 0.0
 
+[sub_resource type="Curve2D" id="Curve2D_l4h26"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -193, 145, 0, 0, 0, 0, -188, 159, 0, 0, 0, 0, -161, 168, 0, 0, 0, 0, -105, 177, 0, 0, 0, 0, -32, 181, 0, 0, 0, 0, 37, 179, 0, 0, 0, 0, 92, 174, 0, 0, 0, 0, 129, 164, 0, 0, 0, 0, 151, 155, 0, 0, 0, 0, 159, 146, 0, 0, 0, 0, 153, 135, 0, 0, 0, 0, 136, 127, 0, 0, 0, 0, 112, 120, 0, 0, 0, 0, 70, 115, 0, 0, 0, 0, -6, 110, 0, 0, 0, 0, -84, 111, 0, 0, 0, 0, -146, 120, 0, 0, 0, 0, -188, 135, 0, 0, 0, 0, -193, 145)
+}
+point_count = 19
+
 [sub_resource type="Curve2D" id="Curve2D_d33sh"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
@@ -130,15 +131,13 @@ shader = ExtResource("7_eyw3c")
 shader_parameter/mask = ExtResource("8_0wtlu")
 shader_parameter/progress = 0.0
 
-[sub_resource type="Curve2D" id="Curve2D_8jsrj"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
-[sub_resource type="Curve2D" id="Curve2D_6hbp2"]
+[sub_resource type="Curve2D" id="Curve2D_8nqmx"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
+"points": PackedVector2Array(0, 0, 0, 0, 480.62015, 317, 0, 0, 0, 0, 418.60464, 328, 0, 0, 0, 0, 420.93024, 367, 0, 0, 0, 0, 506.20154, 382, 0, 0, 0, 0, 535.65894, 344, 0, 0, 0, 0, 573.64343, 344, 0, 0, 0, 0, 637.2093, 345, 0, 0, 0, 0, 654.26355, 380, 0, 0, 0, 0, 668.99225, 422, 0, 0, 0, 0, 700, 437, 0, 0, 0, 0, 724.8062, 426, 0, 0, 0, 0, 753.48834, 402, 0, 0, 0, 0, 772.8682, 348, 0, 0, 0, 0, 785.2713, 308, 0, 0, 0, 0, 791.47284, 270, 0, 0, 0, 0, 800, 251.00002, 0, 0, 0, 0, 818.6047, 256, 0, 0, 0, 0, 831.00775, 288, 0, 0, 0, 0, 840.31006, 312, 0, 0, 0, 0, 866.6667, 312, 0, 0, 0, 0, 894.57367, 303, 0, 0, 0, 0, 932.55817, 322, 0, 0, 0, 0, 924.031, 352, 0, 0, 0, 0, 903.10077, 372, 0, 0, 0, 0, 875.1938, 394, 0, 0, 0, 0, 847.2868, 404, 0, 0, 0, 0, 827.907, 416, 0, 0, 0, 0, 817.82947, 438, 0, 0, 0, 0, 826.35657, 452, 0, 0, 0, 0, 855.03876, 465, 0, 0, 0, 0, 873.64343, 448, 0, 0, 0, 0, 868.99225, 426, 0, 0, 0, 0, 829.45734, 421, 0, 0, 0, 0, 785.2713, 428, 0, 0, 0, 0, 766.6667, 439, 0, 0, 0, 0, 706.20154, 444, 0, 0, 0, 0, 587.5969, 419, 0, 0, 0, 0, 489.9225, 417, 0, 0, 0, 0, 422.4806, 399, 0, 0, 0, 0, 405.42633, 351, 0, 0, 0, 0, 388.37207, 290, 0, 0, 0, 0, 446.51163, 278, 0, 0, 0, 0, 490.69766, 274, 0, 0, 0, 0, 503.87598, 328, 0, 0, 0, 0, 492.24805, 398, 0, 0, 0, 0, 456.58914, 454, 0, 0, 0, 0, 431.00775, 457, 0, 0, 0, 0, 433.3333, 430, 0, 0, 0, 0, 506.20154, 442, 0, 0, 0, 0, 738.7597, 391, 0, 0, 0, 0, 881.3953, 360, 0, 0, 0, 0, 866.6667, 341, 0, 0, 0, 0, 824.8062, 351, 0, 0, 0, 0, 742.6357, 360, 0, 0, 0, 0, 660.4651, 383, 0, 0, 0, 0, 582.94574, 393, 0, 0, 0, 0, 512.4031, 380, 0, 0, 0, 0, 473.6434, 354, 0, 0, 0, 0, 480.62015, 317)
 }
-point_count = 29
+point_count = 59
 
 [node name="ZenGardenSinging" type="Node2D" node_paths=PackedStringArray("rhythm_scene")]
 script = ExtResource("1_r5g3c")
@@ -194,7 +193,7 @@ script = ExtResource("8_8f3qg")
 lines = [NodePath("Line1")]
 
 [node name="Line1" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_4ri8s")
+curve_to_use = ExtResource("18_b1n2n")
 debug_autostart = true
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
@@ -202,6 +201,9 @@ telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line1/TelegraphLine2D" index="0"]
 material = SubResource("ShaderMaterial_4ri8s")
+
+[node name="ActualPressedLine2D" parent="LineController/Line1" index="1"]
+visible = true
 
 [node name="Line2" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
 curve_to_use = SubResource("Curve2D_b1n2n")
@@ -257,38 +259,31 @@ telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 [node name="TelegraphSprite2D" parent="LineController/Line7/TelegraphLine2D" index="0"]
 material = SubResource("ShaderMaterial_e7svu")
 
-[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_d33sh")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
-
-[node name="TelegraphSprite2D" parent="LineController/Line8/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_ncdbi")
-
 [node name="Path2D" type="Path2D" parent="LineController"]
-curve = SubResource("Curve2D_8jsrj")
+curve = SubResource("Curve2D_l4h26")
 
 [node name="TelegraphPathFollow2D" type="PathFollow2D" parent="LineController/Path2D"]
+position = Vector2(-193, 145)
+rotation = 1.2277724
 
 [node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
-modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
 texture_filter = 1
 rotation = 0.023525076
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_t80qu")
 
 [node name="CircleOutter" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
-modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
+modulate = Color(1, 0.37405896, 0.5381727, 0.6509804)
 texture_filter = 1
 rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
 
 [node name="ActualPathFollow2D2" type="PathFollow2D" parent="LineController/Path2D"]
+position = Vector2(-193, 145)
+rotation = 1.2277724
 
 [node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
-modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
 texture_filter = 1
 rotation = 0.023525076
 scale = Vector2(0.8, 0.8)
@@ -300,6 +295,15 @@ texture_filter = 1
 rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
+
+[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+curve_to_use = SubResource("Curve2D_d33sh")
+target_path = NodePath("../Path2D")
+actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
+telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
+
+[node name="TelegraphSprite2D" parent="LineController/Line8/TelegraphLine2D" index="0"]
+material = SubResource("ShaderMaterial_ncdbi")
 
 [node name="BGStones" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -330,11 +334,11 @@ round_precision = 12
 [node name="Path" type="Path2D" parent="."]
 position = Vector2(-225.99998, 175.99998)
 scale = Vector2(1.29, 1)
-curve = SubResource("Curve2D_6hbp2")
+curve = SubResource("Curve2D_8nqmx")
 
 [node name="ZenPlayerPathFollow" type="PathFollow2D" parent="Path" node_paths=PackedStringArray("drawn_lines", "telegraphed_path_follow")]
 z_index = 1
-position = Vector2(548.062, 307)
+position = Vector2(480.62015, 317)
 rotation = -0.023525072
 rotates = false
 script = ExtResource("6_r5g3c")
@@ -344,26 +348,26 @@ zen_line_scene = ExtResource("7_3rur6")
 telegraphed_path_follow = NodePath("../TelegraphedPathFollow")
 
 [node name="CircleInner" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
-modulate = Color(0.99607843, 0.42352942, 0.043137256, 1)
+modulate = Color(0, 0.70151675, 0.7874723, 1)
 texture_filter = 1
 rotation = 0.023525076
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_t80qu")
 
 [node name="CircleOutter" type="Sprite2D" parent="Path/ZenPlayerPathFollow"]
-modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
+modulate = Color(0, 0.7019608, 0.7882353, 0.6509804)
 texture_filter = 1
 rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
 
 [node name="TelegraphedPathFollow" type="PathFollow2D" parent="Path"]
-position = Vector2(548.062, 307)
+position = Vector2(480.62015, 317)
 rotation = -0.023525072
 rotates = false
 
 [node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager") instance=ExtResource("2_jn2uw")]
-position = Vector2(638, 360)
+position = Vector2(597, 360)
 target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
 fall_object_manager = NodePath("../RhythmEventCreator")
 
@@ -374,17 +378,24 @@ fall_object_manager = NodePath("../RhythmEventCreator")
 [connection signal="event_triggered" from="RhythmBase" to="RhythmEventCreator" method="_on_rhythm_base_event_triggered"]
 [connection signal="note_failed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_failed"]
 [connection signal="note_failed" from="RhythmBase" to="RhythmBase/WrongNoteAudioPlayer" method="_on_rhythm_base_note_failed"]
+[connection signal="note_failed" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_failed"]
 [connection signal="note_failed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_failed"]
 [connection signal="note_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_hit"]
+[connection signal="note_hit" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_hit"]
 [connection signal="note_missed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_missed"]
+[connection signal="note_missed" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_missed"]
 [connection signal="note_missed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_missed"]
+[connection signal="note_tap_hit" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="note_tap_hit" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
+[connection signal="reset_progress" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
 [connection signal="started_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_started_playing"]
+[connection signal="started_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_stopped_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
 

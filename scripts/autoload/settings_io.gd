@@ -89,9 +89,9 @@ func reset_inputs(do_save: bool = true) -> void:
 func save_to_file() -> void:
 	var settings_file_access: FileAccess = FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	var save_dict: Dictionary = {
-		"overall_volume": overall_volume_linear,
-		"music_volume": music_volume_linear,
-		"sfx_volume": sfx_volume_linear,
+		"overall_volume_linear": overall_volume_linear,
+		"music_volume_linear": music_volume_linear,
+		"sfx_volume_linear": sfx_volume_linear,
 		"guide_music_volume_linear": guide_music_volume_linear,
 		"overall_volume_muted": overall_volume_muted,
 		"music_volume_muted": music_volume_muted,
