@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 
 [sub_resource type="Resource" id="Resource_a50sf"]
 script = ExtResource("3_kqsqy")
-trackname = &"MIDI Drums"
+trackname = &"guide track"
 offset = -2.0
 identifier = &"telegraph_drums"
 debug_color = Color(0.3004979, 0.7218863, 0.59019166, 1)
@@ -31,9 +31,9 @@ metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 [resource]
 script = ExtResource("2_qnv11")
 backing_track = ExtResource("1_radft")
-midi_file = "res://audio/music/levels/zengarden/ZenGardenNew.mid"
+midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
 button_a_trackname = &"MIDI Throat Singing"
-button_b_trackname = &"MIDI Drums"
+button_b_trackname = &"guide track"
 button_ab_trackname = &"MIDI BELLS"
 subscribed_events = Array[ExtResource("3_kqsqy")]([SubResource("Resource_q26em"), SubResource("Resource_a50sf"), SubResource("Resource_radft")])
 metadata/_custom_type_script = "uid://cc1yvxkjy47yb"
