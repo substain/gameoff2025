@@ -3,7 +3,7 @@ extends Node2D
 
 const FLYING_NOTE: PackedScene = preload("uid://ocykk4ntbiep")
 
-const FALLING_OBJECT_TARGET_TRACK: String = "guide track"
+const FALLING_OBJECT_TARGET_TRACK: String = "MIDI BELLS"
 const HOLD_TRACK: String = "MIDI Throat Singing"
 
 const MIN_POSE_TIME: float = 4.0
@@ -27,6 +27,8 @@ enum Anim {
 @export var exact_hit: bool = true
 @export var target_pos_node: ZenPlayerPathFollow
 @export var fall_object_manager: RhythmEventCreator
+@export var line_controller: LineController
+
 @export_category("internal nodes")
 @export var anim_player: AnimationPlayer
 @export var anim_timer: Timer
@@ -114,6 +116,18 @@ func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 	shoot_note(false)
 	mood = max(mood - 0.25, -1.0)
 	play_anim(Anim.caugh)
+
+
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, _time_diff: float) -> void:
+	if track.name != HOLD_TRACK:
+		return
+	line_controller.start_hold(note.get_combined_id(), note.duration)
+
+
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
+	if track.name != HOLD_TRACK:
+		return
+	line_controller.stop_hold_current()
 
 func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:

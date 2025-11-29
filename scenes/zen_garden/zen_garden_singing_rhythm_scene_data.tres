@@ -35,5 +35,6 @@ midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
 button_a_trackname = &"MIDI Throat Singing"
 button_b_trackname = &"guide track"
 button_ab_trackname = &"MIDI BELLS"
+input_buffer_seconds = 0.15
 subscribed_events = Array[ExtResource("3_kqsqy")]([SubResource("Resource_q26em"), SubResource("Resource_a50sf"), SubResource("Resource_radft")])
 metadata/_custom_type_script = "uid://cc1yvxkjy47yb"

@@ -1,57 +1,51 @@
-[gd_scene load_steps=8 format=3 uid="uid://qaqtgnhhhqqy"]
+[gd_scene load_steps=6 format=3 uid="uid://qaqtgnhhhqqy"]
 
 [ext_resource type="Script" uid="uid://cw2drix6uu4nr" path="res://scenes/zen_garden/line_show.gd" id="1_6lcgy"]
-[ext_resource type="Shader" uid="uid://diio5h8lx0mkf" path="res://scenes/zen_garden/zen_garden_singing_level.gdshader" id="2_vboqs"]
-[ext_resource type="Texture2D" uid="uid://n7pd83x7ec6j" path="res://2d/zen/fader.png" id="3_hpfe3"]
+[ext_resource type="Script" uid="uid://ca4b663mgn45y" path="res://scenes/zen_garden/progress_line_2d.gd" id="2_hpfe3"]
 [ext_resource type="Texture2D" uid="uid://cmc6hpe6y2012" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1w.png" id="4_314yd"]
 [ext_resource type="Texture2D" uid="uid://c64x2w26t42ig" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1.png" id="5_p2qjp"]
 
 [sub_resource type="Gradient" id="Gradient_6lcgy"]
-offsets = PackedFloat32Array(0.7978227, 1)
+offsets = PackedFloat32Array(0.91601866, 1)
 colors = PackedColorArray(0.90588236, 0.14509805, 0.5019608, 1, 1, 1, 1, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jsrj"]
-resource_local_to_scene = true
-shader = ExtResource("2_vboqs")
-shader_parameter/mask = ExtResource("3_hpfe3")
-shader_parameter/progress = 0.0
-
-[node name="Line" type="Node2D" node_paths=PackedStringArray("actual_pressed_sprite", "actual_pressed_line2d", "actual_pressed_timer", "telegraph_sprite", "telegraph_line2d", "telegraph_timer")]
+[node name="Line" type="Node2D" node_paths=PackedStringArray("telegraph_line_2d", "actual_pressed_line_2d")]
 script = ExtResource("1_6lcgy")
-actual_pressed_sprite = NodePath("ActualPressedLine2D/ActualPressedSprite2D")
-actual_pressed_line2d = NodePath("ActualPressedLine2D")
-actual_pressed_timer = NodePath("ActualPressedTimer")
-telegraph_sprite = NodePath("TelegraphLine2D/TelegraphSprite2D")
-telegraph_line2d = NodePath("TelegraphLine2D")
-telegraph_timer = NodePath("TelegraphTimer")
+telegraph_line_2d = NodePath("TelegraphLine2D")
+actual_pressed_line_2d = NodePath("ActualPressedLine2D")
 
-[node name="TelegraphLine2D" type="Line2D" parent="."]
-clip_children = 2
-points = PackedVector2Array(-142, 119, -131, 116, -113, 114, -99, 113, -82, 111, -68, 110)
+[node name="TelegraphLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer")]
+clip_children = 1
 width = 20.0
 gradient = SubResource("Gradient_6lcgy")
+script = ExtResource("2_hpfe3")
+sprite = NodePath("TelegraphSprite2D")
+timer = NodePath("TelegraphTimer")
 
 [node name="TelegraphSprite2D" type="Sprite2D" parent="TelegraphLine2D"]
-modulate = Color(0.90588236, 0.85490197, 1, 1)
-material = SubResource("ShaderMaterial_8jsrj")
+modulate = Color(0.90588236, 0.85490197, 1, 0.6901961)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_314yd")
 
-[node name="ActualPressedLine2D" type="Line2D" parent="."]
-visible = false
-clip_children = 2
-points = PackedVector2Array(-142, 119, -131, 116, -113, 114, -99, 113, -82, 111, -68, 110)
+[node name="TelegraphTimer" type="Timer" parent="TelegraphLine2D"]
+wait_time = 4.0
+one_shot = true
+
+[node name="ActualPressedLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer")]
+clip_children = 1
 width = 20.0
 gradient = SubResource("Gradient_6lcgy")
+script = ExtResource("2_hpfe3")
+sprite = NodePath("ActualPressedSprite2D")
+timer = NodePath("ActualPressedTimer")
 
 [node name="ActualPressedSprite2D" type="Sprite2D" parent="ActualPressedLine2D"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_p2qjp")
 
-[node name="TelegraphTimer" type="Timer" parent="."]
-wait_time = 4.0
-one_shot = true
-
-[node name="ActualPressedTimer" type="Timer" parent="."]
+[node name="ActualPressedTimer" type="Timer" parent="ActualPressedLine2D"]
 wait_time = 3.0
 one_shot = true
+
+[connection signal="timeout" from="TelegraphLine2D/TelegraphTimer" to="TelegraphLine2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="ActualPressedLine2D/ActualPressedTimer" to="ActualPressedLine2D" method="_on_timer_timeout"]

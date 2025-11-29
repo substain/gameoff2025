@@ -1,13 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=50 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
 [ext_resource type="Script" uid="uid://cowgwjxqhm7pk" path="res://scenes/zen_garden/zen_garden_singing_level.gd" id="1_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://beivor4vhcbrd" path="res://scenes/zen_garden/singing_monk.tscn" id="2_jn2uw"]
 [ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
-[ext_resource type="Script" uid="uid://btsvj6avenf0k" path="res://scenes/old_files/zen_garden/timed_starter.gd" id="4_t80qu"]
 [ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
-[ext_resource type="Texture2D" uid="uid://bj48hfo2i6qoh" path="res://2d/placeholder/test_draw_texture.png" id="5_osv4t"]
 [ext_resource type="AudioStream" uid="uid://dd5aryv5juje0" path="res://audio/music/levels/zengarden/zengarden_wrongnote_001.ogg" id="5_pmntt"]
 [ext_resource type="Texture2D" uid="uid://ggpk0y3fxptv" path="res://2d/zen/Zen Garden Background Blanc.png" id="6_bwifo"]
 [ext_resource type="AudioStream" uid="uid://cw41l8y7fjvcr" path="res://audio/music/levels/zengarden/zengarden_wrongnote_002.ogg" id="6_e7svu"]
@@ -27,6 +25,27 @@
 [ext_resource type="Script" uid="uid://dic827gieoob4" path="res://scenes/zen_garden/correct_note_audio_player.gd" id="9_d33sh"]
 [ext_resource type="AudioStream" uid="uid://dsq4ftyqoexwv" path="res://audio/music/levels/zengarden/zengarden_playertrack2311.ogg" id="9_ncdbi"]
 [ext_resource type="Curve2D" uid="uid://qosxxgdeqlpl" path="res://scenes/zen_garden/curves/l1_curve_2d.tres" id="18_b1n2n"]
+[ext_resource type="Curve2D" uid="uid://du6l7pqowfe24" path="res://scenes/zen_garden/curves/l2_curve_2d.tres" id="21_1vgba"]
+[ext_resource type="Texture2D" uid="uid://brrnviljc472e" path="res://Assets/Zen Garden/Background/Lines/bg-4-l2w.png" id="21_l4h26"]
+[ext_resource type="Texture2D" uid="uid://dqsy83pxlxqwl" path="res://Assets/Zen Garden/Background/Lines/bg-4-l2.png" id="22_6a8qv"]
+[ext_resource type="Texture2D" uid="uid://bm8sd3ijqa1k0" path="res://Assets/Zen Garden/Background/Lines/bg-4-l3w.png" id="23_8nqmx"]
+[ext_resource type="Curve2D" uid="uid://d1pbd7d75ot7o" path="res://scenes/zen_garden/curves/l3_curve_2d.tres" id="24_i88mc"]
+[ext_resource type="Texture2D" uid="uid://bkt37gsjun4nm" path="res://Assets/Zen Garden/Background/Lines/bg-4-l3.png" id="24_rwpcj"]
+[ext_resource type="Texture2D" uid="uid://bmdevydqwn6b4" path="res://Assets/Zen Garden/Background/Lines/bg-4-l4w.png" id="25_ntrlb"]
+[ext_resource type="Texture2D" uid="uid://dv5560sdt3rjl" path="res://Assets/Zen Garden/Background/Lines/bg-4-l4.png" id="26_ke7tj"]
+[ext_resource type="Texture2D" uid="uid://b2tofqxs438jr" path="res://Assets/Zen Garden/Background/Lines/bg-4-l5w.png" id="27_8jsrj"]
+[ext_resource type="Texture2D" uid="uid://oh3ais5ehpvf" path="res://Assets/Zen Garden/Background/Lines/bg-4-l5.png" id="28_8f3qg"]
+[ext_resource type="Texture2D" uid="uid://bsnr437ml0fi7" path="res://Assets/Zen Garden/Background/Lines/bg-4-l6w.png" id="29_rodxa"]
+[ext_resource type="Texture2D" uid="uid://dr7f81kt2v3g1" path="res://Assets/Zen Garden/Background/Lines/bg-4-l6.png" id="30_pmntt"]
+[ext_resource type="Texture2D" uid="uid://dvs2ijvwdukgi" path="res://Assets/Zen Garden/Background/Lines/bg-4-l7w.png" id="31_e7svu"]
+[ext_resource type="Texture2D" uid="uid://cbqgcveh45o0u" path="res://Assets/Zen Garden/Background/Lines/bg-4-l7.png" id="32_d33sh"]
+[ext_resource type="Texture2D" uid="uid://d4ak3u3iss2qi" path="res://Assets/Zen Garden/Background/Lines/bg-4-l8w.png" id="33_ncdbi"]
+[ext_resource type="Curve2D" uid="uid://hofidaipnsrw" path="res://scenes/zen_garden/curves/l6_curve_2d.tres" id="33_rns40"]
+[ext_resource type="Texture2D" uid="uid://4py64s6bo3uo" path="res://Assets/Zen Garden/Background/Lines/bg-4-l8.png" id="34_or4sn"]
+[ext_resource type="Curve2D" uid="uid://bj1up8pfwfovj" path="res://scenes/zen_garden/curves/l4_curve_2d.tres" id="37_ma2lu"]
+[ext_resource type="Curve2D" uid="uid://dvee5lrnr0mrh" path="res://scenes/zen_garden/curves/l5_curve_2d.tres" id="38_ut7f8"]
+[ext_resource type="Curve2D" uid="uid://crysbhlo8paoi" path="res://scenes/zen_garden/curves/l7_curve_2d.tres" id="40_84nfk"]
+[ext_resource type="Curve2D" uid="uid://db2m7csdiu13v" path="res://scenes/zen_garden/curves/l8_curve_2d.tres" id="41_mh8sn"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ncdbi"]
 playback_mode = 1
@@ -40,98 +59,6 @@ resource_local_to_scene = true
 shader = ExtResource("7_eyw3c")
 shader_parameter/mask = ExtResource("8_0wtlu")
 shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_b1n2n"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4h26"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_6a8qv"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nqmx"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_rwpcj"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntrlb"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_ke7tj"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jsrj"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_8f3qg"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rodxa"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_pmntt"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7svu"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="Curve2D" id="Curve2D_l4h26"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -193, 145, 0, 0, 0, 0, -188, 159, 0, 0, 0, 0, -161, 168, 0, 0, 0, 0, -105, 177, 0, 0, 0, 0, -32, 181, 0, 0, 0, 0, 37, 179, 0, 0, 0, 0, 92, 174, 0, 0, 0, 0, 129, 164, 0, 0, 0, 0, 151, 155, 0, 0, 0, 0, 159, 146, 0, 0, 0, 0, 153, 135, 0, 0, 0, 0, 136, 127, 0, 0, 0, 0, 112, 120, 0, 0, 0, 0, 70, 115, 0, 0, 0, 0, -6, 110, 0, 0, 0, 0, -84, 111, 0, 0, 0, 0, -146, 120, 0, 0, 0, 0, -188, 135, 0, 0, 0, 0, -193, 145)
-}
-point_count = 19
-
-[sub_resource type="Curve2D" id="Curve2D_d33sh"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 548.062, 307, 0, 0, 0, 0, 542.6356, 310, 0, 0, 0, 0, 531.00775, 316, 0, 0, 0, 0, 522.4806, 322, 0, 0, 0, 0, 520.155, 332, 0, 0, 0, 0, 525.5814, 341, 0, 0, 0, 0, 531.78296, 347, 0, 0, 0, 0, 542.6356, 351, 0, 0, 0, 0, 562.79065, 357, 0, 0, 0, 0, 586.82166, 362, 0, 0, 0, 0, 608.5271, 364, 0, 0, 0, 0, 636.4341, 366, 0, 0, 0, 0, 667.4419, 365, 0, 0, 0, 0, 702.32556, 363, 0, 0, 0, 0, 727.1318, 361, 0, 0, 0, 0, 748.8372, 355, 0, 0, 0, 0, 770.54266, 349, 0, 0, 0, 0, 788.3721, 340, 0, 0, 0, 0, 794.57367, 330, 0, 0, 0, 0, 792.24805, 322, 0, 0, 0, 0, 785.2713, 315, 0, 0, 0, 0, 774.4186, 309, 0, 0, 0, 0, 765.1163, 306, 0, 0, 0, 0, 731.78296, 298, 0, 0, 0, 0, 685.2713, 293, 0, 0, 0, 0, 642.6356, 291, 0, 0, 0, 0, 588.3721, 294, 0, 0, 0, 0, 549.6124, 306, 0, 0, 0, 0, 548.062, 307)
-}
-point_count = 29
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ncdbi"]
-resource_local_to_scene = true
-shader = ExtResource("7_eyw3c")
-shader_parameter/mask = ExtResource("8_0wtlu")
-shader_parameter/progress = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kq45"]
 
 [sub_resource type="Curve2D" id="Curve2D_8nqmx"]
 _data = {
@@ -160,11 +87,12 @@ stream = ExtResource("9_ncdbi")
 bus = &"Music"
 script = ExtResource("9_d33sh")
 
-[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk")]
+[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk", "line_controller")]
 script = ExtResource("3_3rur6")
 event_node_parent = NodePath("..")
 zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
 singing_monk = NodePath("../SingingMonk")
+line_controller = NodePath("../LineController")
 
 [node name="Background" type="Sprite2D" parent="."]
 visible = false
@@ -190,11 +118,10 @@ texture = ExtResource("7_ke7tj")
 [node name="LineController" type="Node2D" parent="." node_paths=PackedStringArray("lines")]
 position = Vector2(640, 360)
 script = ExtResource("8_8f3qg")
-lines = [NodePath("Line1")]
+lines = [NodePath("Line1"), NodePath("Line2"), NodePath("Line3"), NodePath("Line4"), NodePath("Line5"), NodePath("Line6"), NodePath("Line7"), NodePath("Line8")]
 
 [node name="Line1" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("18_b1n2n")
-debug_autostart = true
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
@@ -202,69 +129,96 @@ telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 [node name="TelegraphSprite2D" parent="LineController/Line1/TelegraphLine2D" index="0"]
 material = SubResource("ShaderMaterial_4ri8s")
 
-[node name="ActualPressedLine2D" parent="LineController/Line1" index="1"]
-visible = true
-
 [node name="Line2" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_b1n2n")
+curve_to_use = ExtResource("21_1vgba")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line2/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_l4h26")
+texture = ExtResource("21_l4h26")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line2/ActualPressedLine2D" index="0"]
+texture = ExtResource("22_6a8qv")
 
 [node name="Line3" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_6a8qv")
+curve_to_use = ExtResource("24_i88mc")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line3/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_8nqmx")
+texture = ExtResource("23_8nqmx")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line3/ActualPressedLine2D" index="0"]
+texture = ExtResource("24_rwpcj")
 
 [node name="Line4" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_rwpcj")
+curve_to_use = ExtResource("37_ma2lu")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line4/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_ntrlb")
+texture = ExtResource("25_ntrlb")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line4/ActualPressedLine2D" index="0"]
+texture = ExtResource("26_ke7tj")
 
 [node name="Line5" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_ke7tj")
+curve_to_use = ExtResource("38_ut7f8")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line5/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_8jsrj")
+texture = ExtResource("27_8jsrj")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line5/ActualPressedLine2D" index="0"]
+texture = ExtResource("28_8f3qg")
 
 [node name="Line6" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_8f3qg")
+curve_to_use = ExtResource("33_rns40")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line6/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_rodxa")
+texture = ExtResource("29_rodxa")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line6/ActualPressedLine2D" index="0"]
+texture = ExtResource("30_pmntt")
 
 [node name="Line7" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_pmntt")
+curve_to_use = ExtResource("40_84nfk")
 target_path = NodePath("../Path2D")
 actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line7/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_e7svu")
+texture = ExtResource("31_e7svu")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line7/ActualPressedLine2D" index="0"]
+texture = ExtResource("32_d33sh")
+
+[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+curve_to_use = ExtResource("41_mh8sn")
+target_path = NodePath("../Path2D")
+actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
+telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
+
+[node name="TelegraphSprite2D" parent="LineController/Line8/TelegraphLine2D" index="0"]
+texture = ExtResource("33_ncdbi")
+
+[node name="ActualPressedSprite2D" parent="LineController/Line8/ActualPressedLine2D" index="0"]
+texture = ExtResource("34_or4sn")
 
 [node name="Path2D" type="Path2D" parent="LineController"]
-curve = SubResource("Curve2D_l4h26")
+curve = ExtResource("41_mh8sn")
 
 [node name="TelegraphPathFollow2D" type="PathFollow2D" parent="LineController/Path2D"]
-position = Vector2(-193, 145)
-rotation = 1.2277724
+position = Vector2(258, 229)
+rotation = 2.714965
 
 [node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
 texture_filter = 1
@@ -280,8 +234,8 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
 
 [node name="ActualPathFollow2D2" type="PathFollow2D" parent="LineController/Path2D"]
-position = Vector2(-193, 145)
-rotation = 1.2277724
+position = Vector2(258, 229)
+rotation = 2.714965
 
 [node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
 texture_filter = 1
@@ -296,38 +250,10 @@ rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_t80qu")
 
-[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
-curve_to_use = SubResource("Curve2D_d33sh")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
-
-[node name="TelegraphSprite2D" parent="LineController/Line8/TelegraphLine2D" index="0"]
-material = SubResource("ShaderMaterial_ncdbi")
-
 [node name="BGStones" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_8jsrj")
-
-[node name="DrawnLines" type="Node2D" parent="." node_paths=PackedStringArray("target_lines")]
-visible = false
-script = ExtResource("4_t80qu")
-target_lines = [null, null, null]
-target_times = Array[float]([0.5, 1.5, 2.5, 7.0])
-
-[node name="Line2D" type="Line2D" parent="DrawnLines"]
-texture_repeat = 2
-material = SubResource("ShaderMaterial_0kq45")
-position = Vector2(0, -2)
-rotation = -0.00039833438
-points = PackedVector2Array(33, 310, 551, 314, 610, 266, 646, 265, 672.886, 286.26804, 684.8757, 312.27283, 679.8681, 331.27084, 664, 352, 649.85614, 361.25888, 629, 368, 607.85535, 363.24216, 592, 353, 577.8681, 331.2302, 574, 304, 581.88684, 284.2318, 589.8908, 274.235, 598, 267, 616.89557, 262.24573, 631.896, 261.2517, 654, 265, 692.88605, 286.276, 737.88007, 301.29395, 780.8749, 314.31107, 1022, 315, 1147, 319)
-texture = ExtResource("5_osv4t")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-round_precision = 12
 
 [node name="TelegraphedHoldLine" type="Line2D" parent="."]
 
@@ -366,10 +292,11 @@ position = Vector2(480.62015, 317)
 rotation = -0.023525072
 rotates = false
 
-[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager") instance=ExtResource("2_jn2uw")]
-position = Vector2(597, 360)
+[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager", "line_controller") instance=ExtResource("2_jn2uw")]
+position = Vector2(640, 360)
 target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
 fall_object_manager = NodePath("../RhythmEventCreator")
+line_controller = NodePath("../LineController")
 
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
@@ -382,6 +309,8 @@ fall_object_manager = NodePath("../RhythmEventCreator")
 [connection signal="note_failed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_failed"]
 [connection signal="note_hit" from="RhythmBase" to="UI" method="_on_rhythm_base_note_hit"]
 [connection signal="note_hit" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_hit"]
+[connection signal="note_hold_release" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_hold_release"]
+[connection signal="note_hold_start" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_hold_start"]
 [connection signal="note_missed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_missed"]
 [connection signal="note_missed" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_missed"]
 [connection signal="note_missed" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_missed"]

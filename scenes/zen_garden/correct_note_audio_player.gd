@@ -5,20 +5,20 @@ var _music_position: float = 0.0
 
 var target_volume: float
 
-func _process(delta: float) -> void:
-	volume_linear = lerp(volume_linear, target_volume, 0.75)
+func _process(_delta: float) -> void:
+	volume_linear = lerp(volume_linear, target_volume, 5.0* _delta)
+	#print(self.name + ": ", volume_linear)
 
-
-func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_tap_hit(_track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	target_volume = 1.0
 
-func _on_rhythm_base_note_hit(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hit(_track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	target_volume = 1.0
 
-func _on_rhythm_base_note_missed(track: RhythmTrack, note: RhythmNote) -> void:
+func _on_rhythm_base_note_missed(_track: RhythmTrack, _note: RhythmNote) -> void:
 	target_volume = 0.00001
 
-func _on_rhythm_base_note_failed(track: RhythmTrack, note: RhythmNote) -> void:
+func _on_rhythm_base_note_failed(_track: RhythmTrack, _note: RhythmNote) -> void:
 	target_volume = 0.00001
 
 func _on_rhythm_base_started_playing() -> void:
