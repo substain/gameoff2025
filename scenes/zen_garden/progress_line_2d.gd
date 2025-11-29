@@ -1,13 +1,15 @@
 class_name ProgressLine2D
 extends Line2D
 
+
+@export var fadeout_on_finalize: bool = false
 @export_category("internal nodes")
 @export var sprite: Sprite2D
 @export var timer: Timer
+@export	var target_path: Path2D
+@export	var path_follow: PathFollow2D
 
 var curve_to_use: Curve2D
-var target_path: Path2D
-var target_path_follow: PathFollow2D
 
 var is_activated: bool = false
 
@@ -16,10 +18,13 @@ var previous_point: Vector2
 var next_point: Vector2
 var current_dist_squared: float
 
+var show_tween: Tween
 
 func _ready() -> void:
 	clear_points()
 	sprite.visible = false
+	path_follow.modulate.a = 0.0
+
 
 func start_progressing(max_duration: float) -> void:
 	is_activated = true
@@ -29,7 +34,9 @@ func start_progressing(max_duration: float) -> void:
 	var point_0: Vector2 = curve_to_use.get_baked_points()[0]
 	add_point(point_0, 0)
 	update_active_point_at(1, point_0)
-
+	show_tween = create_tween()
+	show_tween.tween_property(path_follow, "modulate:a", 1.0, 0.2)
+	
 func _process(_delta: float) -> void:
 	if !is_activated:
 		return
@@ -40,8 +47,8 @@ func _process(_delta: float) -> void:
 func _handle_draw_update() -> int:
 	var progress: float = 1.0 - (timer.time_left / timer.wait_time)
 	
-	target_path_follow.progress_ratio = progress
-	var new_pos: Vector2 = target_path_follow.global_position
+	path_follow.progress_ratio = progress
+	var new_pos: Vector2 = path_follow.global_position
 	var index_to_use: int = current_point_idx
 	if previous_point.distance_squared_to(new_pos) >= current_dist_squared:
 		set_point_position(current_point_idx, to_local(next_point))
@@ -68,6 +75,15 @@ func stop_progressing() -> void:
 func finalize() -> void:
 	points = curve_to_use.get_baked_points()
 	gradient = null
+
+	if is_instance_valid(show_tween):
+		show_tween.kill()
+
+	show_tween = create_tween()
+	show_tween.tween_property(path_follow, "modulate:a", 0.0, 0.5)
+	
+	if fadeout_on_finalize:
+		show_tween.tween_property(sprite, "modulate:a", 0.0, 0.3)
 
 func _on_timer_timeout() -> void:
 	finalize()

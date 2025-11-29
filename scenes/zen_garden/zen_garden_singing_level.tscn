@@ -120,20 +120,14 @@ position = Vector2(640, 360)
 script = ExtResource("8_8f3qg")
 lines = [NodePath("Line1"), NodePath("Line2"), NodePath("Line3"), NodePath("Line4"), NodePath("Line5"), NodePath("Line6"), NodePath("Line7"), NodePath("Line8")]
 
-[node name="Line1" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line1" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("18_b1n2n")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line1/TelegraphLine2D" index="0"]
 material = SubResource("ShaderMaterial_4ri8s")
 
-[node name="Line2" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line2" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("21_1vgba")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line2/TelegraphLine2D" index="0"]
 texture = ExtResource("21_l4h26")
@@ -141,11 +135,8 @@ texture = ExtResource("21_l4h26")
 [node name="ActualPressedSprite2D" parent="LineController/Line2/ActualPressedLine2D" index="0"]
 texture = ExtResource("22_6a8qv")
 
-[node name="Line3" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line3" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("24_i88mc")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line3/TelegraphLine2D" index="0"]
 texture = ExtResource("23_8nqmx")
@@ -153,11 +144,8 @@ texture = ExtResource("23_8nqmx")
 [node name="ActualPressedSprite2D" parent="LineController/Line3/ActualPressedLine2D" index="0"]
 texture = ExtResource("24_rwpcj")
 
-[node name="Line4" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line4" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("37_ma2lu")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line4/TelegraphLine2D" index="0"]
 texture = ExtResource("25_ntrlb")
@@ -165,11 +153,8 @@ texture = ExtResource("25_ntrlb")
 [node name="ActualPressedSprite2D" parent="LineController/Line4/ActualPressedLine2D" index="0"]
 texture = ExtResource("26_ke7tj")
 
-[node name="Line5" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line5" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("38_ut7f8")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line5/TelegraphLine2D" index="0"]
 texture = ExtResource("27_8jsrj")
@@ -177,11 +162,8 @@ texture = ExtResource("27_8jsrj")
 [node name="ActualPressedSprite2D" parent="LineController/Line5/ActualPressedLine2D" index="0"]
 texture = ExtResource("28_8f3qg")
 
-[node name="Line6" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line6" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("33_rns40")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line6/TelegraphLine2D" index="0"]
 texture = ExtResource("29_rodxa")
@@ -189,11 +171,8 @@ texture = ExtResource("29_rodxa")
 [node name="ActualPressedSprite2D" parent="LineController/Line6/ActualPressedLine2D" index="0"]
 texture = ExtResource("30_pmntt")
 
-[node name="Line7" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line7" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("40_84nfk")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line7/TelegraphLine2D" index="0"]
 texture = ExtResource("31_e7svu")
@@ -201,54 +180,14 @@ texture = ExtResource("31_e7svu")
 [node name="ActualPressedSprite2D" parent="LineController/Line7/ActualPressedLine2D" index="0"]
 texture = ExtResource("32_d33sh")
 
-[node name="Line8" parent="LineController" node_paths=PackedStringArray("target_path", "actual_pressed_path_follow", "telegraph_path_follow") instance=ExtResource("9_8jsrj")]
+[node name="Line8" parent="LineController" instance=ExtResource("9_8jsrj")]
 curve_to_use = ExtResource("41_mh8sn")
-target_path = NodePath("../Path2D")
-actual_pressed_path_follow = NodePath("../Path2D/ActualPathFollow2D2")
-telegraph_path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" parent="LineController/Line8/TelegraphLine2D" index="0"]
 texture = ExtResource("33_ncdbi")
 
 [node name="ActualPressedSprite2D" parent="LineController/Line8/ActualPressedLine2D" index="0"]
 texture = ExtResource("34_or4sn")
-
-[node name="Path2D" type="Path2D" parent="LineController"]
-curve = ExtResource("41_mh8sn")
-
-[node name="TelegraphPathFollow2D" type="PathFollow2D" parent="LineController/Path2D"]
-position = Vector2(258, 229)
-rotation = 2.714965
-
-[node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
-texture_filter = 1
-rotation = 0.023525076
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("8_t80qu")
-
-[node name="CircleOutter" type="Sprite2D" parent="LineController/Path2D/TelegraphPathFollow2D"]
-modulate = Color(1, 0.37405896, 0.5381727, 0.6509804)
-texture_filter = 1
-rotation = 0.023525072
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("8_t80qu")
-
-[node name="ActualPathFollow2D2" type="PathFollow2D" parent="LineController/Path2D"]
-position = Vector2(258, 229)
-rotation = 2.714965
-
-[node name="CircleInner" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
-texture_filter = 1
-rotation = 0.023525076
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("8_t80qu")
-
-[node name="CircleOutter" type="Sprite2D" parent="LineController/Path2D/ActualPathFollow2D2"]
-modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
-texture_filter = 1
-rotation = 0.023525072
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("8_t80qu")
 
 [node name="BGStones" type="Sprite2D" parent="."]
 position = Vector2(640, 360)

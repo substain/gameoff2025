@@ -1,26 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://qaqtgnhhhqqy"]
+[gd_scene load_steps=7 format=3 uid="uid://qaqtgnhhhqqy"]
 
 [ext_resource type="Script" uid="uid://cw2drix6uu4nr" path="res://scenes/zen_garden/line_show.gd" id="1_6lcgy"]
 [ext_resource type="Script" uid="uid://ca4b663mgn45y" path="res://scenes/zen_garden/progress_line_2d.gd" id="2_hpfe3"]
 [ext_resource type="Texture2D" uid="uid://cmc6hpe6y2012" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1w.png" id="4_314yd"]
 [ext_resource type="Texture2D" uid="uid://c64x2w26t42ig" path="res://Assets/Zen Garden/Background/Lines/bg-4-l1.png" id="5_p2qjp"]
+[ext_resource type="Texture2D" uid="uid://dm78ebdyk0rnu" path="res://2d/placeholder/circle_1x1.svg" id="6_hpfe3"]
 
 [sub_resource type="Gradient" id="Gradient_6lcgy"]
 offsets = PackedFloat32Array(0.91601866, 1)
 colors = PackedColorArray(0.90588236, 0.14509805, 0.5019608, 1, 1, 1, 1, 0)
 
-[node name="Line" type="Node2D" node_paths=PackedStringArray("telegraph_line_2d", "actual_pressed_line_2d")]
+[node name="Line" type="Node2D" node_paths=PackedStringArray("telegraph_line_2d", "actual_pressed_line_2d", "target_path")]
 script = ExtResource("1_6lcgy")
 telegraph_line_2d = NodePath("TelegraphLine2D")
 actual_pressed_line_2d = NodePath("ActualPressedLine2D")
+target_path = NodePath("Path2D")
 
-[node name="TelegraphLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer")]
+[node name="TelegraphLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer", "target_path", "path_follow")]
 clip_children = 1
 width = 20.0
 gradient = SubResource("Gradient_6lcgy")
 script = ExtResource("2_hpfe3")
+fadeout_on_finalize = true
 sprite = NodePath("TelegraphSprite2D")
 timer = NodePath("TelegraphTimer")
+target_path = NodePath("../Path2D")
+path_follow = NodePath("../Path2D/TelegraphPathFollow2D")
 
 [node name="TelegraphSprite2D" type="Sprite2D" parent="TelegraphLine2D"]
 modulate = Color(0.90588236, 0.85490197, 1, 0.6901961)
@@ -31,13 +36,15 @@ texture = ExtResource("4_314yd")
 wait_time = 4.0
 one_shot = true
 
-[node name="ActualPressedLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer")]
+[node name="ActualPressedLine2D" type="Line2D" parent="." node_paths=PackedStringArray("sprite", "timer", "target_path", "path_follow")]
 clip_children = 1
 width = 20.0
 gradient = SubResource("Gradient_6lcgy")
 script = ExtResource("2_hpfe3")
 sprite = NodePath("ActualPressedSprite2D")
 timer = NodePath("ActualPressedTimer")
+target_path = NodePath("../Path2D")
+path_follow = NodePath("../Path2D/ActualPathFollow2D2")
 
 [node name="ActualPressedSprite2D" type="Sprite2D" parent="ActualPressedLine2D"]
 scale = Vector2(0.5, 0.5)
@@ -46,6 +53,43 @@ texture = ExtResource("5_p2qjp")
 [node name="ActualPressedTimer" type="Timer" parent="ActualPressedLine2D"]
 wait_time = 3.0
 one_shot = true
+
+[node name="Path2D" type="Path2D" parent="."]
+
+[node name="TelegraphPathFollow2D" type="PathFollow2D" parent="Path2D"]
+visible = false
+position = Vector2(258, 229)
+rotation = 2.714965
+
+[node name="CircleInner" type="Sprite2D" parent="Path2D/TelegraphPathFollow2D"]
+texture_filter = 1
+rotation = 0.023525076
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_hpfe3")
+
+[node name="CircleOutter" type="Sprite2D" parent="Path2D/TelegraphPathFollow2D"]
+modulate = Color(1, 0.37405896, 0.5381727, 0.6509804)
+texture_filter = 1
+rotation = 0.023525072
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_hpfe3")
+
+[node name="ActualPathFollow2D2" type="PathFollow2D" parent="Path2D"]
+position = Vector2(258, 229)
+rotation = 2.714965
+
+[node name="CircleInner" type="Sprite2D" parent="Path2D/ActualPathFollow2D2"]
+texture_filter = 1
+rotation = 0.023525076
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_hpfe3")
+
+[node name="CircleOutter" type="Sprite2D" parent="Path2D/ActualPathFollow2D2"]
+modulate = Color(0.89, 0.5265834, 0.017799983, 0.6509804)
+texture_filter = 1
+rotation = 0.023525072
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_hpfe3")
 
 [connection signal="timeout" from="TelegraphLine2D/TelegraphTimer" to="TelegraphLine2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="ActualPressedLine2D/ActualPressedTimer" to="ActualPressedLine2D" method="_on_timer_timeout"]
