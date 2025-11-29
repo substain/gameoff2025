@@ -31,7 +31,7 @@ func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, _time: float) ->
 		create_leaf(event)
 	elif event.identifier == TELEGRAPH_THROAT_EVENT_ID:
 		singing_monk.start_telegraph(event)
-		line_controller.start_telegraph(event.note.get_combined_id(), -event.offset * 2)
+		line_controller.start_telegraph(event.note.get_combined_id(), -event.offset * 2, -event.offset)
 
 func on_free_falling_object(leaf_id: String) -> void:
 	current_fall_objects.erase(leaf_id)

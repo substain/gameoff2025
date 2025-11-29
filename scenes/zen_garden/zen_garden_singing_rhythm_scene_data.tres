@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RhythmSceneData" load_steps=8 format=3 uid="uid://dbbfhffnh0ppb"]
 
-[ext_resource type="AudioStream" uid="uid://cwbrb15skthyv" path="res://audio/music/levels/zengarden/old/ZenGarden2.ogg" id="1_radft"]
+[ext_resource type="AudioStream" uid="uid://bupmk28fg3fi4" path="res://audio/music/levels/zengarden/zengarden2311.ogg" id="1_radft"]
 [ext_resource type="Script" uid="uid://b5h8cxpfkcar5" path="res://util/rhythm_system/rhythm_subscribe_custom_event.gd" id="2_kqsqy"]
 [ext_resource type="Script" uid="uid://cc1yvxkjy47yb" path="res://util/rhythm_system/rhythm_scene_data.gd" id="2_qnv11"]
 [ext_resource type="Script" uid="uid://b6bmbjrsggkay" path="res://util/rhythm_system/rhythm_subscribe_note_event.gd" id="3_kqsqy"]
@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://b6bmbjrsggkay"
 
 [sub_resource type="Resource" id="Resource_a50sf"]
 script = ExtResource("3_kqsqy")
-trackname = &"guide track"
+trackname = &"MIDI BELLS"
 offset = -2.0
 identifier = &"telegraph_drums"
 debug_color = Color(0.3004979, 0.7218863, 0.59019166, 1)
@@ -33,8 +33,7 @@ script = ExtResource("2_qnv11")
 backing_track = ExtResource("1_radft")
 midi_file = "res://audio/music/levels/zengarden/ZenGarden.mid"
 button_a_trackname = &"MIDI Throat Singing"
-button_b_trackname = &"guide track"
-button_ab_trackname = &"MIDI BELLS"
+button_b_trackname = &"MIDI BELLS"
 input_buffer_seconds = 0.15
 subscribed_events = Array[ExtResource("3_kqsqy")]([SubResource("Resource_q26em"), SubResource("Resource_a50sf"), SubResource("Resource_radft")])
 metadata/_custom_type_script = "uid://cc1yvxkjy47yb"

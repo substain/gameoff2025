@@ -6,19 +6,32 @@ var _music_position: float = 0.0
 var target_volume: float
 
 func _process(_delta: float) -> void:
-	volume_linear = lerp(volume_linear, target_volume, 5.0* _delta)
-	#print(self.name + ": ", volume_linear)
+	if is_equal_approx(volume_linear, target_volume):
+		return
+	#volume_linear = lerp(volume_linear, target_volume, 5.0* _delta)
+	volume_linear = target_volume
+	print(self.name + ": ", volume_linear)
 
-func _on_rhythm_base_note_tap_hit(_track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
+
+func _on_rhythm_base_note_tap_hit(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	target_volume = 1.0
 
-func _on_rhythm_base_note_hit(_track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
+func _on_rhythm_base_note_hit(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	target_volume = 1.0
 
-func _on_rhythm_base_note_missed(_track: RhythmTrack, _note: RhythmNote) -> void:
+func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	target_volume = 0.00001
 
-func _on_rhythm_base_note_failed(_track: RhythmTrack, _note: RhythmNote) -> void:
+func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
+	
 	target_volume = 0.00001
 
 func _on_rhythm_base_started_playing() -> void:
@@ -31,3 +44,15 @@ func _on_rhythm_base_stopped_playing() -> void:
 
 func _on_rhythm_base_reset_progress() -> void:
 	_music_position = 0.0
+
+
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
+	target_volume = 1.0
+
+
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
+	target_volume = 0.00001

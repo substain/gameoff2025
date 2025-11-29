@@ -25,14 +25,14 @@ func get_next_line() -> LineShow:
 	available_lines.remove_at(next_index)
 	return line_show
 
-func start_telegraph(id: String, duration: float) -> void:
+func start_telegraph(id: String, duration: float, telegraph_offset: float) -> void:
 	var next_line: LineShow = get_next_line()
 	if next_line == null:
 		return
 	
 	current_id_mappings[id] = next_line
 	
-	next_line.start_telegraphing(duration)
+	next_line.start_telegraphing(duration, telegraph_offset)
 	
 func start_hold(id: String, max_duration: float) -> void:
 	if !current_id_mappings.has(id):
@@ -43,7 +43,9 @@ func start_hold(id: String, max_duration: float) -> void:
 			
 	current_id_mappings[current_id].start_activating(max_duration)
 
-func stop_hold(id: String) -> void:	
+func stop_hold(id: String) -> void:
+	if !current_id_mappings.has(id):
+		return
 	current_id_mappings[id].stop_activating()
 
 func stop_hold_current() -> void:

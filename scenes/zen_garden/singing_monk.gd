@@ -34,6 +34,8 @@ enum Anim {
 @export var anim_timer: Timer
 @export var switch_pose_timer: Timer
 
+var current_hold_note_id: String = ""
+
 var is_one_shot_active: bool = false
 
 var is_moving: bool = false
@@ -112,23 +114,35 @@ static func get_idle_anim(mood_to_check: float) -> Anim:
 func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
+	if !current_hold_note_id.is_empty():
+		line_controller.stop_hold(current_hold_note_id)
+		current_hold_note_id = ""
+		return
 	is_one_shot_active = true
-	shoot_note(false)
+	if track.name == FALLING_OBJECT_TARGET_TRACK:
+		shoot_note(false)
 	mood = max(mood - 0.25, -1.0)
 	play_anim(Anim.caugh)
 
 
 func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, _time_diff: float) -> void:
+	if track.name == FALLING_OBJECT_TARGET_TRACK:
+		mood = min(mood + 0.25, 1.0)
+		var target_falling_object: FallingObject = fall_object_manager.get_falling_object_by_note(note)
+		is_one_shot_active = true
+		shoot_note(true, target_falling_object)
+
+	if track.name == HOLD_TRACK:
+		mood = min(mood + 0.25, 1.0)
+		line_controller.start_hold(note.get_combined_id(), note.duration)
+	current_hold_note_id = note.get_combined_id()
+
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, _time_diff: float) -> void:
 	if track.name != HOLD_TRACK:
 		return
-	line_controller.start_hold(note.get_combined_id(), note.duration)
-
-
-func _on_rhythm_base_note_hold_release(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
-	if track.name != HOLD_TRACK:
-		return
-	line_controller.stop_hold_current()
-
+	line_controller.stop_hold(note.get_combined_id())
+	current_hold_note_id = ""
+	
 func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
@@ -144,6 +158,9 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, _diff: f
 		is_one_shot_active = true
 		shoot_note(true, target_falling_object)
 
+	elif track.name == HOLD_TRACK:
+		current_hold_note_id = ""
+		
 func _on_rhythm_base_started_playing() -> void:
 	start_moving()
 

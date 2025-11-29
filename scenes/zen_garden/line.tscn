@@ -75,8 +75,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("6_hpfe3")
 
 [node name="ActualPathFollow2D2" type="PathFollow2D" parent="Path2D"]
-position = Vector2(258, 229)
-rotation = 2.714965
+rotates = false
 
 [node name="CircleInner" type="Sprite2D" parent="Path2D/ActualPathFollow2D2"]
 texture_filter = 1
@@ -90,6 +89,28 @@ texture_filter = 1
 rotation = 0.023525072
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("6_hpfe3")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="InputHintLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -11.5
+offset_right = 42.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 6
+text = "Hold [0] in "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="TelegraphLine2D/TelegraphTimer" to="TelegraphLine2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="ActualPressedLine2D/ActualPressedTimer" to="ActualPressedLine2D" method="_on_timer_timeout"]

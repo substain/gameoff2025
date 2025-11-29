@@ -17,7 +17,7 @@ var current_point_idx: int = 0
 var previous_point: Vector2
 var next_point: Vector2
 var current_dist_squared: float
-
+var pointer_activated: bool = false
 var show_tween: Tween
 
 func _ready() -> void:
@@ -25,6 +25,10 @@ func _ready() -> void:
 	sprite.visible = false
 	path_follow.modulate.a = 0.0
 
+func show_pointer() -> void:
+	pointer_activated = true
+	show_tween = create_tween()
+	show_tween.tween_property(path_follow, "modulate:a", 1.0, 0.2)
 
 func start_progressing(max_duration: float) -> void:
 	is_activated = true
@@ -34,8 +38,8 @@ func start_progressing(max_duration: float) -> void:
 	var point_0: Vector2 = curve_to_use.get_baked_points()[0]
 	add_point(point_0, 0)
 	update_active_point_at(1, point_0)
-	show_tween = create_tween()
-	show_tween.tween_property(path_follow, "modulate:a", 1.0, 0.2)
+	if !pointer_activated:
+		show_pointer()
 	
 func _process(_delta: float) -> void:
 	if !is_activated:
@@ -55,7 +59,7 @@ func _handle_draw_update() -> int:
 		if current_point_idx + 1 < curve_to_use.point_count-1:
 			update_active_point_at(current_point_idx + 1, to_local(new_pos))
 		else:
-			finalize()
+			finalize(true)
 	else:
 		set_point_position(current_point_idx, to_local(new_pos))
 
@@ -70,10 +74,11 @@ func update_active_point_at(new_index: int, point: Vector2) -> void:
 
 func stop_progressing() -> void:
 	timer.stop()
-	finalize()
+	finalize(false)
 	
-func finalize() -> void:
-	points = curve_to_use.get_baked_points()
+func finalize(update_points: bool) -> void:
+	if update_points:
+		points = curve_to_use.get_baked_points()
 	gradient = null
 
 	if is_instance_valid(show_tween):
@@ -86,4 +91,4 @@ func finalize() -> void:
 		show_tween.tween_property(sprite, "modulate:a", 0.0, 0.3)
 
 func _on_timer_timeout() -> void:
-	finalize()
+	finalize(true)
