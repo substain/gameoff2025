@@ -1,4 +1,7 @@
+class_name Calibration
 extends Control
+
+@onready var pause_menu: Menu = $PauseMenu
 
 signal calibration_finished(offset_value: float)
 
@@ -119,3 +122,8 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, time_dif
 	#tween.tween_callback(func() -> void:
 	#	label.queue_free()
 	#)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		pause_menu.visible = !pause_menu.visible
+		pause_menu.set_paused(pause_menu.visible as bool)

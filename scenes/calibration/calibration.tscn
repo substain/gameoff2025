@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://7vygc2wpvuw4"]
+[gd_scene load_steps=5 format=3 uid="uid://7vygc2wpvuw4"]
 
 [ext_resource type="Script" uid="uid://bmnjcl352fw0f" path="res://scenes/calibration/calibration.gd" id="1_50wda"]
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="2_b83y1"]
 [ext_resource type="Resource" uid="uid://uaqpwrwe0wvs" path="res://scenes/calibration/calibration_rhythm_scene_data.tres" id="3_hbrkc"]
+[ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="4_d6e5j"]
 
 [node name="Calibration" type="Control"]
 layout_mode = 3
@@ -53,6 +54,20 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("4_d6e5j")]
+visible = false
+is_pause_menu = true
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/CalibrationButton")]
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
 
 [connection signal="event_triggered" from="RhythmBase" to="." method="_on_rhythm_base_event_triggered"]
 [connection signal="note_tap_hit" from="RhythmBase" to="." method="_on_rhythm_base_note_tap_hit"]

@@ -26,7 +26,8 @@ static func get_button_text(input_event: InputEvent, tr_callable: Callable) -> S
 	if input_event == null:
 		return ""
 	
-	var txt: String = tr_callable.call(InputLocaleKeyLookup.get_locale_key_for(InputUtil.as_input_data(input_event)))
+	#var txt: String = tr_callable.call(InputLocaleKeyLookup.get_locale_key_for(InputUtil.as_input_data(input_event)))
+	var txt: String = ""
 	if txt.length() > 10:
 		txt = txt.substr(0, 10)
 	return txt

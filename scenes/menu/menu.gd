@@ -105,7 +105,7 @@ func _on_credits_back_button_pressed() -> void:
 
 func _on_calibration_button_pressed() -> void:
 	play_accept_sfx()
-	push_error("TODO: start calibration")
+	get_tree().change_scene_to_file("res://scenes/calibration/calibration.tscn")
 
 func _on_back_to_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")

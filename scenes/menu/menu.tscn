@@ -17,7 +17,7 @@ title_label = NodePath("HeaderMC/TitleLabel")
 version_label = NodePath("VersionMC/VersionLabel")
 first_start_menu_item = NodePath("StartMenuMC/VBoxContainer/StartGameButton")
 quit_button = NodePath("StartMenuMC/VBoxContainer/QuitButton")
-items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton"), NodePath("StartMenuMC/VBoxContainer/CalibrationButton")]
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
 z_index = 1
