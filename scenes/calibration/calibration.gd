@@ -26,7 +26,7 @@ const CALIBRATION_LABEL: PackedScene = preload("res://scenes/calibration/calibra
 
 var line_associtations: Dictionary[RhythmNote, Control] = {}
 
-func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, time: float) -> void:
+func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, _time: float) -> void:
 	var line: Control = CALIBRATION_LINE.instantiate()
 	
 	line.set_rhythm_data(rhythm_base._rhythm_data, rhythm_base.audio_stream_player)
@@ -70,7 +70,7 @@ func _calculate_consistency(_offsets: Array[float]) -> ConsistencyData:
 	
 	return consistency
 
-func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_tap_hit(_track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
 	print("diff: %.2f" % time_diff)
 	
 	if note not in line_associtations:

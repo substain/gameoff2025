@@ -3,7 +3,7 @@ extends ColorRect
 var _data: RhythmData
 var _player: AudioStreamPlayer
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _data == null:
 		queue_free()
 		return

@@ -1,10 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlg102u4ynte4"]
+[gd_scene load_steps=20 format=3 uid="uid://dlg102u4ynte4"]
 
 [ext_resource type="Texture2D" uid="uid://dqi4x10df6ap6" path="res://2d/placeholder/zen_preview.png" id="1_2qsyw"]
 [ext_resource type="Script" uid="uid://spp4aunfllk8" path="res://scenes/game_map/game_map.gd" id="1_tq0av"]
 [ext_resource type="Texture2D" uid="uid://n7vjuy7e6hsb" path="res://2d/placeholder/zen_preview_press.png" id="2_ud3be"]
 [ext_resource type="Texture2D" uid="uid://8ubre5w5g5va" path="res://2d/placeholder/zen_preview_hover.png" id="3_tq0av"]
 [ext_resource type="Texture2D" uid="uid://dt4h71kfn8d3c" path="res://Assets/Map/map-draft.png" id="5_u30o8"]
+[ext_resource type="Texture2D" uid="uid://b3jdoirjnsrm0" path="res://Assets/Map/map_location_1.png" id="6_flo8s"]
+[ext_resource type="Texture2D" uid="uid://cs4yseahhfp0k" path="res://Assets/Map/map_location_2.png" id="7_6e2mp"]
+[ext_resource type="Texture2D" uid="uid://5otg7tsimxuh" path="res://Assets/Map/map_location_1_zen.png" id="7_sh8d3"]
+[ext_resource type="Texture2D" uid="uid://bmf5te267aem8" path="res://Assets/Map/map_location_3.png" id="8_if026"]
+[ext_resource type="Texture2D" uid="uid://d4aw8c2yy3v1g" path="res://Assets/Map/map_location_4.png" id="9_if026"]
+[ext_resource type="Texture2D" uid="uid://1woltwi865g1" path="res://Assets/Map/map_location_5.png" id="10_sh8d3"]
 
 [sub_resource type="Gradient" id="Gradient_tq0av"]
 offsets = PackedFloat32Array(0.20080322)
@@ -34,7 +40,7 @@ colors = PackedColorArray(0.2362287, 0.5528146, 0.96773714, 0.5254902)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sh8d3"]
 gradient = SubResource("Gradient_if026")
 
-[node name="GameMap" type="Control" node_paths=PackedStringArray("timer", "button", "levelselection", "level_buttons")]
+[node name="GameMap" type="Control" node_paths=PackedStringArray("location_textures", "timer", "countdown_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,18 +48,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tq0av")
+location_textures = {
+0: NodePath("MapBackground/ZenLocationOverlay"),
+1: NodePath("MapBackground/GlowsticksLocationOverlay"),
+2: NodePath("MapBackground/AnglerFishLocationOverlay"),
+3: NodePath("MapBackground/SurfingLocationOverlay"),
+4: NodePath("MapBackground/HospitalLocationOverlay")
+}
+actual_available_leveltypes = Array[int]([0])
 zen_garden_level_path = "res://scenes/zen_garden/zen_garden_singing_level.tscn"
 surfing_level_path = "res://scenes/surfing/surfing_level.tscn"
 angler_fish_level_path = "res://scenes/angler_fish/angler_fish_level.tscn"
 glowsticks_level_path = "res://scenes/glowsticks/glowsticks_level.tscn"
 timer = NodePath("Timer")
-button = NodePath("CanvasLayer/Button")
-levelselection = [NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton/ZenLevelSelection"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton/Sprite2D"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton/Sprite2D"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton/Sprite2D")]
-level_buttons = [NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton"), NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton")]
+countdown_button = NodePath("CanvasLayer/MarginContainer/CountdownButton")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,19 +288,33 @@ text = "Surfing
 (not implemented)"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 915.0
-offset_top = 212.0
-offset_right = 1176.0
-offset_bottom = 366.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -57.0
+offset_right = 163.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CountdownButton" type="Button" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 35
-text = "Randomizer"
+text = "Start Random Level"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MapBackground" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -297,9 +324,233 @@ grow_vertical = 2
 texture = ExtResource("5_u30o8")
 expand_mode = 3
 
+[node name="TextureButton" type="TextureButton" parent="MapBackground"]
+visible = false
+layout_mode = 0
+offset_left = 136.0
+offset_top = 442.0
+offset_right = 176.0
+offset_bottom = 482.0
+
+[node name="ZenLocationOverlay" type="TextureRect" parent="MapBackground"]
+self_modulate = Color(0.7607843, 0.99607843, 1, 1)
+layout_mode = 0
+offset_left = 135.0
+offset_top = 441.0
+offset_right = 822.0
+offset_bottom = 821.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_flo8s")
+
+[node name="ActualLocationOverlay" type="TextureRect" parent="MapBackground/ZenLocationOverlay"]
+visible = false
+layout_mode = 0
+offset_top = 8.0
+offset_right = 678.0
+offset_bottom = 380.0
+texture = ExtResource("7_sh8d3")
+
+[node name="LocationNameRTL" type="RichTextLabel" parent="MapBackground/ZenLocationOverlay"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.5
+offset_top = -122.0
+offset_right = 266.5
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.22745098, 0.6431373, 0.6509804, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+text = "LOCATION NAME"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Location1Overlay2" type="TextureButton" parent="MapBackground"]
+visible = false
+self_modulate = Color(0.4745098, 1, 1, 0.3882353)
+layout_mode = 0
+offset_left = 136.0
+offset_top = 442.0
+offset_right = 823.0
+offset_bottom = 822.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_flo8s")
+texture_hover = ExtResource("6_flo8s")
+
+[node name="HospitalLocationOverlay" type="TextureRect" parent="MapBackground"]
+self_modulate = Color(1, 0.9372549, 0.7607843, 1)
+layout_mode = 0
+offset_left = 138.0
+offset_top = 162.0
+offset_right = 825.0
+offset_bottom = 542.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_6e2mp")
+
+[node name="ActualLocationOverlay" type="TextureRect" parent="MapBackground/HospitalLocationOverlay"]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 684.0
+offset_bottom = 374.0
+texture = ExtResource("7_6e2mp")
+
+[node name="LocationNameRTL" type="RichTextLabel" parent="MapBackground/HospitalLocationOverlay"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -55.0
+offset_right = 20.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.65, 0.53733337, 0.2275, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+text = "LOCATION NAME"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GlowsticksLocationOverlay" type="TextureRect" parent="MapBackground"]
+self_modulate = Color(0.7607843, 0.8235294, 1, 1)
+layout_mode = 0
+offset_left = 460.0
+offset_top = 250.0
+offset_right = 1168.0
+offset_bottom = 630.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_if026")
+
+[node name="ActualLocationOverlay" type="TextureRect" parent="MapBackground/GlowsticksLocationOverlay"]
+visible = false
+layout_mode = 0
+offset_top = 4.0
+offset_right = 708.0
+offset_bottom = 376.0
+texture = ExtResource("8_if026")
+
+[node name="LocationNameRTL" type="RichTextLabel" parent="MapBackground/GlowsticksLocationOverlay"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -55.0
+offset_right = 20.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.2275, 0.34016657, 0.65, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+text = "LOCATION NAME"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SurfingLocationOverlay" type="TextureRect" parent="MapBackground"]
+self_modulate = Color(0.77254903, 1, 0.7607843, 1)
+layout_mode = 0
+offset_left = 700.0
+offset_top = 432.0
+offset_right = 1691.0
+offset_bottom = 973.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_if026")
+
+[node name="ActualLocationOverlay" type="TextureRect" parent="MapBackground/SurfingLocationOverlay"]
+visible = false
+layout_mode = 0
+offset_right = 991.0
+offset_bottom = 541.0
+texture = ExtResource("9_if026")
+
+[node name="LocationNameRTL" type="RichTextLabel" parent="MapBackground/SurfingLocationOverlay"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -55.0
+offset_right = 20.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.24862503, 0.65, 0.2275, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+text = "LOCATION NAME"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnglerFishLocationOverlay" type="TextureRect" parent="MapBackground"]
+self_modulate = Color(1, 0.7647059, 1, 1)
+layout_mode = 0
+offset_left = 811.0
+offset_top = 13.0
+offset_right = 1590.0
+offset_bottom = 742.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_sh8d3")
+
+[node name="ActualLocationOverlay" type="TextureRect" parent="MapBackground/AnglerFishLocationOverlay"]
+visible = false
+layout_mode = 0
+offset_right = 779.0
+offset_bottom = 729.0
+texture = ExtResource("10_sh8d3")
+
+[node name="LocationNameRTL" type="RichTextLabel" parent="MapBackground/AnglerFishLocationOverlay"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.5
+offset_top = -172.5
+offset_right = 304.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.65, 0.2275, 0.65, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 80
+text = "LOCATION NAME"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/ZenGardenLevel/ZenGardenLevelButton" to="." method="_on_zen_garden_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/GlowsticksButton/GlowsticksButton" to="." method="_on_glowsticks_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/AnglerFishLevel/AnglerFishLevelButton" to="." method="_on_angler_fish_level_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/SurfLevelButton/SurfLevelButton" to="." method="_on_surf_level_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/CountdownButton" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

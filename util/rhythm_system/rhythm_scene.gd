@@ -58,7 +58,7 @@ func _ready() -> void:
 		_additional_players.append(new_audio_player)
 		new_audio_player.stream = additional_track
 		var audio_type: AudioUtil.AudioType = scene_data.additional_backing_tracks[additional_track]
-		new_audio_player.bus = "Guide Music"#AudioUtil.get_audio_type_string(audio_type)
+		new_audio_player.bus = AudioUtil.get_audio_type_string(audio_type) #"Guide Music"
 	
 	_rhythm_data = process_midi_file(scene_data.midi_file)
 	parsing_finished.emit(_rhythm_data)

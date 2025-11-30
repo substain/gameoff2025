@@ -31,3 +31,8 @@ input.debug_increase_note_ui_speed;Debug: Increase Note UI Speed;Debug Increase 
 input.debug_decrease_note_ui_speed;Debug: Decrease Note UI Speed;Debug Decrease Note UI Speed
 input.debug_reset_note_ui_speed;Debug: Reset Note UI Speed;Debug: Reset Note UI Speed
 input.debug_start_track;Debug: Start Track;Debug: Start Track
+leveltype.zen_garden;Zen Garden;Zen Garten
+leveltype.glowsticks;Arena;Arena
+leveltype.angler_fish;Angler Fish;Angler-Fische
+leveltype.surfing;Surfing;Surfing
+leveltype.hospital;Hospital;Krankenhaus
