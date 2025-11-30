@@ -8,7 +8,7 @@ var audio_paused: bool = false
 var audio_progressed: bool = false
 
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func _on_ui_start_pressed() -> void:
 	rhythm_scene.start()

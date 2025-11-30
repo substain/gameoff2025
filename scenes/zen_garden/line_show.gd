@@ -14,7 +14,7 @@ func _ready() -> void:
 	actual_pressed_line_2d.curve_to_use = curve_to_use
 	input_hint_label.global_position = actual_pressed_line_2d.path_follow.global_position
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#TODO: update time left
 	## translate()
 	pass

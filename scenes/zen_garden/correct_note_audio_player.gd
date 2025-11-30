@@ -46,13 +46,13 @@ func _on_rhythm_base_reset_progress() -> void:
 	_music_position = 0.0
 
 
-func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
 		return
 	target_volume = 1.0
 
 
-func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
 		return
 	target_volume = 0.00001
