@@ -1,6 +1,7 @@
 class_name ZenGardenSingingLevel
 extends Node2D
 
+@export var autostart: bool = true
 @export_category("internal nodes")
 @export var rhythm_scene: RhythmScene
 
@@ -8,7 +9,8 @@ var audio_paused: bool = false
 var audio_progressed: bool = false
 
 func _ready() -> void:
-	pass
+	if autostart:
+		rhythm_scene.start()
 
 func _on_ui_start_pressed() -> void:
 	rhythm_scene.start()

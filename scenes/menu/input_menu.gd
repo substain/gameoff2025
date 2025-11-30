@@ -38,7 +38,7 @@ func instantiate_inputs() -> void:
 		var remappable_input_str: String = InputHandler.input_name_to_str(remappable_input)
 		var input_events: Array[InputEvent] = InputMap.action_get_events(remappable_input_str)
 		#add_label(tr(to_tr_key(remappable_input_str)))			
-		add_label(to_tr_key(remappable_input_str))
+		add_label(InputHandler.to_tr_key(remappable_input_str))
 			
 		var first_input_button: Button
 		if input_events.size() == 0:
@@ -164,11 +164,8 @@ func play_hover_sfx() -> void:
 
 
 func translate() -> void:
-	press_remap_key_label.text = tr(remap_key_tr_template).replace("[0]", tr(to_tr_key(InputHandler.input_name_to_str(current_input_to_remap))))
+	press_remap_key_label.text = tr(remap_key_tr_template).replace("[0]", tr(InputHandler.to_tr_key(InputHandler.input_name_to_str(current_input_to_remap))))
 	press_exit_key_label.text = tr(exit_key_tr_template).replace("[0]", InputHandler.get_first_input_str_for_input_name(cancel_input_action))
-
-static func to_tr_key(input_name: String) -> String:
-	return "input."+input_name
 	
 static func update_input_map_from_in(input_name: InputHandler.InputName, new_input_event: InputEvent, index: int) -> void:
 	update_input_map_from_ins(InputHandler.input_name_to_str(input_name), new_input_event, index)

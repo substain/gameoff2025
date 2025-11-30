@@ -8,9 +8,9 @@ var target_volume: float
 func _process(_delta: float) -> void:
 	if is_equal_approx(volume_linear, target_volume):
 		return
-	#volume_linear = lerp(volume_linear, target_volume, 5.0* _delta)
-	volume_linear = target_volume
-	print(self.name + ": ", volume_linear)
+	volume_linear = lerp(volume_linear, target_volume, clamp(8.0* _delta, 0.0, 1.0))
+	#volume_linear = target_volume
+	#print(self.name + ": ", volume_linear)
 
 
 func _on_rhythm_base_note_tap_hit(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:

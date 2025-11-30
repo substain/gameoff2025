@@ -89,3 +89,6 @@ static func get_first_input_for(input_name_str: String) -> InputEvent:
 		return null
 	
 	return input_events[0];
+
+static func to_tr_key(input_name: String) -> String:
+	return "input."+input_name
