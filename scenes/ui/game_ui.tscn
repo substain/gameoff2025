@@ -202,20 +202,6 @@ text = "[b]Arrow Left[/b] / [b]A[/b]: 	Sing (hold)
 [b]Space[/b]: 					Restart"
 fit_content = true
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("2_xjfbv")]
-visible = false
-is_pause_menu = true
-items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC")]
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
-
 [node name="PopupParent" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -235,6 +221,20 @@ offset_top = -177.0
 offset_bottom = -177.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("2_xjfbv")]
+visible = false
+is_pause_menu = true
+items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC")]
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
 
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/Stop" to="." method="_on_stop_pressed"]
