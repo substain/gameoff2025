@@ -24,11 +24,15 @@ signal toggle_rhythm_ui(is_toggled_on: bool)
 @export var popup_parent: Control
 @export var popup_default_pos: Control
 
+@onready var score_label: Label = $ScoreMC/HBoxContainer/ScoreLabel2
+
 var is_stopped: bool = false
 var is_track_in_progress: bool = false
 
 ## TODO: keep the counting logic somewhere else instead of in the ui
 var current_hits: int = 0
+var current_hold_hits: int = 0
+
 var current_misses: int = 0
 var current_fails: int = 0
 
@@ -45,6 +49,8 @@ func _ready() -> void:
 	missed_text_template = missed_label.text
 	failed_text_template = failed_label.text
 	reset_note_statistics()
+	update_score()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -101,17 +107,41 @@ func update_status_label() -> void:
 	else:
 		status_label.text = "-running-"
 
-func _on_rhythm_base_note_hit(_track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
+func _on_rhythm_base_note_hit(track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	set_current_hits(current_hits + 1)
-
-func _on_rhythm_base_note_tap_hit(_track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
+	update_score()
+	
+func _on_rhythm_base_note_tap_hit(track: RhythmTrack, _note: RhythmNote, _diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	set_current_hits(current_hits + 1)
+	update_score()
 
-func _on_rhythm_base_note_failed(_track: RhythmTrack, _note: RhythmNote) -> void:
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
+	set_current_hits(current_hits + 1)
+	update_score()
+
+func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	set_current_fails(current_fails + 1)
+	update_score()
 
-func _on_rhythm_base_note_missed(_track: RhythmTrack, _note: RhythmNote) -> void:
+func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
 	set_current_misses(current_misses + 1)
+	update_score()
+
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
+		return
+	set_current_hold_hits(current_hold_hits + 1)
+	update_score()
 
 func reset_note_statistics() -> void:
 	set_current_hits(0)
@@ -121,6 +151,10 @@ func reset_note_statistics() -> void:
 func set_current_hits(amount: int) -> void:
 	current_hits = amount
 	hit_label.text = hit_text_template.replace("{amount}", str(current_hits))
+
+func set_current_hold_hits(amount: int) -> void:
+	current_hold_hits = amount
+
 
 func set_current_fails(amount: int) -> void:
 	current_fails = amount
@@ -148,6 +182,10 @@ func create_text_popup(text: String, duration: float, target_pos_node: Node2D = 
 	label.global_position += target_pos + node_offset
 	label.start(duration)
 	return label
-	
+
+func update_score() -> void:
+	var score: int = (current_hits * 20) + (current_hold_hits * 35) + (current_fails * -15) + (current_misses * -10)
+	score_label.text = str(score)
+
 static func get_position_in_ui_space(node_2d: Node2D) -> Vector2:
 	return node_2d.get_screen_transform().origin

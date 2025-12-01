@@ -43,7 +43,7 @@ func translate_text() -> void:
 
 func get_text_translation() -> String:
 	var time_left: String = str(snapped(telegraph_timer.time_left, 0.1))
-	var text: String = tr("telegraph_button")
+	var text: String = tr("telegraph_hold")
 	#var input_action: String = tr(InputHandler.to_tr_key(InputHandler.input_name_to_str(InputHandler.InputName.action_b)))
 	var input_action_name: String = InputHandler.get_first_input_str_for_input_name(InputHandler.InputName.action_a)
 	return text.replace("[0]", input_action_name).replace("[1]", str(time_left))

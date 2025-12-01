@@ -1,6 +1,75 @@
-[gd_resource type="Theme" format=3 uid="uid://bm6h5yx1xgaub"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bm6h5yx1xgaub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0yv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vos2p"]
+bg_color = Color(0.46573758, 0.85408336, 0.85955507, 0.7176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5boi"]
+bg_color = Color(0.21438313, 0.5917104, 0.71422255, 0.7176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 4.0
+expand_margin_top = 2.0
+expand_margin_right = 4.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4llc"]
+bg_color = Color(0.15971541, 0.47745192, 0.57903755, 0.7176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 4.0
+expand_margin_top = 2.0
+expand_margin_right = 4.0
+expand_margin_bottom = 2.0
 
 [resource]
+Button/styles/focus = SubResource("StyleBoxFlat_5r0yv")
+Button/styles/hover = SubResource("StyleBoxFlat_vos2p")
+Button/styles/normal = SubResource("StyleBoxFlat_y5boi")
+Button/styles/pressed = SubResource("StyleBoxFlat_i4llc")
 HeaderRTL/base_type = &"RichTextLabel"
 HeaderRTL/font_sizes/normal_font_size = 30
 TitleRTL/base_type = &"RichTextLabel"

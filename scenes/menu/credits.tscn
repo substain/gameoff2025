@@ -123,5 +123,6 @@ layout_mode = 2
 text = "ui.menu.back"
 
 [connection signal="meta_clicked" from="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/GameCreditsRTL" to="." method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/AttributionsRTL" to="." method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/GodotLicenseRTL" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

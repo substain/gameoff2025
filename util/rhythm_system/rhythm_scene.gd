@@ -24,7 +24,7 @@ signal stopped_playing
 signal reset_progress
 
 @export var scene_data: RhythmSceneData
-
+@export var visible_ui: bool = false
 @export_category("Debug")
 @export_tool_button("Check Files") var check_action: Callable = check
 @export_tool_button("Print Midi Tracks") var print_midi_tracks_action: Callable = print_midi_tracks
@@ -46,6 +46,8 @@ var _music_position: float = 0.0
 var _additional_players: Array[AudioStreamPlayer]
 
 func _ready() -> void:
+	if visible_ui:
+		visualizer.visible = true
 	# Tool script macht sonst tool script sachen
 	if Engine.is_editor_hint():
 		return

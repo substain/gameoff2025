@@ -33,7 +33,6 @@ const ALL_ACTIONS: Array[String] = [ACTION_A, ACTION_B, ACTION_C]
 const remappable_inputs: Array[InputName] = [
 	InputName.action_a,	
 	InputName.action_b,	
-	InputName.action_c,	
 	InputName.pause,
 ]
 

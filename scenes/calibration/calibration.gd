@@ -21,10 +21,16 @@ var offsets: Array[float] = []
 const CALIBRATION_LINE: PackedScene = preload("res://scenes/calibration/calibration_line.tscn")
 const CALIBRATION_LABEL: PackedScene = preload("res://scenes/calibration/calibration_label.tscn")
 
+@onready var input_hint_label: Label = $MarginContainer/InputHintLabel
 
 @onready var rhythm_base: RhythmScene = $RhythmBase
 
 var line_associtations: Dictionary[RhythmNote, Control] = {}
+
+func _ready() -> void:
+	rhythm_base.start()
+	SettingsIO.locale_changed.connect(translate_hint)
+	translate_hint()
 
 func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, _time: float) -> void:
 	var line: Control = CALIBRATION_LINE.instantiate()
@@ -127,3 +133,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		pause_menu.visible = !pause_menu.visible
 		pause_menu.set_paused(pause_menu.visible as bool)
+
+func translate_hint() -> void:
+	var text: String = tr("calibration.hint")
+	var input_action_name: String = InputHandler.get_first_input_str_for_input_name(InputHandler.InputName.action_a)
+	input_hint_label.text = text.replace("[0]", input_action_name)

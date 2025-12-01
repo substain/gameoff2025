@@ -23,3 +23,4 @@ func _on_ui_set_paused(is_paused: bool) -> void:
 
 func _on_ui_toggle_rhythm_ui(is_toggled_on: bool) -> void:
 	rhythm_scene.set_ui_visible(is_toggled_on)
+	

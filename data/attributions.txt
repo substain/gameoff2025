@@ -1,1 +1,2 @@
-- midi loaded (TODO)
+MIDI import based on [url=https://github.com/G0retZ/godot-midi-mport]godot-midi-mport[/url]
+Font: [url=https://www.dafont.com/shaabyla.font]Shaabyla[/url]
