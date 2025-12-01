@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bfl4afk07lcxr"]
+
+[ext_resource type="FontFile" uid="uid://d1lasbid31oww" path="res://ui/font/Shaabyla-Regular.ttf" id="1_ygvpq"]
+
+[resource]
+base_font = ExtResource("1_ygvpq")

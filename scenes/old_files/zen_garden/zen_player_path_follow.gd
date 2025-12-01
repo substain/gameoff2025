@@ -18,7 +18,7 @@ var current_line: Line2D = null
 var current_interpolation: float = 0.0
 
 func _ready() -> void:
-	pass
+	progress_ratio = randf()
 	
 func _process(delta: float) -> void:
 
@@ -50,21 +50,6 @@ func draw_zen_line(delta: float) -> void:
 		
 	print("is drawing zen line")
 		
-
-func _input(_event: InputEvent) -> void:
-	pass
-	#return
-	#if event.is_action_pressed(InputHandler.ACTION_A):
-		#is_drawing = true
-		#current_interpolation = 0.0
-		#current_line = zen_line_scene.instantiate()
-		#drawn_lines.add_child(current_line)
-		#current_line_points.clear()
-#
-	#elif event.is_action_released(InputHandler.ACTION_A):
-		#is_drawing = false
-		#current_line = null
-
 func start() -> void:
 	is_running = true
 	
@@ -79,10 +64,8 @@ func get_telegraphed_position(time_offset: float) -> Vector2:
 func _on_rhythm_base_started_playing() -> void:
 	start()
 
-
 func _on_rhythm_base_stopped_playing() -> void:
 	stop()
-
 
 func _on_rhythm_base_reset_progress() -> void:
 	progress_ratio = 0.0
