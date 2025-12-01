@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://btynacr175fvp"]
+
+[ext_resource type="Script" uid="uid://bdkmfysokc6kx" path="res://scenes/ui/popup_label.gd" id="1_hwmnu"]
+
+[node name="InputHintLabel" type="Label" node_paths=PackedStringArray("timer")]
+z_index = 3
+offset_right = 165.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "XXX XXX XXX XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_hwmnu")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

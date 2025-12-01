@@ -1,6 +1,8 @@
 class_name GameUI 
 extends CanvasLayer
 
+const HINT_LABEL: PackedScene = preload("res://scenes/ui/hint_label.tscn") 
+
 signal start_pressed
 signal stop_pressed
 signal set_paused(is_paused: bool)
@@ -19,6 +21,8 @@ signal toggle_rhythm_ui(is_toggled_on: bool)
 @export var failed_label: RichTextLabel
 @export var warning_label: RichTextLabel
 
+@export var popup_parent: Control
+@export var popup_default_pos: Control
 
 var is_stopped: bool = false
 var is_track_in_progress: bool = false
@@ -31,6 +35,8 @@ var current_fails: int = 0
 var hit_text_template: String
 var missed_text_template: String
 var failed_text_template: String
+
+var current_text_popups: Array[Label]
 
 func _ready() -> void:
 	GameState.ui = self
@@ -126,3 +132,22 @@ func set_current_misses(amount: int) -> void:
 
 func _on_back_to_map_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_map/game_map.tscn")
+
+func create_text_popup(text: String, duration: float, target_pos_node: Node2D = null, node_offset: Vector2 = Vector2.ZERO) -> PopupLabel:
+	var label: PopupLabel = HINT_LABEL.instantiate() as PopupLabel
+	label.text = text
+	current_text_popups.append(label)
+	
+	var target_parent: Control = popup_default_pos
+	var target_pos: Vector2 = Vector2.ZERO
+	if target_pos_node != null:
+		target_parent = popup_parent
+		target_pos = target_pos_node.get_global_transform_with_canvas().origin# get_position_in_ui_space(target_pos_node)
+		
+	target_parent.add_child(label)
+	label.global_position += target_pos + node_offset
+	label.start(duration)
+	return label
+	
+static func get_position_in_ui_space(node_2d: Node2D) -> Vector2:
+	return node_2d.get_screen_transform().origin

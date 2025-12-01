@@ -11,8 +11,14 @@ const TELEGRAPH_THROAT_EVENT_ID: String = "telegraph_throat"
 @export var singing_monk: SingingMonk
 @export var line_controller: LineController
 
+@export var point_show_timer: Timer
+var point_tween: Tween = null
+
 ## fall_objects are removed when they are destroyed / on the ground (not when they are freed)
 var current_fall_objects: Dictionary[String, FallingObject] = {}
+
+func _ready() -> void:
+	zen_player_path_follow.modulate = Color.TRANSPARENT
 
 func create_leaf(event: RhythmTriggerEvent) -> void:
 	var target_position: Vector2 = zen_player_path_follow.get_telegraphed_position(-event.offset)
@@ -29,6 +35,7 @@ func create_leaf(event: RhythmTriggerEvent) -> void:
 func _on_rhythm_base_event_triggered(event: RhythmTriggerEvent, _time: float) -> void:
 	if event.identifier == TELEGRAPH_DRUM_EVENT_ID:
 		create_leaf(event)
+		show_pointer(-event.offset * 1.5)
 	elif event.identifier == TELEGRAPH_THROAT_EVENT_ID:
 		singing_monk.start_telegraph(event)
 		line_controller.start_telegraph(event.note.get_combined_id(), -event.offset * 2, -event.offset)
@@ -48,3 +55,17 @@ func get_falling_object_by_note(note: RhythmNote) -> FallingObject:
 		
 	return res
 	
+func show_pointer(duration: float) -> void:
+	point_show_timer.start(duration)
+	if is_instance_valid(point_tween):
+		point_tween.kill()
+	
+	point_tween = create_tween()
+	point_tween.tween_property(zen_player_path_follow, "modulate:a", 1.0, 0.5)
+
+func _on_timer_timeout() -> void:
+	if is_instance_valid(point_tween):
+		point_tween.kill()
+
+	point_tween = create_tween()
+	point_tween.tween_property(zen_player_path_follow, "modulate:a", 0.0, 0.5)

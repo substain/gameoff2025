@@ -87,12 +87,16 @@ stream = ExtResource("9_ncdbi")
 bus = &"Music"
 script = ExtResource("9_d33sh")
 
-[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk", "line_controller")]
+[node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk", "line_controller", "point_show_timer")]
 script = ExtResource("3_3rur6")
 event_node_parent = NodePath("..")
 zen_player_path_follow = NodePath("../Path/ZenPlayerPathFollow")
 singing_monk = NodePath("../SingingMonk")
 line_controller = NodePath("../LineController")
+point_show_timer = NodePath("PointShowTimer")
+
+[node name="PointShowTimer" type="Timer" parent="RhythmEventCreator"]
+one_shot = true
 
 [node name="Background" type="Sprite2D" parent="."]
 visible = false
@@ -268,6 +272,7 @@ line_controller = NodePath("../LineController")
 [connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
+[connection signal="timeout" from="RhythmEventCreator/PointShowTimer" to="RhythmEventCreator" method="_on_timer_timeout"]
 
 [editable path="LineController/Line1"]
 [editable path="LineController/Line2"]

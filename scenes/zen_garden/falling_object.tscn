@@ -56,11 +56,12 @@ _data = {
 &"idle": SubResource("Animation_rhwxp")
 }
 
-[node name="FallingObject" type="Node2D" node_paths=PackedStringArray("fall_object", "fall_object_sprite", "fall_object_anim_player")]
+[node name="FallingObject" type="Node2D" node_paths=PackedStringArray("fall_object", "fall_object_sprite", "fall_object_anim_player", "telegraph_timer")]
 script = ExtResource("1_1ccnv")
 fall_object = NodePath("StoneObject")
 fall_object_sprite = NodePath("StoneObject/Sprite2D")
 fall_object_anim_player = NodePath("StoneObject/AnimationPlayer")
+telegraph_timer = NodePath("TelegraphTimer")
 
 [node name="StoneObject" type="Node2D" parent="."]
 z_index = 2
@@ -74,3 +75,5 @@ texture = ExtResource("2_488yn")
 libraries = {
 &"": SubResource("AnimationLibrary_w3d1d")
 }
+
+[node name="TelegraphTimer" type="Timer" parent="."]

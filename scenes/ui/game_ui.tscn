@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ucfx8fc6ffe"]
+[gd_scene load_steps=4 format=3 uid="uid://b5ucfx8fc6ffe"]
 
 [ext_resource type="Script" uid="uid://swlh1ijj3r4g" path="res://scenes/ui/game_ui.gd" id="1_gwk6t"]
 [ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="2_xjfbv"]
+[ext_resource type="PackedScene" uid="uid://btynacr175fvp" path="res://scenes/ui/hint_label.tscn" id="3_bma8u"]
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label", "popup_parent", "popup_default_pos")]
 script = ExtResource("1_gwk6t")
 pause_menu = NodePath("PauseMenu")
 start_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/StartButton")
@@ -15,6 +16,8 @@ hit_label = NodePath("RhythmMC/VBoxContainer/HitLabel")
 missed_label = NodePath("RhythmMC/VBoxContainer/MissedLabel")
 failed_label = NodePath("RhythmMC/VBoxContainer/FailedLabel")
 warning_label = NodePath("RhythmMC/VBoxContainer/WarningLabel")
+popup_parent = NodePath("PopupParent")
+popup_default_pos = NodePath("PopupParent/PopupDefaultPos")
 
 [node name="GameControlsMC" type="MarginContainer" parent="."]
 anchors_preset = 7
@@ -170,6 +173,34 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
+
+[node name="PopupParent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopupDefaultPos" type="Control" parent="PopupParent"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -177.0
+offset_bottom = -177.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="InputHintLabel" parent="PopupParent/PopupDefaultPos" instance=ExtResource("3_bma8u")]
+visible = false
+layout_mode = 1
+offset_left = -82.5
+offset_top = -14.0
+offset_right = 82.5
+offset_bottom = 14.0
 
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/Stop" to="." method="_on_stop_pressed"]
