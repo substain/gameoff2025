@@ -122,19 +122,19 @@ func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 	is_one_shot_active = true
 	if track.name == FALLING_OBJECT_TARGET_TRACK:
 		shoot_note(false)
-	set_mood(max(mood - 0.25, -1.0))
+	set_mood(maxf(mood - 0.25, -1.0))
 	play_anim(Anim.caugh)
 
 
 func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, _time_diff: float) -> void:
 	if track.name == FALLING_OBJECT_TARGET_TRACK:
-		set_mood(min(mood + 0.25, 1.0))
+		set_mood(minf(mood + 0.25, 1.0))
 		var target_falling_object: FallingObject = fall_object_manager.get_falling_object_by_note(note)
 		is_one_shot_active = true
 		shoot_note(true, target_falling_object)
 
 	if track.name == HOLD_TRACK:
-		set_mood(min(mood + 0.25, 1.0))
+		set_mood(minf(mood + 0.25, 1.0))
 		line_controller.start_hold(note.get_combined_id(), note.duration)
 	current_hold_note_id = note.get_combined_id()
 
@@ -147,12 +147,12 @@ func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, _ti
 func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
-	set_mood(max(mood - 0.2, -1.0))
+	set_mood(maxf(mood - 0.2, -1.0))
 
 func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, _diff: float) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
-	set_mood(min(mood + 0.25, 1.0))
+	set_mood(minf(mood + 0.25, 1.0))
 
 	if track.name == FALLING_OBJECT_TARGET_TRACK:
 		var target_falling_object: FallingObject = fall_object_manager.get_falling_object_by_note(note)

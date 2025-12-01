@@ -119,7 +119,7 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, _note: RhythmNote, _diff: 
 	set_current_hits(current_hits + 1)
 	update_score()
 
-func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, _note: RhythmNote, time_diff: float) -> void:
 	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
 		return
 	set_current_hits(current_hits + 1)
@@ -137,7 +137,7 @@ func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
 	set_current_misses(current_misses + 1)
 	update_score()
 
-func _on_rhythm_base_note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hold_release(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
 		return
 	set_current_hold_hits(current_hold_hits + 1)

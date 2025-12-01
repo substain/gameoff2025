@@ -3,6 +3,8 @@ extends CanvasLayer
 
 const VERSION_PLACEHOLDER: String = "[version]"
 
+signal game_started
+
 @export var set_game_title_from_project_settings: bool = true
 @export_file_path("*.tscn") var start_scene_file_path: String
 
@@ -72,8 +74,9 @@ func set_title_label_from_settings() -> void:
 	title_label.text = ProjectSettings.get_setting("application/config/name", "???")
 
 func _on_start_game_button_pressed() -> void:
-	get_tree().change_scene_to_file(start_scene_file_path)
+	#get_tree().change_scene_to_file(start_scene_file_path)
 	play_accept_sfx()
+	game_started.emit()
 
 func _on_input_menu_button_pressed() -> void:
 	show_input_menu()

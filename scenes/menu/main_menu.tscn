@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ab5t2hcu3d7"]
+[gd_scene load_steps=7 format=3 uid="uid://b1ab5t2hcu3d7"]
 
+[ext_resource type="PackedScene" uid="uid://dlg102u4ynte4" path="res://scenes/game_map/game_map.tscn" id="1_3rkf3"]
+[ext_resource type="Script" uid="uid://bhrb17kk4yle2" path="res://scenes/menu/main_menu_with_background.gd" id="1_kiqgm"]
 [ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="1_nl8w3"]
+[ext_resource type="Texture2D" uid="uid://cg8mtlks3cqjs" path="res://Assets/Zen Garden/Background/bg-2-cloud-loop.png" id="2_247la"]
 
 [sub_resource type="Gradient" id="Gradient_mh8sn"]
 offsets = PackedFloat32Array(1)
@@ -12,11 +15,43 @@ width = 50
 height = 50
 
 [node name="MainMenu" type="Node"]
+script = ExtResource("1_kiqgm")
+
+[node name="GameMap" parent="." node_paths=PackedStringArray("location_textures") instance=ExtResource("1_3rkf3")]
+pivot_offset = Vector2(679, 378)
+autostart_countdown = false
+location_textures = {
+0: NodePath("MapBackground/ZenLocationOverlay"),
+1: NodePath("MapBackground/GlowsticksLocationOverlay"),
+2: NodePath("MapBackground/AnglerFishLocationOverlay"),
+3: NodePath("MapBackground/SurfingLocationOverlay"),
+4: NodePath("MapBackground/HospitalLocationOverlay")
+}
 
 [node name="BGSky" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
 scale = Vector2(33.714504, 19.050467)
 texture = SubResource("GradientTexture2D_nl8w3")
 
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scale = Vector2(3, 3)
+scroll_scale = Vector2(0.1, 0.1)
+scroll_offset = Vector2(-6257, -583)
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(10, 0)
+repeat_times = 5
+
+[node name="BGClouds" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(640, 359)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_247la")
+
 [node name="Menu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("1_nl8w3")]
 items_to_hide = [NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Guide Music"
+
+[connection signal="game_started" from="Menu" to="." method="_on_menu_game_started"]
