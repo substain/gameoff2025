@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=59 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dw4lm56cfg2pg" path="res://scenes/zen_garden/rhythm_event_creator.gd" id="3_3rur6"]
 [ext_resource type="Resource" uid="uid://dbbfhffnh0ppb" path="res://scenes/zen_garden/zen_garden_singing_rhythm_scene_data.tres" id="5_3rur6"]
 [ext_resource type="AudioStream" uid="uid://dd5aryv5juje0" path="res://audio/music/levels/zengarden/zengarden_wrongnote_001.ogg" id="5_pmntt"]
-[ext_resource type="Texture2D" uid="uid://ggpk0y3fxptv" path="res://2d/zen/Zen Garden Background Blanc.png" id="6_bwifo"]
 [ext_resource type="AudioStream" uid="uid://cw41l8y7fjvcr" path="res://audio/music/levels/zengarden/zengarden_wrongnote_002.ogg" id="6_e7svu"]
 [ext_resource type="Script" uid="uid://b5nqt0btswijk" path="res://scenes/old_files/zen_garden/zen_player_path_follow.gd" id="6_r5g3c"]
 [ext_resource type="PackedScene" uid="uid://cee1vmk181t3o" path="res://scenes/old_files/zen_garden/zen_line_2d.tscn" id="7_3rur6"]
@@ -270,19 +269,20 @@ point_show_timer = NodePath("PointShowTimer")
 [node name="PointShowTimer" type="Timer" parent="RhythmEventCreator"]
 one_shot = true
 
-[node name="Background" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(640, 360)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_bwifo")
-
 [node name="BGSky" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8f3qg")
 
-[node name="BGClouds" type="Sprite2D" parent="."]
-position = Vector2(640, 360)
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(10, 0)
+repeat_times = 5
+
+[node name="BGClouds" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(640, 359)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8jsrj")
 
@@ -422,7 +422,7 @@ rotation = -0.023525072
 rotates = false
 
 [node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager", "line_controller", "statue_animation_player") instance=ExtResource("2_jn2uw")]
-position = Vector2(640, 360)
+position = Vector2(631, 360)
 target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
 fall_object_manager = NodePath("../RhythmEventCreator")
 line_controller = NodePath("../LineController")
