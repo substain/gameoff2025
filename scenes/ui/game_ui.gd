@@ -119,7 +119,7 @@ func _on_rhythm_base_note_tap_hit(track: RhythmTrack, _note: RhythmNote, _diff: 
 	set_current_hits(current_hits + 1)
 	update_score()
 
-func _on_rhythm_base_note_hold_start(track: RhythmTrack, _note: RhythmNote, time_diff: float) -> void:
+func _on_rhythm_base_note_hold_start(track: RhythmTrack, _note: RhythmNote, _time_diff: float) -> void:
 	if track.name != SingingMonk.HOLD_TRACK && track.name != SingingMonk.FALLING_OBJECT_TARGET_TRACK:
 		return
 	set_current_hits(current_hits + 1)

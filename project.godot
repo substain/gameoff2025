@@ -14,7 +14,7 @@ General/banks_path="res://audio/fmod/banks"
 
 [application]
 
-config/name="Unnamed Rhythm Game"
+config/name="Untitled Rhythm Game"
 config/version="0.0.55"
 run/main_scene="uid://b1ab5t2hcu3d7"
 config/features=PackedStringArray("4.5", "Forward Plus")
