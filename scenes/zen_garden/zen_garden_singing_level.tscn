@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=60 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
@@ -24,6 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://qaqtgnhhhqqy" path="res://scenes/zen_garden/line.tscn" id="9_8jsrj"]
 [ext_resource type="Script" uid="uid://dic827gieoob4" path="res://scenes/zen_garden/correct_note_audio_player.gd" id="9_d33sh"]
 [ext_resource type="AudioStream" uid="uid://dsq4ftyqoexwv" path="res://audio/music/levels/zengarden/zengarden_playertrack2311.ogg" id="9_ncdbi"]
+[ext_resource type="Texture2D" uid="uid://swu78j5yr6ba" path="res://Assets/Zen Garden/Background/statue-base.png" id="16_mh8sn"]
+[ext_resource type="Texture2D" uid="uid://c06uinmx8nt53" path="res://Assets/Zen Garden/Background/statue-top-happy.png" id="17_5dllv"]
+[ext_resource type="Texture2D" uid="uid://d06ja7k7ncyct" path="res://Assets/Zen Garden/Background/statue-top-sad.png" id="18_5dllv"]
 [ext_resource type="Curve2D" uid="uid://qosxxgdeqlpl" path="res://scenes/zen_garden/curves/l1_curve_2d.tres" id="18_b1n2n"]
 [ext_resource type="Curve2D" uid="uid://du6l7pqowfe24" path="res://scenes/zen_garden/curves/l2_curve_2d.tres" id="21_1vgba"]
 [ext_resource type="Texture2D" uid="uid://brrnviljc472e" path="res://Assets/Zen Garden/Background/Lines/bg-4-l2w.png" id="21_l4h26"]
@@ -53,6 +56,175 @@ streams_count = 3
 stream_0/stream = ExtResource("5_pmntt")
 stream_1/stream = ExtResource("6_e7svu")
 stream_2/stream = ExtResource("7_d33sh")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_35qgt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_5dllv")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_5dllv")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_5dllv"]
+resource_name = "happy"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.19521618),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_35qgt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nkhyw"]
+resource_name = "sad"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"sad"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nkyab"]
+resource_name = "very_sad"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"sad"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666668, 0.13333336, 0.2, 0.26666668, 0.33333334, 0.43333334, 0.57039726, 0.808317),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-10, 0), Vector2(10, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tduys"]
+resource_name = "very_happy"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.19521618),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkyab"]
+_data = {
+&"RESET": SubResource("Animation_35qgt"),
+&"happy": SubResource("Animation_5dllv"),
+&"sad": SubResource("Animation_nkhyw"),
+&"very_happy": SubResource("Animation_tduys"),
+&"very_sad": SubResource("Animation_nkyab")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ri8s"]
 resource_local_to_scene = true
@@ -118,6 +290,20 @@ texture = ExtResource("7_8jsrj")
 position = Vector2(640, 360)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_ke7tj")
+
+[node name="StatueBase" type="Sprite2D" parent="."]
+position = Vector2(640, 359)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_mh8sn")
+
+[node name="StatueTop" type="AnimatedSprite2D" parent="StatueBase"]
+sprite_frames = SubResource("SpriteFrames_35qgt")
+animation = &"happy"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StatueBase"]
+libraries = {
+&"": SubResource("AnimationLibrary_nkyab")
+}
 
 [node name="LineController" type="Node2D" parent="." node_paths=PackedStringArray("lines")]
 position = Vector2(640, 360)
@@ -235,11 +421,12 @@ position = Vector2(480.62015, 317)
 rotation = -0.023525072
 rotates = false
 
-[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager", "line_controller") instance=ExtResource("2_jn2uw")]
+[node name="SingingMonk" parent="." node_paths=PackedStringArray("target_pos_node", "fall_object_manager", "line_controller", "statue_animation_player") instance=ExtResource("2_jn2uw")]
 position = Vector2(640, 360)
 target_pos_node = NodePath("../Path/ZenPlayerPathFollow")
 fall_object_manager = NodePath("../RhythmEventCreator")
 line_controller = NodePath("../LineController")
+statue_animation_player = NodePath("../StatueBase/AnimationPlayer")
 
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
