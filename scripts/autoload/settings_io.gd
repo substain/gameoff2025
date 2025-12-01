@@ -24,7 +24,7 @@ var music_volume_linear: float = 1
 var music_volume_muted: bool = false
 var sfx_volume_linear: float = 1
 var sfx_volume_muted: bool = false
-var guide_music_volume_linear: float = 1
+var guide_music_volume_linear: float = 0.75
 var guide_music_volume_muted: bool = false
 
 var locale: LocaleItem = LocaleItem.EN
@@ -68,7 +68,7 @@ func reset(do_save: bool = true) -> void:
 	set_overall_volume(0.75, false)
 	set_music_volume(1, false)
 	set_sfx_volume(1, false)
-	set_guide_music_volume(1, false)
+	set_guide_music_volume(0.75, false)
 	set_overall_volume_muted(false, false)
 	set_music_volume_muted(false, false)
 	set_sfx_volume_muted(false, false)

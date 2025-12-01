@@ -43,7 +43,6 @@ var _held_notes: Dictionary[RhythmTrack, RhythmNote] = {}
   
 var _music_position: float = 0.0
 
-var _additional_players: Array[AudioStreamPlayer]
 
 func _ready() -> void:
 	if visible_ui:
@@ -53,14 +52,6 @@ func _ready() -> void:
 		return
 	
 	audio_stream_player.stream = scene_data.backing_track
-	
-	for additional_track: AudioStream in scene_data.additional_backing_tracks.keys():
-		var new_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
-		audio_stream_player.get_parent().add_child(new_audio_player)
-		_additional_players.append(new_audio_player)
-		new_audio_player.stream = additional_track
-		var audio_type: AudioUtil.AudioType = scene_data.additional_backing_tracks[additional_track]
-		new_audio_player.bus = AudioUtil.get_audio_type_string(audio_type) #"Guide Music"
 	
 	_rhythm_data = process_midi_file(scene_data.midi_file)
 	parsing_finished.emit(_rhythm_data)
@@ -336,8 +327,8 @@ func print_midi_tracks() -> void:
 
 func start() -> void:
 	audio_stream_player.play(0.0)
-	for asp: AudioStreamPlayer in _additional_players:
-		asp.play(0.0)
+	#for asp: AudioStreamPlayer in _additional_players:
+		#asp.play(0.0)
 	reset_progress.emit()
 	started_playing.emit()
 
@@ -345,20 +336,20 @@ func set_paused(is_paused_new: bool) -> void:
 	if is_paused_new:
 		_music_position = audio_stream_player.get_playback_position()
 		audio_stream_player.stop()
-		for asp: AudioStreamPlayer in _additional_players:
-			asp.stop()
+		#for asp: AudioStreamPlayer in _additional_players:
+			#asp.stop()
 		stopped_playing.emit()
 	else:
 		audio_stream_player.play(_music_position)
-		for asp: AudioStreamPlayer in _additional_players:
-			asp.play(_music_position)
+		#for asp: AudioStreamPlayer in _additional_players:
+			#asp.play(_music_position)
 		started_playing.emit()
 	
 func stop() -> void:
 	_music_position = 0.0
 	audio_stream_player.stop()	
-	for asp: AudioStreamPlayer in _additional_players:
-		asp.stop()
+	#for asp: AudioStreamPlayer in _additional_players:
+		#asp.stop()
 	stopped_playing.emit()
 	reset_progress.emit()
 

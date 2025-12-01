@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ddi7wqycrl4sb"]
+[gd_scene load_steps=62 format=3 uid="uid://ddi7wqycrl4sb"]
 
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="1_hagkd"]
 [ext_resource type="PackedScene" uid="uid://b5ucfx8fc6ffe" path="res://scenes/ui/game_ui.tscn" id="1_osv4t"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://qaqtgnhhhqqy" path="res://scenes/zen_garden/line.tscn" id="9_8jsrj"]
 [ext_resource type="Script" uid="uid://dic827gieoob4" path="res://scenes/zen_garden/correct_note_audio_player.gd" id="9_d33sh"]
 [ext_resource type="AudioStream" uid="uid://dsq4ftyqoexwv" path="res://audio/music/levels/zengarden/zengarden_playertrack2311.ogg" id="9_ncdbi"]
+[ext_resource type="AudioStream" uid="uid://nuuk50fjahtl" path="res://audio/music/levels/zengarden/zengarden_guidetrack2311.ogg" id="11_5dllv"]
+[ext_resource type="Script" uid="uid://cpg2xp0wskkv7" path="res://scenes/zen_garden/guide_stream_player.gd" id="11_mh8sn"]
 [ext_resource type="Texture2D" uid="uid://swu78j5yr6ba" path="res://Assets/Zen Garden/Background/statue-base.png" id="16_mh8sn"]
 [ext_resource type="Texture2D" uid="uid://c06uinmx8nt53" path="res://Assets/Zen Garden/Background/statue-top-happy.png" id="17_5dllv"]
 [ext_resource type="Texture2D" uid="uid://d06ja7k7ncyct" path="res://Assets/Zen Garden/Background/statue-top-sad.png" id="18_5dllv"]
@@ -266,6 +268,11 @@ stream = ExtResource("9_ncdbi")
 bus = &"Music"
 script = ExtResource("9_d33sh")
 
+[node name="GuideStreamPlayer" type="AudioStreamPlayer" parent="RhythmBase"]
+stream = ExtResource("11_5dllv")
+bus = &"Guide Music"
+script = ExtResource("11_mh8sn")
+
 [node name="RhythmEventCreator" type="Node" parent="." node_paths=PackedStringArray("event_node_parent", "zen_player_path_follow", "singing_monk", "line_controller", "point_show_timer")]
 script = ExtResource("3_3rur6")
 event_node_parent = NodePath("..")
@@ -461,14 +468,17 @@ statue_animation_player = NodePath("../StatueBase/AnimationPlayer")
 [connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
+[connection signal="reset_progress" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_reset_progress"]
 [connection signal="started_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
+[connection signal="started_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_started_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="timeout" from="RhythmEventCreator/PointShowTimer" to="RhythmEventCreator" method="_on_timer_timeout"]
 
 [editable path="LineController/Line1"]
