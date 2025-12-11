@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ucfx8fc6ffe"]
+[gd_scene load_steps=7 format=3 uid="uid://b5ucfx8fc6ffe"]
 
 [ext_resource type="Script" uid="uid://swlh1ijj3r4g" path="res://scenes/ui/game_ui.gd" id="1_gwk6t"]
 [ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="2_xjfbv"]
+[ext_resource type="Texture2D" uid="uid://78w88pd7fqgw" path="res://2d/mobile/button_b.svg" id="3_fct72"]
+[ext_resource type="Texture2D" uid="uid://dku5m4p3yhlbl" path="res://2d/mobile/button_b_pressed.svg" id="4_ru5ln"]
+[ext_resource type="Texture2D" uid="uid://dwkipi7qy8q5a" path="res://2d/mobile/button_a.svg" id="5_v1bdg"]
+[ext_resource type="Texture2D" uid="uid://btulwp2q53rew" path="res://2d/mobile/button_a_pressed.svg" id="6_qrkc0"]
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label", "popup_parent", "popup_default_pos")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label", "popup_parent", "popup_default_pos", "score_label", "mobile_ui", "score_ctrl", "mobile_score_target")]
 script = ExtResource("1_gwk6t")
+simulate_mobile = true
 pause_menu = NodePath("PauseMenu")
 start_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/StartButton")
 pause_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/PauseButton")
@@ -17,6 +22,10 @@ failed_label = NodePath("RhythmMC/VBoxContainer/FailedLabel")
 warning_label = NodePath("RhythmMC/VBoxContainer/WarningLabel")
 popup_parent = NodePath("PopupParent")
 popup_default_pos = NodePath("PopupParent/PopupDefaultPos")
+score_label = NodePath("ScoreMC/ScoreHBC/ScoreLabel2")
+mobile_ui = NodePath("MobileUI")
+score_ctrl = NodePath("ScoreMC/ScoreHBC")
+mobile_score_target = NodePath("MobileUI/ScoreMC")
 
 [node name="ScoreMC" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -34,10 +43,10 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScoreMC"]
+[node name="ScoreHBC" type="HBoxContainer" parent="ScoreMC"]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="ScoreMC/HBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="ScoreMC/ScoreHBC"]
 z_index = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -47,7 +56,7 @@ theme_override_font_sizes/font_size = 42
 text = "Score: "
 vertical_alignment = 2
 
-[node name="ScoreLabel2" type="Label" parent="ScoreMC/HBoxContainer"]
+[node name="ScoreLabel2" type="Label" parent="ScoreMC/ScoreHBC"]
 z_index = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -235,6 +244,65 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.18, 0.073800005, 0.10211998, 0.78431374)
+
+[node name="MobileUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ButtonBMC" type="MarginContainer" parent="MobileUI"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 68.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MobileUI/ButtonBMC"]
+position = Vector2(1109, -75)
+scale = Vector2(0.48013246, 0.48013246)
+texture_normal = ExtResource("3_fct72")
+texture_pressed = ExtResource("4_ru5ln")
+action = "action_b"
+
+[node name="ButtonAMC" type="MarginContainer" parent="MobileUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MobileUI/ButtonAMC"]
+position = Vector2(-1180, -75)
+scale = Vector2(0.48013246, 0.48013246)
+texture_normal = ExtResource("5_v1bdg")
+texture_pressed = ExtResource("6_qrkc0")
+action = "action_a"
+
+[node name="ScoreMC" type="MarginContainer" parent="MobileUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/Stop" to="." method="_on_stop_pressed"]

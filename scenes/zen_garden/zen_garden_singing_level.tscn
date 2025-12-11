@@ -85,6 +85,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_35qgt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_5dllv"]
 resource_name = "happy"
 loop_mode = 1
@@ -111,33 +138,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_35qgt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StatueTop:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"happy"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StatueTop:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nkhyw"]
@@ -169,6 +169,34 @@ tracks/1/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_tduys"]
+resource_name = "very_happy"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatueTop:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"happy"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StatueTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.19521618),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_nkyab"]
 resource_name = "very_sad"
 length = 3.0
@@ -198,34 +226,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-10, 0), Vector2(10, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(5, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tduys"]
-resource_name = "very_happy"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StatueTop:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"happy"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StatueTop:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.19521618),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nkyab"]
 _data = {
 &"RESET": SubResource("Animation_35qgt"),
@@ -252,6 +252,7 @@ script = ExtResource("1_r5g3c")
 rhythm_scene = NodePath("RhythmBase")
 
 [node name="UI" parent="." instance=ExtResource("1_osv4t")]
+col = Color(0.58431375, 0.18039216, 0.1254902, 1)
 
 [node name="RhythmBase" parent="." instance=ExtResource("1_hagkd")]
 offset_left = 1.0
@@ -443,6 +444,10 @@ fall_object_manager = NodePath("../RhythmEventCreator")
 line_controller = NodePath("../LineController")
 statue_animation_player = NodePath("../StatueBase/AnimationPlayer")
 
+[connection signal="a_pressed" from="UI" to="SingingMonk" method="_on_ui_a_pressed"]
+[connection signal="a_released" from="UI" to="SingingMonk" method="_on_ui_a_released"]
+[connection signal="b_pressed" from="UI" to="SingingMonk" method="_on_ui_b_pressed"]
+[connection signal="b_released" from="UI" to="SingingMonk" method="_on_ui_b_released"]
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
 [connection signal="stop_pressed" from="UI" to="." method="_on_ui_stop_pressed"]
@@ -467,18 +472,18 @@ statue_animation_player = NodePath("../StatueBase/AnimationPlayer")
 [connection signal="note_tap_hit" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_note_tap_hit"]
 [connection signal="reset_progress" from="RhythmBase" to="UI" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_reset_progress"]
-[connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
 [connection signal="reset_progress" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_reset_progress"]
+[connection signal="reset_progress" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_reset_progress"]
 [connection signal="started_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_started_playing"]
+[connection signal="started_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_started_playing"]
 [connection signal="started_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_started_playing"]
-[connection signal="started_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_started_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_stopped_playing"]
+[connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="Path/ZenPlayerPathFollow" method="_on_rhythm_base_stopped_playing"]
 [connection signal="stopped_playing" from="RhythmBase" to="SingingMonk" method="_on_rhythm_base_stopped_playing"]
-[connection signal="stopped_playing" from="RhythmBase" to="RhythmBase/GuideStreamPlayer" method="_on_rhythm_base_stopped_playing"]
 [connection signal="timeout" from="RhythmEventCreator/PointShowTimer" to="RhythmEventCreator" method="_on_timer_timeout"]
 
 [editable path="LineController/Line1"]

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="80mm"
+   height="80mm"
+   viewBox="0 0 80 80"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="button_b.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="136.11806"
+     inkscape:cy="189.32784"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="2391"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#e9c5b2;fill-opacity:1;stroke:#cf855d;stroke-width:5.29166;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path1"
+       cx="40"
+       cy="40"
+       r="37.354172" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6531px;line-height:1.25;font-family:'Cascadia Code';-inkscape-font-specification:'Cascadia Code';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="34.763123"
+       y="44.119614"
+       id="text1"
+       transform="scale(0.98442238,1.0158241)"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Cascadia Code';-inkscape-font-specification:'Cascadia Code';stroke-width:0.264583"
+         x="34.763123"
+         y="44.119614" /></text>
+    <path
+       d="m 32.632216,59.185097 v -5.421559 h 8.560357 q 3.766557,0 5.849577,-1.712072 2.08302,-1.740606 2.08302,-4.850869 0,-3.195866 -2.168623,-4.936472 -2.168624,-1.76914 -6.163457,-1.76914 h -8.046736 l -0.684828,-2.596642 h 10.15829 q 6.163457,0 9.53053,2.653711 3.367074,2.65371 3.367074,7.504579 0,5.307421 -3.195867,8.217942 -3.195866,2.910522 -9.073978,2.910522 z m -5.307421,0 V 18.666075 H 33.0317 V 59.185097 Z M 30.691869,39.268 V 36.471617 H 42.56223 V 39.268 Z m 1.940347,-1.597933 v -2.596642 h 6.848286 q 3.224401,0 4.993541,-1.426726 1.797675,-1.45526 1.797675,-4.137505 0,-2.625176 -1.883278,-4.023368 -1.854744,-1.398192 -5.307422,-1.398192 h -6.334664 l -0.684828,-5.421559 h 7.304838 q 6.163456,0 9.53053,2.682245 3.367074,2.653711 3.367074,7.590183 0,4.194575 -3.195867,6.477337 -3.195866,2.254227 -9.073978,2.254227 z"
+       id="text2"
+       style="font-size:58.4387px;line-height:1.25;font-family:'Cascadia Code';-inkscape-font-specification:'Cascadia Code';letter-spacing:0px;word-spacing:0px;fill:#cf855d;stroke-width:0.264583"
+       transform="scale(0.98442238,1.0158241)"
+       aria-label="B" />
+  </g>
+</svg>

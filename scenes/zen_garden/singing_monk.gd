@@ -80,19 +80,13 @@ func shoot_note(is_hit: bool, target_falling_object: FallingObject = null) -> vo
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(InputHandler.ACTION_B):
-		play_anim(Anim.sing)
-		is_one_shot_active = true
-		anim_timer.start()
+		b_pressed()
 
 	if event.is_action_pressed(InputHandler.ACTION_A):
-		is_one_shot_active = false
-		play_anim(Anim.sing)
+		a_pressed()
+		
 	if event.is_action_released(InputHandler.ACTION_A):
-		if is_moving:
-			play_anim(get_idle_anim(mood))
-		else:
-			play_anim(Anim.RESET)
-			anim_player.stop()
+		a_released()
 
 func play_anim(anim: Anim, anim_speed: float = 1.0) -> void:
 	anim_player.speed_scale = anim_speed
@@ -203,3 +197,35 @@ static func is_switchable_anim(anim: Anim) -> bool:
 
 static func anim_to_str(anim: Anim) -> String:
 	return Anim.keys()[anim]
+
+
+func a_pressed() -> void:
+	is_one_shot_active = false
+	play_anim(Anim.sing)
+		
+func a_released() -> void:
+	if is_moving:
+		play_anim(get_idle_anim(mood))
+	else:
+		play_anim(Anim.RESET)
+		anim_player.stop()
+				
+func b_pressed() -> void:
+	play_anim(Anim.sing)
+	is_one_shot_active = true
+	anim_timer.start()	
+
+func b_released() -> void:
+	pass
+
+func _on_ui_a_pressed() -> void:
+	a_pressed()
+
+func _on_ui_a_released() -> void:
+	a_released()
+
+func _on_ui_b_pressed() -> void:
+	b_pressed()
+
+func _on_ui_b_released() -> void:
+	b_released()

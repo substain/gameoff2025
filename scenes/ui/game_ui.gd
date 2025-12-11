@@ -7,7 +7,14 @@ signal start_pressed
 signal stop_pressed
 signal set_paused(is_paused: bool)
 signal toggle_rhythm_ui(is_toggled_on: bool)
+signal a_pressed
+signal b_pressed
+signal a_released
+signal b_released
 
+#@export var col: Color
+
+@export var simulate_mobile: bool = false
 @export_category("internal nodes")
 @export var pause_menu: Menu
 
@@ -24,7 +31,11 @@ signal toggle_rhythm_ui(is_toggled_on: bool)
 @export var popup_parent: Control
 @export var popup_default_pos: Control
 
-@onready var score_label: Label = $ScoreMC/HBoxContainer/ScoreLabel2
+@export var score_label: Label
+@export var mobile_ui: Control
+
+@export var score_ctrl: Control
+@export var mobile_score_target: Control
 
 var is_stopped: bool = false
 var is_track_in_progress: bool = false
@@ -48,9 +59,24 @@ func _ready() -> void:
 	hit_text_template = hit_label.text
 	missed_text_template = missed_label.text
 	failed_text_template = failed_label.text
+	
+
+	handle_mobile()
 	reset_note_statistics()
 	update_score()
 
+func handle_mobile() -> void:
+	var is_mobile_active: bool = is_mobile()
+	mobile_ui.visible = is_mobile_active
+	if !is_mobile_active:
+		return
+
+	score_ctrl.reparent(mobile_score_target, false)
+
+func is_mobile() -> bool:
+	if simulate_mobile && OS.has_feature("editor"):
+		return true
+	return OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.has_feature("web_android") || OS.has_feature("web_ios") 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -189,3 +215,16 @@ func update_score() -> void:
 
 static func get_position_in_ui_space(node_2d: Node2D) -> Vector2:
 	return node_2d.get_screen_transform().origin
+
+
+func _on_action_button_a_button_down() -> void:
+	a_pressed.emit()
+
+func _on_action_button_a_button_up() -> void:
+	a_released.emit()
+
+func _on_action_button_b_button_down() -> void:
+	b_pressed.emit()
+
+func _on_action_button_b_button_up() -> void:
+	b_released.emit()
