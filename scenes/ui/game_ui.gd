@@ -7,14 +7,11 @@ signal start_pressed
 signal stop_pressed
 signal set_paused(is_paused: bool)
 signal toggle_rhythm_ui(is_toggled_on: bool)
-signal a_pressed
-signal b_pressed
-signal a_released
-signal b_released
 
 #@export var col: Color
 
 @export var simulate_mobile: bool = false
+@export var max_score: int = 650
 @export_category("internal nodes")
 @export var pause_menu: Menu
 
@@ -36,6 +33,8 @@ signal b_released
 
 @export var score_ctrl: Control
 @export var mobile_score_target: Control
+@export var final_overlay: FinalOverlay
+
 
 var is_stopped: bool = false
 var is_track_in_progress: bool = false
@@ -53,28 +52,31 @@ var failed_text_template: String
 
 var current_text_popups: Array[Label]
 
+var is_finished: bool = false
+
 func _ready() -> void:
 	GameState.ui = self
 	show_rhythm_ui_button.text = "Hide Rhyhthm UI" if show_rhythm_ui_button.button_pressed else "Show Rhyhthm UI"  
 	hit_text_template = hit_label.text
 	missed_text_template = missed_label.text
 	failed_text_template = failed_label.text
-	
-
+	final_overlay.set_max_score(max_score)
 	handle_mobile()
 	reset_note_statistics()
 	update_score()
+	final_overlay.visible = false
 
 func handle_mobile() -> void:
-	var is_mobile_active: bool = is_mobile()
-	mobile_ui.visible = is_mobile_active
-	if !is_mobile_active:
+	GameState.is_mobile = is_mobile()
+	mobile_ui.visible = GameState.is_mobile
+	if !GameState.is_mobile:
 		return
 
 	score_ctrl.reparent(mobile_score_target, false)
 
 func is_mobile() -> bool:
 	if simulate_mobile && OS.has_feature("editor"):
+		ProjectSettings.set("input_devices/pointing/emulate_touch_from_mouse", true)
 		return true
 	return OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.has_feature("web_android") || OS.has_feature("web_ios") 
 
@@ -181,7 +183,6 @@ func set_current_hits(amount: int) -> void:
 func set_current_hold_hits(amount: int) -> void:
 	current_hold_hits = amount
 
-
 func set_current_fails(amount: int) -> void:
 	current_fails = amount
 	failed_label.text = failed_text_template.replace("{amount}", str(current_fails))
@@ -216,15 +217,17 @@ func update_score() -> void:
 static func get_position_in_ui_space(node_2d: Node2D) -> Vector2:
 	return node_2d.get_screen_transform().origin
 
+func _on_fin_back_to_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
 
-func _on_action_button_a_button_down() -> void:
-	a_pressed.emit()
+func _on_fin_retry_button_pressed() -> void:
+	get_tree().reload_current_scene()
 
-func _on_action_button_a_button_up() -> void:
-	a_released.emit()
+func finish() -> void:
+	is_finished = true
+	pause_menu.is_finished = true
+	var score: int = (current_hits * 20) + (current_hold_hits * 35) + (current_fails * -15) + (current_misses * -10)
+	final_overlay.fade_in_result(score)
 
-func _on_action_button_b_button_down() -> void:
-	b_pressed.emit()
-
-func _on_action_button_b_button_up() -> void:
-	b_released.emit()
+func _on_rhythm_base_finished_playing() -> void:
+	finish()

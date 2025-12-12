@@ -39,3 +39,17 @@ leveltype.hospital;Hospital;Krankenhaus
 telegraph_button;Press '[0]' in [1];Drücke '[0]' in [1]
 telegraph_hold;Hold '[0]' in [1];Halte '[0]' in [1]
 calibration.hint;Press '[0]' when the lines overlap;Drücke '[0]' wenn die Linien übereinander liegen
+ui.calibration.finished_good;Calibration finished ([0]%)\nReturning to Main Menu...;Kalibrierung abgeschlossen ([0]%)\nKehre zum Hauptmenü zurück...
+ui.calibration.finished_ok;Calibration finished ([0]%)\nA value over 90% should be fine.\nRetry?;Kalibrierung abgeschlossen ([0]%)\nEin Wert über 90% sollte okay sein.\n Nochmal versuchen?
+ui.calibration.minimum_tries;Provide at least [0] inputs for calibration;Mache mindestens [0] Eingaben zum Kalibrieren
+ui.calibration.finish;Finish;Beenden
+ui.calibration.retry;Retry;Nochmal versuchen
+ui.calibration.cancel;Cancel;Abbrechen
+ui.game_finished;Game finished!;Spiel beendet!
+ui.rating.fantastic;Fantastic!;Fantastisch!
+ui.rating.great;Great!;Toll!
+ui.rating.okay;Okay;Okay
+ui.rating.improvable;Improvable;Verbesserbar
+ui.rating.did_you_press;Did you press anything?;Hast du etwas gedrückt?
+ui.rating.try_bad;You're trying to be bad!;Du versuchst schlecht zu sein!
+ui.rating.tester;Award for testing the lowest possible score!;Auszeichnung für das Testen der niedrigstmöglichen Punktzahl

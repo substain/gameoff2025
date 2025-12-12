@@ -11,15 +11,17 @@ signal back_button_pressed
 @export var press_remap_key_label: Label
 @export var press_exit_key_label: Label
 
-
 var waiting_for_reassignment: bool = false
 var reassign_button: Button = null
-var input_reassignment_key: InputHandler.InputName
 var exit_key_tr_template: String = ""
 var remap_key_tr_template: String = ""
 
 var current_input_to_remap: InputHandler.InputName
 var current_action_index: int = 0
+
+
+
+var remap_buttons: Dictionary[InputHandler.InputName, Dictionary] = {}  # Dictionary[int, InputEvent]
 
 func _ready() -> void:
 	reassignment_overlay.visible = false
@@ -28,8 +30,6 @@ func _ready() -> void:
 	if first_focus_item == null:
 		push_warning("first_focus_item not set!")
 	instantiate_inputs()
-	
-	#update_all_input_names()
 
 func instantiate_inputs() -> void:
 	var remappable_inputs: Array[InputHandler.InputName] = InputHandler.remappable_inputs
@@ -47,7 +47,7 @@ func instantiate_inputs() -> void:
 			first_input_button = add_input_button(input_events[0])
 			
 		first_input_button.pressed.connect(_on_input_button_pressed.bind(remappable_input, 0, first_input_button))
-
+		
 		var second_input_button: Button		
 		if input_events.size() <= 1:
 			second_input_button = add_empty_button()
@@ -56,20 +56,7 @@ func instantiate_inputs() -> void:
 
 		second_input_button.pressed.connect(_on_input_button_pressed.bind(remappable_input, 1, second_input_button))
 
-	#for input_action: StringName in input_actions_to_instantiate:
-		#var input_row: InputAssignmentRow = INPUT_ROW_SCENE.instantiate() as InputAssignmentRow
-		#remap_row_parent.add_child(input_row)
-		#input_row.init_from(input_action)
-		##input_assign_rows[input_action] = input_row
-		#
-		#var iab_1: InputAssignButton = input_row.get_input_assign_button(false)
-		#iab_1.on_pressed_input_assign.connect(start_input_reassignment)
-		#input_assignment_buttons.append(iab_1)
-#
-		#var iab_2: InputAssignButton = input_row.get_input_assign_button(true)
-		#iab_2.on_pressed_input_assign.connect(start_input_reassignment)
-		#input_assignment_buttons.append(iab_2)
-
+		remap_buttons[remappable_input] = {0: first_input_button, 1: second_input_button}
 	
 func _on_input_button_pressed(input_name: InputHandler.InputName, action_index: int, button: Button) -> void:
 	current_input_to_remap = input_name
@@ -85,12 +72,21 @@ func grab_focus_deferred(control: Control = first_focus_item) -> void:
 	control.grab_focus.call_deferred()
 
 func stop_reassignment() -> void:
+	update_button_by_input_event(reassign_button, current_action_index, InputMap.action_get_events(InputHandler.input_name_to_str(current_input_to_remap)))
 	waiting_for_reassignment = false
 	reassignment_overlay.visible = false
 
 func update_all_input_names() -> void:
-	#TODO
-	pass
+	for input_name: InputHandler.InputName in remap_buttons.keys():
+		var input_events: Array[InputEvent] = InputMap.action_get_events(InputHandler.input_name_to_str(input_name))
+		update_button_by_input_event(remap_buttons[input_name][0] as Button, 0, input_events)
+		update_button_by_input_event(remap_buttons[input_name][1] as Button, 1, input_events)
+	
+func update_button_by_input_event(button: Button, index: int, input_events: Array[InputEvent]) -> void:
+	if input_events.size() <= index:
+		update_button_from_input_event(button, null)
+	else:
+		update_button_from_input_event(button, input_events[index])
 
 func _input(in_event: InputEvent) -> void:
 	if !waiting_for_reassignment:
@@ -98,9 +94,6 @@ func _input(in_event: InputEvent) -> void:
 	
 	get_viewport().set_input_as_handled()
 	if in_event.is_action_pressed("cancel"):
-		
-	
-	#if in_event is InputEventKey && (in_event as InputEventKey).pressed && (in_event as InputEventKey).keycode == KEY_ESCAPE:
 		stop_reassignment()
 		return
 		
@@ -114,8 +107,9 @@ func _input(in_event: InputEvent) -> void:
 		#if in_joy_motion_event.axis_value < 0.3:
 		#	return
 
-	update_input_map_from_in(input_reassignment_key, in_event, current_action_index)
+	update_input_map_from_in(current_input_to_remap, in_event, current_action_index)
 	update_button_from_input_event(reassign_button, in_event)
+	SettingsIO.update_input_settings(current_input_to_remap, in_event, current_action_index, true)
 	#get_viewport().set_input_as_handled() # needed?
 	stop_reassignment()
 
@@ -154,6 +148,7 @@ func _on_back_button_pressed() -> void:
 	
 func reset_inputs() -> void:
 	InputMap.load_from_project_settings()
+	SettingsIO.reset_inputs(true)
 	update_all_input_names()
 
 func play_accept_sfx() -> void:

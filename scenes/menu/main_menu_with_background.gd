@@ -12,7 +12,7 @@ func _on_menu_game_started() -> void:
 	var tween: Tween = create_tween().set_parallel(true)
 	#tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(bg_clouds, "modulate:a", 0.0, 2.5)
-	tween.tween_property(bg_clouds, "global_position:y", bg_clouds.global_position.y + 100, 1.5)
+	tween.tween_property(bg_clouds, "global_position:y", bg_clouds.global_position.y + 100, 3.5)
 	
 	await get_tree().create_timer(0.5).timeout
 	

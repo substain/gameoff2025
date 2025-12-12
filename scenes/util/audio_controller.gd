@@ -25,4 +25,4 @@ func play_sfx(sfx_type: SfxType) -> void:
 			hover_audio_stream_player.play()
 			
 		SfxType.POPUP:
-				popup_audio_stream_player.play()
+			popup_audio_stream_player.play()

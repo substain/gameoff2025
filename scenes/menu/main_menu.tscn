@@ -48,6 +48,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_247la")
 
 [node name="Menu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("1_nl8w3")]
+set_game_title_from_project_settings = true
+is_pause_menu = false
 items_to_hide = [NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]

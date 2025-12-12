@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5ucfx8fc6ffe"]
+[gd_scene load_steps=8 format=3 uid="uid://b5ucfx8fc6ffe"]
 
 [ext_resource type="Script" uid="uid://swlh1ijj3r4g" path="res://scenes/ui/game_ui.gd" id="1_gwk6t"]
 [ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="2_xjfbv"]
@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dku5m4p3yhlbl" path="res://2d/mobile/button_b_pressed.svg" id="4_ru5ln"]
 [ext_resource type="Texture2D" uid="uid://dwkipi7qy8q5a" path="res://2d/mobile/button_a.svg" id="5_v1bdg"]
 [ext_resource type="Texture2D" uid="uid://btulwp2q53rew" path="res://2d/mobile/button_a_pressed.svg" id="6_qrkc0"]
+[ext_resource type="Script" uid="uid://dqy44qpf0pe54" path="res://scenes/ui/final_overlay.gd" id="7_qrkc0"]
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label", "popup_parent", "popup_default_pos", "score_label", "mobile_ui", "score_ctrl", "mobile_score_target")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu", "start_button", "pause_button", "show_rhythm_ui_button", "status_label", "progress_bar", "hit_label", "missed_label", "failed_label", "warning_label", "popup_parent", "popup_default_pos", "score_label", "mobile_ui", "score_ctrl", "mobile_score_target", "final_overlay")]
 script = ExtResource("1_gwk6t")
-simulate_mobile = true
 pause_menu = NodePath("PauseMenu")
 start_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/StartButton")
 pause_button = NodePath("GameControlsMC/VBoxContainer/ControlsHBC/PauseButton")
@@ -26,6 +26,7 @@ score_label = NodePath("ScoreMC/ScoreHBC/ScoreLabel2")
 mobile_ui = NodePath("MobileUI")
 score_ctrl = NodePath("ScoreMC/ScoreHBC")
 mobile_score_target = NodePath("MobileUI/ScoreMC")
+final_overlay = NodePath("FinalOverlay")
 
 [node name="ScoreMC" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -304,8 +305,109 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="FinalOverlay" type="ColorRect" parent="." node_paths=PackedStringArray("final_label", "score_hbc", "score_value_label", "final_rating_tag", "fin_retry_button", "fin_back_to_main_menu_button")]
+visible = false
+z_index = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.84000003, 0.9573333, 1, 0.6627451)
+script = ExtResource("7_qrkc0")
+final_label = NodePath("VBoxContainer/FinalLabel")
+score_hbc = NodePath("VBoxContainer/ScoreHBC")
+score_value_label = NodePath("VBoxContainer/ScoreHBC/ScoreValueLabel")
+final_rating_tag = NodePath("VBoxContainer/FinalRatingTag")
+fin_retry_button = NodePath("VBoxContainer/FinRetryButton")
+fin_back_to_main_menu_button = NodePath("VBoxContainer/FinBackToMainMenuButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FinalOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.0
+offset_top = -67.5
+offset_right = 243.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="FinalLabel" type="Label" parent="FinalOverlay/VBoxContainer"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "ui.game_finished"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreHBC" type="HBoxContainer" parent="FinalOverlay/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="FinalOverlay/VBoxContainer/ScoreHBC"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.120000005, 0.76533335, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 42
+text = "Score: "
+vertical_alignment = 2
+
+[node name="ScoreValueLabel" type="Label" parent="FinalOverlay/VBoxContainer/ScoreHBC"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.120000005, 0.76533335, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 42
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FinalRatingTag" type="Label" parent="FinalOverlay/VBoxContainer"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "ui.rating.xyz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmptySpace" type="Label" parent="FinalOverlay/VBoxContainer"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinRetryButton" type="Button" parent="FinalOverlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ui.calibration.retry"
+
+[node name="FinBackToMainMenuButton" type="Button" parent="FinalOverlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ui.calibration.finish"
+
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/StartButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="GameControlsMC/VBoxContainer/ControlsHBC/Stop" to="." method="_on_stop_pressed"]
 [connection signal="toggled" from="GameControlsMC/VBoxContainer/ControlsHBC/PauseButton" to="." method="_on_pause_toggled"]
 [connection signal="toggled" from="RhythmMC/VBoxContainer/HBoxContainer/ShowRhythmUIButton" to="." method="_on_show_rhythm_ui_button_toggled"]
 [connection signal="pressed" from="RhythmMC/VBoxContainer/HBoxContainer/BackToMapButton" to="." method="_on_back_to_map_button_pressed"]
+[connection signal="pressed" from="FinalOverlay/VBoxContainer/FinRetryButton" to="." method="_on_fin_retry_button_pressed"]
+[connection signal="pressed" from="FinalOverlay/VBoxContainer/FinBackToMainMenuButton" to="." method="_on_fin_back_to_main_menu_button_pressed"]

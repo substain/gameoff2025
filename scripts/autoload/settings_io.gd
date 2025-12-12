@@ -31,7 +31,7 @@ var locale: LocaleItem = LocaleItem.EN
 
 var fullscreen_active: bool = false
 
-var input_remaps: Dictionary = {}
+var input_remaps: Dictionary[String, Dictionary] = {} #nested array is Dictionary[int, InputEvent]
 
 var skip_intro_active: bool = false
 
@@ -59,6 +59,11 @@ func apply_values() -> void:
 	TranslationServer.set_locale(to_short_locale(locale))
 	set_fullscreen(fullscreen_active)
 
+	for remap_input_key: String in input_remaps.keys():
+		var input_remap_dict: Dictionary = input_remaps[remap_input_key]
+		for index: int in input_remap_dict.keys():
+			InputMenu.update_input_map_from_ins(remap_input_key, input_remap_dict[index] as InputEvent, index)
+		
 func apply_web_build_settings() -> void:
 	pass
 
@@ -85,7 +90,8 @@ func reset_inputs(do_save: bool = true) -> void:
 	input_remaps = {}
 	if do_save:
 		save_inputs_to_file()
-		
+	
+
 func save_to_file() -> void:
 	var settings_file_access: FileAccess = FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	var save_dict: Dictionary = {
@@ -164,13 +170,20 @@ func load_inputs_from_file() -> void:
 	if err != OK:
 		push_error("cannot load inputs from '" + SAVE_INPUT_PATH + "'")
 		return
-	
+	#var res: Variant = inputs_file.get_value(INPUTS_SECTION, "input_remaps")
+	#if res is Dictionary[String, Array]:
+		#input_remaps = {}
+		#return
 	input_remaps = inputs_file.get_value(INPUTS_SECTION, "input_remaps")
 		
-func update_input_settings(input_key: String, in_event: InputEvent, do_save: bool = true) -> void:
+func update_input_settings(input_key: InputHandler.InputName, in_event: InputEvent, index: int, do_save: bool = true) -> void:
 	if input_remaps == null:
 		input_remaps = {}
-	input_remaps[input_key] = in_event
+	var input_key_str: String = InputHandler.input_name_to_str(input_key)
+	if !input_remaps.has(input_key_str):
+		input_remaps[input_key_str] = {}
+	input_remaps[input_key_str][index] = in_event
+		
 	if do_save:
 		save_inputs_to_file()
 

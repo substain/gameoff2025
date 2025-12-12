@@ -1,23 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs01eprm04ef8"]
+[gd_scene load_steps=5 format=3 uid="uid://bs01eprm04ef8"]
 
 [ext_resource type="Script" uid="uid://cy4akn28j7j0n" path="res://scenes/util/audio_controller.gd" id="1_mgs1l"]
 [ext_resource type="AudioStream" uid="uid://byffre6ka2g1l" path="res://audio/sfx/ui/ui_click.ogg" id="2_wn78k"]
 [ext_resource type="AudioStream" uid="uid://dju1icyk4kot8" path="res://audio/sfx/ui/ui_hover.ogg" id="3_ti1xs"]
+[ext_resource type="AudioStream" uid="uid://chsan7t8qwh5f" path="res://audio/sfx/ui/ui_popup.ogg" id="4_ti1xs"]
 
-[node name="AudioController" type="Node" node_paths=PackedStringArray("accept_audio_stream_player", "hover_audio_stream_player")]
+[node name="AudioController" type="Node" node_paths=PackedStringArray("accept_audio_stream_player", "hover_audio_stream_player", "popup_audio_stream_player")]
 script = ExtResource("1_mgs1l")
 accept_audio_stream_player = NodePath("AcceptAudioStreamPlayer")
 hover_audio_stream_player = NodePath("HoverAudioStreamPlayer")
+popup_audio_stream_player = NodePath("PopupAudioStreamPlayer")
 
 [node name="AcceptAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_wn78k")
+volume_db = 1.0
 max_polyphony = 4
 bus = &"SFX"
 
 [node name="HoverAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ti1xs")
+volume_db = 3.0
 max_polyphony = 4
 bus = &"SFX"
 
 [node name="PopupAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ti1xs")
+max_polyphony = 4
 bus = &"SFX"

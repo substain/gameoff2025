@@ -6,8 +6,8 @@ const FLYING_NOTE: PackedScene = preload("uid://ocykk4ntbiep")
 const FALLING_OBJECT_TARGET_TRACK: String = "MIDI BELLS"
 const HOLD_TRACK: String = "MIDI Throat Singing"
 
-const MIN_POSE_TIME: float = 4.0
-const MAX_POSE_TIME: float = 9.0
+const MIN_POSE_TIME: float = 9.0
+const MAX_POSE_TIME: float = 13.0
 
 const ANIM_OPEN_SUFFIX: String = "_open"
 
@@ -41,6 +41,7 @@ var is_one_shot_active: bool = false
 
 var is_moving: bool = false
 var has_open_pose: bool = false
+var is_idle: bool = false
 
 var mood: float = 0
 
@@ -61,7 +62,7 @@ func start_telegraph(event: RhythmTriggerEvent) -> void:
 	var telegraph_duration: float = -event.offset * 1.2
 	var current_length: float = anim_player.get_animation(anim_to_str(Anim.breath)).length
 	play_anim(Anim.breath, telegraph_duration/current_length)
-	
+	is_one_shot_active = false
 	
 func start_switch_pose_timer() -> void:
 	switch_pose_timer.start(randf_range(MIN_POSE_TIME, MAX_POSE_TIME))
@@ -89,9 +90,11 @@ func _input(event: InputEvent) -> void:
 		a_released()
 
 func play_anim(anim: Anim, anim_speed: float = 1.0) -> void:
+	is_idle = anim == Anim.idle
 	anim_player.speed_scale = anim_speed
 	if has_open_pose && is_switchable_anim(anim):
 		anim_player.play(anim_to_str(anim) + ANIM_OPEN_SUFFIX)
+		return
 	anim_player.play(anim_to_str(anim))
 
 static func get_idle_anim(mood_to_check: float) -> Anim:
@@ -118,6 +121,7 @@ func _on_rhythm_base_note_failed(track: RhythmTrack, _note: RhythmNote) -> void:
 		shoot_note(false)
 	set_mood(maxf(mood - 0.25, -1.0))
 	play_anim(Anim.caugh)
+	anim_timer.start(0.35)	
 
 
 func _on_rhythm_base_note_hold_start(track: RhythmTrack, note: RhythmNote, _time_diff: float) -> void:
@@ -143,6 +147,12 @@ func _on_rhythm_base_note_missed(track: RhythmTrack, _note: RhythmNote) -> void:
 		return
 	set_mood(maxf(mood - 0.2, -1.0))
 
+	if track.name == HOLD_TRACK:
+		play_anim(Anim.caugh)
+		anim_timer.start(0.35)	
+		is_one_shot_active = true
+
+
 func _on_rhythm_base_note_tap_hit(track: RhythmTrack, note: RhythmNote, _diff: float) -> void:
 	if track.name != HOLD_TRACK && track.name != FALLING_OBJECT_TARGET_TRACK:
 		return
@@ -163,8 +173,10 @@ func _on_rhythm_base_stopped_playing() -> void:
 	stop_moving()
 
 func _on_switch_pose_timer_timeout() -> void:
-	start_switch_pose_timer()
+	start_switch_pose_timer()		
 	has_open_pose = !has_open_pose
+	if is_idle:
+		play_anim(Anim.idle)
 
 func _on_timer_timeout() -> void:
 	if is_one_shot_active:
@@ -187,7 +199,6 @@ func set_statue_by_mood() -> void:
 		statue_animation_player.play("sad")
 	else:
 		statue_animation_player.play("very_sad")
-		
 	
 static func is_switchable_anim(anim: Anim) -> bool:
 	match anim:
@@ -197,7 +208,6 @@ static func is_switchable_anim(anim: Anim) -> bool:
 
 static func anim_to_str(anim: Anim) -> String:
 	return Anim.keys()[anim]
-
 
 func a_pressed() -> void:
 	is_one_shot_active = false
@@ -213,19 +223,4 @@ func a_released() -> void:
 func b_pressed() -> void:
 	play_anim(Anim.sing)
 	is_one_shot_active = true
-	anim_timer.start()	
-
-func b_released() -> void:
-	pass
-
-func _on_ui_a_pressed() -> void:
-	a_pressed()
-
-func _on_ui_a_released() -> void:
-	a_released()
-
-func _on_ui_b_pressed() -> void:
-	b_pressed()
-
-func _on_ui_b_released() -> void:
-	b_released()
+	anim_timer.start(0.1)	

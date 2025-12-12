@@ -21,6 +21,7 @@ signal note_hold_release(track: RhythmTrack, note: RhythmNote, time_diff: float)
 
 signal started_playing
 signal stopped_playing
+signal finished_playing
 signal reset_progress
 
 @export var scene_data: RhythmSceneData
@@ -61,6 +62,7 @@ func _ready() -> void:
 	
 	visualizer.set_rhythm_data(_rhythm_data, scene_data.input_buffer_seconds, scene_data.note_tap_hold_threshold_seconds)
 	preparing_debug_visualization_finished.emit()
+	audio_stream_player.finished.connect(_on_finished_playing)
 
 func register_animation_for_track(event: RhythmSubscribeNoteEvent) -> void:
 	_subscribed_events.append(event)
@@ -650,3 +652,6 @@ func _ticks_to_seconds(absolute_ticks: int, tempo_map: Array) -> float:
 	current_time_ms += remaining_ticks * current_ms_per_tick
 
 	return current_time_ms / 1000.0
+
+func _on_finished_playing() -> void:
+	finished_playing.emit()

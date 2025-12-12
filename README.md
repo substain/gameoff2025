@@ -9,5 +9,3 @@ https://substain.itch.io/untitled-rhythm-game
 ### Attributions
 MIDI import based on godot-midi-mport (https://github.com/G0retZ/godot-midi-mport)
 Font: Shaabyla (https://www.dafont.com/shaabyla.font)
-
-

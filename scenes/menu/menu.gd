@@ -4,7 +4,7 @@ extends CanvasLayer
 const VERSION_PLACEHOLDER: String = "[version]"
 
 signal game_started
-
+@export var simulate_mobile: bool = false
 @export var set_game_title_from_project_settings: bool = true
 @export_file_path("*.tscn") var start_scene_file_path: String
 
@@ -23,6 +23,9 @@ signal game_started
 @export var quit_button: BaseButton
 
 @export var items_to_hide: Array[Control] = []
+@export var items_to_hide_mobile: Array[Control] = []
+
+var is_finished: bool = false
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -30,10 +33,16 @@ func _enter_tree() -> void:
 		set_paused(false)
 	
 func _ready() -> void:
+	check_is_mobile()
 	quit_button.visible = !SettingsIOClass.is_web_build()
 
 	for ctrl: Control in items_to_hide:
 		ctrl.visible = false
+	
+	if GameState.is_mobile:
+		for ctrl: Control in items_to_hide_mobile:
+			ctrl.visible = false
+	
 	
 	set_version()
 
@@ -114,6 +123,8 @@ func _on_back_to_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu/main_menu.tscn")
 
 func _on_continue_button_pressed() -> void:
+	if is_finished:
+		return
 	set_paused(false)
 	self.visible = false
 
@@ -135,3 +146,10 @@ func play_accept_sfx() -> void:
 		
 func play_hover_sfx() -> void:
 	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.HOVER)
+
+func check_is_mobile() -> void:
+	var is_mobile: bool = OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.has_feature("web_android") || OS.has_feature("web_ios") 
+	if simulate_mobile && OS.has_feature("editor"):
+		ProjectSettings.set("input_devices/pointing/emulate_touch_from_mouse", true)
+		is_mobile = true
+	GameState.is_mobile = is_mobile

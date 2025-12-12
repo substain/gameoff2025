@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://7vygc2wpvuw4"]
+[gd_scene load_steps=9 format=3 uid="uid://7vygc2wpvuw4"]
 
 [ext_resource type="Script" uid="uid://bmnjcl352fw0f" path="res://scenes/calibration/calibration.gd" id="1_50wda"]
 [ext_resource type="PackedScene" uid="uid://c1d6g64utdy0a" path="res://scenes/rhythm_base/rhythm_base.tscn" id="2_b83y1"]
 [ext_resource type="Resource" uid="uid://uaqpwrwe0wvs" path="res://scenes/calibration/calibration_rhythm_scene_data.tres" id="3_hbrkc"]
 [ext_resource type="PackedScene" uid="uid://cavcjvllyn1b0" path="res://scenes/menu/menu.tscn" id="4_d6e5j"]
+[ext_resource type="Texture2D" uid="uid://dwkipi7qy8q5a" path="res://2d/mobile/button_a.svg" id="5_x1duk"]
+[ext_resource type="Texture2D" uid="uid://btulwp2q53rew" path="res://2d/mobile/button_a_pressed.svg" id="6_m8c00"]
 
 [sub_resource type="Gradient" id="Gradient_d6e5j"]
 offsets = PackedFloat32Array(1)
@@ -14,7 +16,7 @@ gradient = SubResource("Gradient_d6e5j")
 width = 50
 height = 50
 
-[node name="Calibration" type="Control"]
+[node name="Calibration" type="Control" node_paths=PackedStringArray("input_hint_label", "overlay", "consistency_label", "final_label", "fin_reset_button", "fin_back_to_main_menu_button", "mobile_ui", "back_to_main_menu_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +24,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_50wda")
+input_hint_label = NodePath("MarginContainer/VBoxContainer/InputHintLabel")
+overlay = NodePath("Overlay")
+consistency_label = NodePath("MarginContainer/VBoxContainer/ConsistencyLabel")
+final_label = NodePath("Overlay/VBoxContainer/FinalLabel")
+fin_reset_button = NodePath("Overlay/VBoxContainer/FinResetButton")
+fin_back_to_main_menu_button = NodePath("Overlay/VBoxContainer/FinBackToMainMenuButton")
+mobile_ui = NodePath("MobileUI")
+back_to_main_menu_button = NodePath("ControlButtons/VBoxContainer/BackToMainMenuButton")
 
 [node name="BGSky2" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -70,10 +80,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide") instance=ExtResource("4_d6e5j")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("items_to_hide", "items_to_hide_mobile") instance=ExtResource("4_d6e5j")]
 visible = false
+set_game_title_from_project_settings = true
 is_pause_menu = true
-items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/CalibrationButton")]
+items_to_hide = []
+items_to_hide_mobile = []
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 anchors_preset = 15
@@ -101,7 +113,10 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="InputHintLabel" type="Label" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="InputHintLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 z_index = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -112,5 +127,120 @@ text = "XXX XXX XXX XXX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ConsistencyLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "???% / ???%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlButtons" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 230.0
+grow_vertical = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlButtons"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="ControlButtons/VBoxContainer"]
+layout_mode = 2
+text = "ui.calibration.retry"
+
+[node name="BackToMainMenuButton" type="Button" parent="ControlButtons/VBoxContainer"]
+layout_mode = 2
+text = "ui.calibration.finish"
+
+[node name="Overlay" type="ColorRect" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.84000003, 0.9573333, 1, 0.6627451)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.0
+offset_top = -67.5
+offset_right = 243.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="FinalLabel" type="Label" parent="Overlay/VBoxContainer"]
+z_index = 3
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.29411766, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "ui.calibration.finished_ok"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinResetButton" type="Button" parent="Overlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ui.calibration.retry"
+
+[node name="FinBackToMainMenuButton" type="Button" parent="Overlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ui.calibration.finish"
+
+[node name="MobileUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ButtonAMC" type="MarginContainer" parent="MobileUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="MobileUI/ButtonAMC"]
+position = Vector2(-1180, -75)
+scale = Vector2(0.48013246, 0.48013246)
+texture_normal = ExtResource("5_x1duk")
+texture_pressed = ExtResource("6_m8c00")
+action = "action_a"
+
 [connection signal="event_triggered" from="RhythmBase" to="." method="_on_rhythm_base_event_triggered"]
+[connection signal="finished_playing" from="RhythmBase" to="." method="_on_rhythm_base_finished_playing"]
 [connection signal="note_tap_hit" from="RhythmBase" to="." method="_on_rhythm_base_note_tap_hit"]
+[connection signal="pressed" from="ControlButtons/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="ControlButtons/VBoxContainer/BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]
+[connection signal="pressed" from="Overlay/VBoxContainer/FinResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Overlay/VBoxContainer/FinBackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

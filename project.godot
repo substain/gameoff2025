@@ -15,7 +15,7 @@ General/banks_path="res://audio/fmod/banks"
 [application]
 
 config/name="Untitled Rhythm Game"
-config/version="0.0.55"
+config/version="0.0.65"
 run/main_scene="uid://b1ab5t2hcu3d7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
@@ -110,6 +110,7 @@ cancel={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+pointing/version="0.0.6"
 
 [internationalization]
 

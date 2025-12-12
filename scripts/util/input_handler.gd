@@ -91,3 +91,13 @@ static func get_first_input_for(input_name_str: String) -> InputEvent:
 
 static func to_tr_key(input_name: String) -> String:
 	return "input."+input_name
+
+static func get_mobile_action_name(input_name: InputHandler.InputName) -> String:
+	match input_name:
+		InputHandler.InputName.action_a:
+			return "A"
+		InputHandler.InputName.action_b:
+			return "B"
+			
+	push_warning(input_name_to_str(input_name), " has no mobile button name assigned")
+	return input_name_to_str(input_name) + ": NO MOBILE MAPPING"

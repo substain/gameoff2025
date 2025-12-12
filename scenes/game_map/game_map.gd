@@ -185,14 +185,16 @@ func select_random_level() -> void:
 	else:
 		selected_level = current_wheel_leveltypes[0]
 	current_wheel_leveltypes.erase(selected_level)
-
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.ACCEPT)
+	
 	#highlight new level
 	set_highlighted(selected_level, true)
 	
 func pick_final_level() -> void:
 	is_select_random = false
 	set_highlighted(selected_level, false)
-	
+	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.POPUP)
+
 	selected_level = actual_available_leveltypes.pick_random()
 	timer.start()
 	set_highlighted(selected_level, true, false)
@@ -214,6 +216,7 @@ func set_highlighted(level: LevelType, is_highlighted: bool, fadeout_highlight: 
 		loc_data.tween = create_tween()
 		loc_data.tween.tween_property(loc_data.texture_rect, "self_modulate", texture_inactive_color, 0.4)
 		loc_data.tween.tween_property(loc_data.label, "theme_override_colors/font_outline_color", rtl_inactive_color, 0.4)
+
 
 func get_location_name(level: LevelType) -> String:
 	return tr("leveltype." + (LevelType.keys()[level] as String).to_lower())

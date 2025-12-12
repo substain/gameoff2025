@@ -124,4 +124,7 @@ func get_text_translation() -> String:
 	var text: String = tr("telegraph_button")
 	#var input_action: String = tr(InputHandler.to_tr_key(InputHandler.input_name_to_str(InputHandler.InputName.action_b)))
 	var input_action_name: String = InputHandler.get_first_input_str_for_input_name(InputHandler.InputName.action_b)
+	if GameState.is_mobile:
+		input_action_name = InputHandler.get_mobile_action_name(InputHandler.InputName.action_b)
+	
 	return text.replace("[0]", input_action_name).replace("[1]", str(time_left))

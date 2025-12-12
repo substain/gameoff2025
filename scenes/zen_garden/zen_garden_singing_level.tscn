@@ -252,7 +252,6 @@ script = ExtResource("1_r5g3c")
 rhythm_scene = NodePath("RhythmBase")
 
 [node name="UI" parent="." instance=ExtResource("1_osv4t")]
-col = Color(0.58431375, 0.18039216, 0.1254902, 1)
 
 [node name="RhythmBase" parent="." instance=ExtResource("1_hagkd")]
 offset_left = 1.0
@@ -444,15 +443,12 @@ fall_object_manager = NodePath("../RhythmEventCreator")
 line_controller = NodePath("../LineController")
 statue_animation_player = NodePath("../StatueBase/AnimationPlayer")
 
-[connection signal="a_pressed" from="UI" to="SingingMonk" method="_on_ui_a_pressed"]
-[connection signal="a_released" from="UI" to="SingingMonk" method="_on_ui_a_released"]
-[connection signal="b_pressed" from="UI" to="SingingMonk" method="_on_ui_b_pressed"]
-[connection signal="b_released" from="UI" to="SingingMonk" method="_on_ui_b_released"]
 [connection signal="set_paused" from="UI" to="." method="_on_ui_set_paused"]
 [connection signal="start_pressed" from="UI" to="." method="_on_ui_start_pressed"]
 [connection signal="stop_pressed" from="UI" to="." method="_on_ui_stop_pressed"]
 [connection signal="toggle_rhythm_ui" from="UI" to="." method="_on_ui_toggle_rhythm_ui"]
 [connection signal="event_triggered" from="RhythmBase" to="RhythmEventCreator" method="_on_rhythm_base_event_triggered"]
+[connection signal="finished_playing" from="RhythmBase" to="UI" method="_on_rhythm_base_finished_playing"]
 [connection signal="note_failed" from="RhythmBase" to="UI" method="_on_rhythm_base_note_failed"]
 [connection signal="note_failed" from="RhythmBase" to="RhythmBase/WrongNoteAudioPlayer" method="_on_rhythm_base_note_failed"]
 [connection signal="note_failed" from="RhythmBase" to="RhythmBase/CorrectNoteAudioPlayer" method="_on_rhythm_base_note_failed"]

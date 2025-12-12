@@ -20,6 +20,9 @@ var current_dist_squared: float
 var pointer_activated: bool = false
 var show_tween: Tween
 
+var is_finalized: bool = false
+
+
 func _ready() -> void:
 	clear_points()
 	sprite.visible = false
@@ -45,7 +48,7 @@ func _process(_delta: float) -> void:
 	if !is_activated:
 		return
 
-	if !timer.is_stopped():
+	if !timer.is_stopped() && !is_finalized:
 		_handle_draw_update()
 
 func _handle_draw_update() -> int:
@@ -77,8 +80,11 @@ func stop_progressing() -> void:
 	finalize(false)
 	
 func finalize(update_points: bool) -> void:
+	is_finalized = true
+	print(get_parent().name + "/" + self.name, ": finalize! (updatepoints: ", update_points, ")")
 	if update_points:
 		points = curve_to_use.get_baked_points()
+		
 	gradient = null
 
 	if is_instance_valid(show_tween):

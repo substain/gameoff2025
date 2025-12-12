@@ -1,4 +1,4 @@
-extends ColorRect
+class_name CalibrationLine extends ColorRect
 
 var _data: RhythmData
 var _player: AudioStreamPlayer

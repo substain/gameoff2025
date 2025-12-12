@@ -28,7 +28,9 @@ func start_telegraphing(max_duration: float, time_left: float) -> void:
 	actual_pressed_line_2d.show_pointer()
 	target_path.curve = curve_to_use
 	telegraph_timer.start(time_left)
+	actual_pressed_line_2d.timer.start(max_duration)
 	text_popup = GameState.ui.create_text_popup(get_text_translation(), time_left, telegraph_line_2d.path_follow)
+	
 	
 func start_activating(max_duration: float) -> void:
 	actual_pressed_line_2d.start_progressing(max_duration)
@@ -45,7 +47,11 @@ func get_text_translation() -> String:
 	var time_left: String = str(snapped(telegraph_timer.time_left, 0.1))
 	var text: String = tr("telegraph_hold")
 	#var input_action: String = tr(InputHandler.to_tr_key(InputHandler.input_name_to_str(InputHandler.InputName.action_b)))
+	
 	var input_action_name: String = InputHandler.get_first_input_str_for_input_name(InputHandler.InputName.action_a)
+	if GameState.is_mobile:
+		input_action_name = InputHandler.get_mobile_action_name(InputHandler.InputName.action_a)
+		
 	return text.replace("[0]", input_action_name).replace("[1]", str(time_left))
 
 func _on_telegraph_timer_timeout() -> void:

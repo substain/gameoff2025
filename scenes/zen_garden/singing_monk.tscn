@@ -542,6 +542,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="SwitchPoseTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="AnimTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="SwitchPoseTimer" to="." method="_on_switch_pose_timer_timeout"]

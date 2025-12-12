@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cmwenlnrbr0ev" path="res://scenes/menu/settings_menu.tscn" id="4_t0a87"]
 [ext_resource type="PackedScene" uid="uid://cxbd17bwwqeko" path="res://scenes/menu/credits.tscn" id="5_qo0fc"]
 
-[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("start_menu", "input_menu", "settings_menu", "credits", "title_label", "version_label", "first_start_menu_item", "quit_button", "items_to_hide")]
+[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("start_menu", "input_menu", "settings_menu", "credits", "title_label", "version_label", "first_start_menu_item", "quit_button", "items_to_hide", "items_to_hide_mobile")]
 script = ExtResource("1_y1o0p")
+set_game_title_from_project_settings = null
 start_scene_file_path = "res://scenes/game_map/game_map.tscn"
+is_pause_menu = null
 start_menu = NodePath("StartMenuMC")
 input_menu = NodePath("InputMenu")
 settings_menu = NodePath("SettingsMenu")
@@ -19,6 +21,7 @@ version_label = NodePath("VersionMC/VersionLabel")
 first_start_menu_item = NodePath("StartMenuMC/VBoxContainer/StartGameButton")
 quit_button = NodePath("StartMenuMC/VBoxContainer/QuitButton")
 items_to_hide = [NodePath("StartMenuMC/VBoxContainer/StartGameButton"), NodePath("StartMenuMC/VBoxContainer/CreditsButton"), NodePath("HeaderMC"), NodePath("VersionMC"), NodePath("StartMenuMC/VBoxContainer/ContinueButton"), NodePath("StartMenuMC/VBoxContainer/BackToMainMenuButton"), NodePath("StartMenuMC/VBoxContainer/CalibrationButton")]
+items_to_hide_mobile = [NodePath("StartMenuMC/VBoxContainer/InputMenuButton")]
 
 [node name="HeaderMC" type="MarginContainer" parent="."]
 z_index = 1
