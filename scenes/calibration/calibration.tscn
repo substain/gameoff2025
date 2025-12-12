@@ -216,6 +216,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 
 [node name="ButtonAMC" type="MarginContainer" parent="MobileUI"]
 layout_mode = 1
