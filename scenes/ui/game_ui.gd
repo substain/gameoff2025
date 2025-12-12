@@ -10,7 +10,6 @@ signal toggle_rhythm_ui(is_toggled_on: bool)
 
 #@export var col: Color
 
-@export var simulate_mobile: bool = false
 @export var max_score: int = 650
 @export_category("internal nodes")
 @export var pause_menu: Menu
@@ -67,18 +66,12 @@ func _ready() -> void:
 	final_overlay.visible = false
 
 func handle_mobile() -> void:
-	GameState.is_mobile = is_mobile()
 	mobile_ui.visible = GameState.is_mobile
 	if !GameState.is_mobile:
 		return
 
 	score_ctrl.reparent(mobile_score_target, false)
 
-func is_mobile() -> bool:
-	if simulate_mobile && OS.has_feature("editor"):
-		ProjectSettings.set("input_devices/pointing/emulate_touch_from_mouse", true)
-		return true
-	return OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.has_feature("web_android") || OS.has_feature("web_ios") 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

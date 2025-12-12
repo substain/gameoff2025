@@ -4,7 +4,6 @@ extends CanvasLayer
 const VERSION_PLACEHOLDER: String = "[version]"
 
 signal game_started
-@export var simulate_mobile: bool = false
 @export var set_game_title_from_project_settings: bool = true
 @export_file_path("*.tscn") var start_scene_file_path: String
 
@@ -33,7 +32,6 @@ func _enter_tree() -> void:
 		set_paused(false)
 	
 func _ready() -> void:
-	check_is_mobile()
 	quit_button.visible = !SettingsIOClass.is_web_build()
 
 	for ctrl: Control in items_to_hide:
@@ -146,10 +144,3 @@ func play_accept_sfx() -> void:
 		
 func play_hover_sfx() -> void:
 	(AudioController as AudioControllerClass).play_sfx(AudioControllerClass.SfxType.HOVER)
-
-func check_is_mobile() -> void:
-	var is_mobile: bool = OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.has_feature("web_android") || OS.has_feature("web_ios") 
-	if simulate_mobile && OS.has_feature("editor"):
-		ProjectSettings.set("input_devices/pointing/emulate_touch_from_mouse", true)
-		is_mobile = true
-	GameState.is_mobile = is_mobile

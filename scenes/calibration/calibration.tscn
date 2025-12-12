@@ -41,7 +41,6 @@ texture = SubResource("GradientTexture2D_bp2rx")
 [node name="RhythmBase" parent="." instance=ExtResource("2_b83y1")]
 layout_mode = 0
 scene_data = ExtResource("3_hbrkc")
-visible_ui = true
 
 [node name="CenterLine" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(4, 0)
@@ -170,6 +169,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.84000003, 0.9573333, 1, 0.6627451)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Overlay"]
@@ -219,19 +219,16 @@ size_flags_horizontal = 4
 
 [node name="ButtonAMC" type="MarginContainer" parent="MobileUI"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -68.0
 offset_top = -20.0
+offset_right = 68.0
 offset_bottom = 20.0
-grow_horizontal = 0
 grow_vertical = 2
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="MobileUI/ButtonAMC"]
-position = Vector2(-1180, -75)
+position = Vector2(32, -75)
 scale = Vector2(0.48013246, 0.48013246)
 texture_normal = ExtResource("5_x1duk")
 texture_pressed = ExtResource("6_m8c00")

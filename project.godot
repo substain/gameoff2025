@@ -109,8 +109,7 @@ cancel={
 
 [input_devices]
 
-pointing/emulate_touch_from_mouse=true
-pointing/version="0.0.6"
+pointing/version="0.0.8"
 
 [internationalization]
 
